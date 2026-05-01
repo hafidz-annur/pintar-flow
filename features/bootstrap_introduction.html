@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PintarFlow - Pengenalan Bootstrap CSS dan Best Practice</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#165DFF',
+                    },
+                }
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .content-auto {
+                content-visibility: auto;
+            }
+            .code-block {
+                @apply rounded-lg overflow-hidden my-4;
+            }
+            .code-block pre {
+                @apply m-0 p-4 !bg-gray-900;
+            }
+            .code-block code {
+                @apply font-mono text-sm leading-relaxed;
+            }
+            .warning-box {
+                @apply bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 p-4 rounded-lg my-4;
+            }
+            .info-box {
+                @apply bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 p-4 rounded-lg my-4;
+            }
+            .success-box {
+                @apply bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 p-4 rounded-lg my-4;
+            }
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50 dark:bg-gray-900 text-gray-800 dark:text-gray-200 transition-colors duration-300">
+    <!-- Horizontal Scroll Progress -->
+    <div class="progress-scroll" id="progressScroll"></div>
+    <header
+        class="sticky top-0 z-50 bg-white/80 dark:bg-gray-900/80 backdrop-blur-md border-b border-gray-200 dark:border-gray-800">
+        <div class="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
+            <a href="../index.html" class="font-bold text-xl text-primary">PintarFlow</a>
+            <button id="toggleDark" class="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800">
+                <span class="dark:hidden">🌙</span>
+                <span class="hidden dark:inline">☀️</span>
+            </button>
+        </div>
+    </header>
+
+    <main class="max-w-4xl mx-auto px-4 py-8">
+        <div class="mb-12">
+            <img src="https://img.magnific.com/premium-photo/bootstrap-5-blue-background-3d-render_582637-307.jpg"
+                alt="Pengenalan Bootstrap CSS" class="w-full h-48 object-cover rounded-xl mb-6 shadow-md">
+            <div class="inline-block px-3 py-1 bg-yellow-100 dark:bg-yellow-900/30 text-yellow-700 dark:text-yellow-400 rounded-full text-sm font-medium mb-4">
+                Intermediate Level
+            </div>
+            <h1 class="text-4xl font-bold mb-4">Pengenalan Bootstrap CSS dan Best Practice</h1>
+            <p class="text-lg text-gray-600 dark:text-gray-400 leading-relaxed">
+                Module pengenalan Bootstrap CSS framework terpopuler di dunia. Pelajari cara kerja Bootstrap, grid system, komponen siap pakai, utility class dan best practice penggunaan Bootstrap untuk pengembangan website yang cepat dan responsive.
+            </p>
+        </div>
+
+        <div class="bg-white dark:bg-gray-800 rounded-xl p-6 mb-10 border border-gray-200 dark:border-gray-700">
+            <h2 class="text-xl font-bold mb-4">🎯 Learning Objectives</h2>
+            <ul class="space-y-2 text-gray-700 dark:text-gray-300">
+                <li class="flex items-start gap-3">
+                    <span class="text-primary mt-1">✅</span>
+                    <span>Memahami apa itu Bootstrap dan keunggulannya</span>
+                </li>
+                <li class="flex items-start gap-3">
+                    <span class="text-primary mt-1">✅</span>
+                    <span>Bisa melakukan instalasi dan setup Bootstrap di project</span>
+                </li>
+                <li class="flex items-start gap-3">
+                    <span class="text-primary mt-1">✅</span>
+                    <span>Memahami dan bisa menggunakan Grid System Bootstrap</span>
+                </li>
+                <li class="flex items-start gap-3">
+                    <span class="text-primary mt-1">✅</span>
+                    <span>Bisa menggunakan komponen Bootstrap yang paling sering dipakai</span>
+                </li>
+                <li class="flex items-start gap-3">
+                    <span class="text-primary mt-1">✅</span>
+                    <span>Memahami Utility Class Bootstrap</span>
+                </li>
+                <li class="flex items-start gap-3">
+                    <span class="text-primary mt-1">✅</span>
+                    <span>Mengetahui best practice penggunaan Bootstrap</span>
+                </li>
+                <li class="flex items-start gap-3">
+                    <span class="text-primary mt-1">✅</span>
+                    <span>Bisa membuat website responsive dengan Bootstrap</span>
+                </li>
+                <li class="flex items-start gap-3">
+                    <span class="text-primary mt-1">✅</span>
+                    <span>Bisa melakukan customisasi Bootstrap dengan SASS</span>
+                </li>
+            </ul>
+        </div>
+
+        <div class="space-y-12">
+            <section class="border-t border-gray-200 dark:border-gray-700 pt-10">
+                <h3 class="text-2xl font-bold mb-4">1. Apa Itu Bootstrap?</h3>
+                <div class="prose dark:prose-invert max-w-none">
+                    <p class="leading-relaxed mb-4">
+                        Bootstrap adalah framework CSS open source yang paling populer di dunia, awalnya dibuat oleh tim Twitter. Bootstrap menyediakan komponen dan sistem grid siap pakai untuk membuat website responsive dengan cepat.
+                    </p>
+                </div>
+                <div class="success-box mt-4">
+                    <p class="font-semibold mb-2 text-green-700 dark:text-green-400">✅ Keunggulan Bootstrap:</p>
+                    <ul class="space-y-1">
+                        <li>Komponen siap pakai</li>
+                        <li>Grid system yang sangat powerful</li>
+                        <li>100% responsive secara default</li>
+                        <li>Dokumentasi paling lengkap</li>
+                        <li>Komunitas terbesar di dunia</li>
+                        <li>Banyak template dan theme gratis</li>
+                        <li>Sudah support dark mode di Bootstrap 5</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section class="border-t border-gray-200 dark:border-gray-700 pt-10">
+                <h3 class="text-2xl font-bold mb-4">2. Instalasi Bootstrap</h3>
+                <div class="info-box mt-4">
+                    Ada 3 cara instalasi Bootstrap yang paling umum:
+                </div>
+                <div class="code-block mt-6">
+                    <pre><code class="language-html">&lt;!-- Cara 1: Menggunakan CDN (termudah) --&gt;
+&lt;link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"&gt;
+&lt;script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"&gt;&lt;/script&gt;</code></pre>
+                </div>
+                <div class="code-block mt-4">
+                    <pre><code class="language-bash"># Cara 2: Menggunakan NPM
+npm install bootstrap</code></pre>
+                </div>
+                <div class="info-box mt-4">
+                    Cara 3: Download File Manual - Download dari getbootstrap.com dan sertakan file CSS dan JS ke project kamu.
+                </div>
+            </section>
+
+            <section class="border-t border-gray-200 dark:border-gray-700 pt-10">
+                <h3 class="text-2xl font-bold mb-4">3. Grid System Bootstrap</h3>
+                <div class="code-block mt-6">
+                    <pre><code class="language-html">&lt;div class="container"&gt;
+  &lt;div class="row"&gt;
+    &lt;div class="col-6"&gt;Kolom 50%&lt;/div&gt;
+    &lt;div class="col-6"&gt;Kolom 50%&lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;div class="row"&gt;
+    &lt;div class="col-4"&gt;Kolom 33%&lt;/div&gt;
+    &lt;div class="col-4"&gt;Kolom 33%&lt;/div&gt;
+    &lt;div class="col-4"&gt;Kolom 33%&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+                </div>
+                <div class="overflow-x-auto mt-6">
+                    <table class="min-w-full border-collapse">
+                        <thead>
+                            <tr>
+                                <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 bg-gray-100 dark:bg-gray-700 text-left">Breakpoint</th>
+                                <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 bg-gray-100 dark:bg-gray-700 text-left">Ukuran</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 font-mono text-sm">xs</td>
+                                <td class="border border-gray-300 dark:border-gray-600 px-4 py-2">< 576px</td>
+                            </tr>
+                            <tr>
+                                <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 font-mono text-sm">sm</td>
+                                <td class="border border-gray-300 dark:border-gray-600 px-4 py-2">≥ 576px</td>
+                            </tr>
+                            <tr>
+                                <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 font-mono text-sm">md</td>
+                                <td class="border border-gray-300 dark:border-gray-600 px-4 py-2">≥ 768px</td>
+                            </tr>
+                            <tr>
+                                <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 font-mono text-sm">lg</td>
+                                <td class="border border-gray-300 dark:border-gray-600 px-4 py-2">≥ 992px</td>
+                            </tr>
+                            <tr>
+                                <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 font-mono text-sm">xl</td>
+                                <td class="border border-gray-300 dark:border-gray-600 px-4 py-2">≥ 1200px</td>
+                            </tr>
+                            <tr>
+                                <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 font-mono text-sm">xxl</td>
+                                <td class="border border-gray-300 dark:border-gray-600 px-4 py-2">≥ 1400px</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <section class="border-t border-gray-200 dark:border-gray-700 pt-10">
+                <h3 class="text-2xl font-bold mb-4">4. Komponenten Dasar Bootstrap</h3>
+                <div class="code-block mt-6">
+                    <pre><code class="language-html">&lt;!-- Button --&gt;
+&lt;button class="btn btn-primary"&gt;Primary Button&lt;/button&gt;
+&lt;button class="btn btn-success"&gt;Success Button&lt;/button&gt;
+&lt;button class="btn btn-outline-danger"&gt;Danger Outline&lt;/button&gt;</code></pre>
+                </div>
+                <div class="code-block mt-4">
+                    <pre><code class="language-html">&lt;!-- Card --&gt;
+&lt;div class="card"&gt;
+  &lt;img src="gambar.jpg" class="card-img-top"&gt;
+  &lt;div class="card-body"&gt;
+    &lt;h5 class="card-title"&gt;Judul Card&lt;/h5&gt;
+    &lt;p class="card-text"&gt;Deskripsi card&lt;/p&gt;
+    &lt;a href="#" class="btn btn-primary"&gt;Baca Selengkapnya&lt;/a&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+                </div>
+                <div class="info-box mt-4">
+                    ✅ Komponen lain yang tersedia: Navbar, Modal, Form Control, Alert, Dropdown, Pagination, Badge, Progress Bar
+                </div>
+            </section>
+
+            <section class="border-t border-gray-200 dark:border-gray-700 pt-10">
+                <h3 class="text-2xl font-bold mb-4">5. Utility Class</h3>
+                <div class="code-block mt-6">
+                    <pre><code class="language-html">&lt;!-- Margin dan Padding --&gt;
+&lt;div class="mt-4 p-3 mb-5"&gt;Margin Top 4, Padding 3, Margin Bottom 5&lt;/div&gt;
+
+&lt;!-- Warna Text dan Background --&gt;
+&lt;p class="text-primary bg-light"&gt;Text warna primary background light&lt;/p&gt;
+
+&lt;!-- Display dan Flexbox --&gt;
+&lt;div class="d-flex justify-content-between align-items-center"&gt;
+  &lt;div&gt;Item 1&lt;/div&gt;
+  &lt;div&gt;Item 2&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+                </div>
+            </section>
+
+            <section class="border-t border-gray-200 dark:border-gray-700 pt-10">
+                <h3 class="text-2xl font-bold mb-4">6. Customisasi Bootstrap</h3>
+                <div class="code-block mt-6">
+                    <pre><code class="language-scss">// Override variabel sebelum import Bootstrap
+$primary: #165DFF;
+$secondary: #36BFFA;
+$font-family-base: 'Inter', sans-serif;
+$border-radius: 8px;
+
+// Import Bootstrap
+@import "bootstrap/scss/bootstrap";</code></pre>
+                </div>
+            </section>
+
+            <section class="border-t border-gray-200 dark:border-gray-700 pt-10">
+                <h3 class="text-2xl font-bold mb-4">7. Best Practice Bootstrap</h3>
+                <div class="success-box mt-4">
+                    <p class="font-semibold mb-2 text-green-700 dark:text-green-400">✅ Best Practice Penggunaan Bootstrap:</p>
+                    <ol class="space-y-2 mt-3">
+                        <li>1. Jangan ubah file CSS Bootstrap secara langsung</li>
+                        <li>2. Gunakan SASS untuk customisasi</li>
+                        <li>3. Gunakan utility class sebanyak mungkin sebelum buat class custom</li>
+                        <li>4. Jangan menimpa style default Bootstrap jika tidak perlu</li>
+                        <li>5. Gunakan semantic HTML bersama kelas Bootstrap</li>
+                        <li>6. Gunakan container untuk semua konten</li>
+                        <li>7. Jangan lupa tambahkan meta viewport</li>
+                        <li>8. Selalu gunakan <code class="bg-gray-100 dark:bg-gray-800 px-1 py-0.5 rounded text-sm">row</code> di dalam <code class="bg-gray-100 dark:bg-gray-800 px-1 py-0.5 rounded text-sm">container</code></li>
+                    </ol>
+                </div>
+                <div class="warning-box mt-6">
+                    <p class="font-semibold mb-2 text-red-700 dark:text-red-400">❌ Yang tidak disarankan:</p>
+                    <div class="code-block mt-2">
+                        <pre><code class="language-css">/* ❌ Jangan lakukan ini! */
+.btn {
+  background: red !important;
+}</code></pre>
+                    </div>
+                </div>
+            </section>
+
+            <section class="border-t border-gray-200 dark:border-gray-700 pt-10">
+                <h3 class="text-2xl font-bold mb-4">8. Perbandingan Bootstrap vs Tailwind</h3>
+                <div class="overflow-x-auto">
+                    <table class="min-w-full border-collapse">
+                        <thead>
+                            <tr>
+                                <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 bg-gray-100 dark:bg-gray-700 text-left">Fitur</th>
+                                <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 bg-gray-100 dark:bg-gray-700 text-left">Bootstrap</th>
+                                <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 bg-gray-100 dark:bg-gray-700 text-left">Tailwind</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 font-medium">Pendekatan</td>
+                                <td class="border border-gray-300 dark:border-gray-600 px-4 py-2">Component First</td>
+                                <td class="border border-gray-300 dark:border-gray-600 px-4 py-2">Utility First</td>
+                            </tr>
+                            <tr>
+                                <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 font-medium">Kecepatan Awal</td>
+                                <td class="border border-gray-300 dark:border-gray-600 px-4 py-2">Sangat Cepat</td>
+                                <td class="border border-gray-300 dark:border-gray-600 px-4 py-2">Cepat Setelah Belajar</td>
+                            </tr>
+                            <tr>
+                                <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 font-medium">Customisasi</td>
+                                <td class="border border-gray-300 dark:border-gray-600 px-4 py-2">Agak Sulit</td>
+                                <td class="border border-gray-300 dark:border-gray-600 px-4 py-2">Sangat Mudah</td>
+                            </tr>
+                            <tr>
+                                <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 font-medium">Ukuran File</td>
+                                <td class="border border-gray-300 dark:border-gray-600 px-4 py-2">Lebih Besar</td>
+                                <td class="border border-gray-300 dark:border-gray-600 px-4 py-2">Lebih Kecil</td>
+                            </tr>
+                            <tr>
+                                <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 font-medium">Design Standar</td>
+                                <td class="border border-gray-300 dark:border-gray-600 px-4 py-2">Semua website mirip</td>
+                                <td class="border border-gray-300 dark:border-gray-600 px-4 py-2">100% Custom</td>
+                            </tr>
+                            <tr>
+                                <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 font-medium">Waktu Belajar</td>
+                                <td class="border border-gray-300 dark:border-gray-600 px-4 py-2">1 hari</td>
+                                <td class="border border-gray-300 dark:border-gray-600 px-4 py-2">1 minggu</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="success-box mt-6">
+                    ✅ Kapan pakai Bootstrap:
+                    <ul class="mt-2 space-y-1">
+                        <li>Project deadline cepat</li>
+                        <li>Dashboard Admin</li>
+                        <li>Website internal</li>
+                        <li>MVP / Prototipe</li>
+                    </ul>
+                </div>
+                <div class="success-box mt-4">
+                    ✅ Kapan pakai Tailwind:
+                    <ul class="mt-2 space-y-1">
+                        <li>Project dengan desain custom</li>
+                        <li>Website skala besar</li>
+                        <li>Design unik</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section class="border-t border-gray-200 dark:border-gray-700 pt-10">
+                <h3 class="text-2xl font-bold mb-4">9. Kesimpulan</h3>
+                <div class="prose dark:prose-invert max-w-none">
+                    <p class="leading-relaxed mb-4">
+                        Bootstrap adalah pilihan yang sangat bagus untuk developer yang ingin membuat website dengan cepat tanpa perlu menghabiskan banyak waktu untuk CSS. Meskipun banyak developer beralih ke Tailwind, Bootstrap tetap menjadi framework yang paling banyak digunakan di dunia dan sangat relevan sampai saat ini.
+                    </p>
+                    <div class="success-box">
+                        Dengan mempelajari Bootstrap kamu bisa membuat website responsive profesional dalam hitungan jam, bukan hari.
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <div class="mt-16 pt-8 border-t border-gray-200 dark:border-gray-700">
+            <div class="flex justify-center">
+                <a href="../index.html"
+                    class="inline-flex items-center gap-2 px-6 py-3 bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors">
+                    ← Kembali ke Menu Utama
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <footer class="mt-20 border-t border-gray-200 dark:border-gray-800 py-8">
+        <div class="max-w-6xl mx-auto px-4 text-center text-gray-500 dark:text-gray-400 text-sm">
+            <p>© 2026 PintarFlow. Seluruh hak cipta dilindungi.</p>
+        </div>
+    </footer>
+
+    <!-- Back To Top Button -->
+    <button class="back-to-top" id="backToTop" title="Kembali ke atas">
+        <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+            stroke-linejoin="round">
+            <polyline points="18 15 12 9 6 15"></polyline>
+        </svg>
+    </button>
+
+    <script src="../js/main.js"></script>
+</body>
+
+</html>

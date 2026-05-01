@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PintarFlow</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <link rel="shortcut icon" href="img/favicon.png" type="image/x-icon">
     <link rel="stylesheet" href="css/style.css">
     <script>
         tailwind.config = {
@@ -15,6 +17,18 @@
                     colors: {
                         primary: '#165DFF',
                     },
+                    animation: {
+                        'gradient': 'gradient 8s ease infinite',
+                    },
+                    keyframes: {
+                        gradient: {
+                            '0%, 100%': { 'background-position': '0% 50%' },
+                            '50%': { 'background-position': '100% 50%' },
+                        }
+                    },
+                    backgroundSize: {
+                        '300%': '300%',
+                    }
                 }
             }
         }
@@ -55,10 +69,15 @@
     </header>
 
     <main class="max-w-6xl mx-auto px-4 py-8">
-        <div class="mb-12 text-center">
-            <h2 class="text-4xl md:text-5xl font-bold mb-3">Platform Pembelajaran Interaktif Modern</h2>
-            <p class="text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">Pelajari konsep teknologi dengan
-                materi terstruktur, contoh praktek nyata, dan alur belajar yang terarah.</p>
+        <!-- Hero Section with 3D Background -->
+        <div class="mb-16 text-center relative overflow-hidden py-0">
+            <div class="hero-bg-3d absolute top-0 left-0 w-full h-full opacity-20 -z-10"></div>
+            <h1 class="text-4xl md:text-6xl font-bold mb-4 bg-gradient-to-r from-blue-600 via-purple-500 to-cyan-500 bg-clip-text text-transparent bg-300% animate-gradient">
+                PintarFlow
+            </h1>
+            <p class="text-lg text-gray-600 dark:text-gray-300 max-w-xl mx-auto">
+                AI-built learning platform untuk belajar coding dan teknologi secara praktis dan terarah
+            </p>
         </div>
 
         <section class="mb-10">
@@ -67,204 +86,6 @@
             <div id="filterContainer" class="flex flex-wrap gap-2 mb-6"></div>
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6" id="moduleList">
-                <a href="features/sql_basic.html"
-                    class="module-card block bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all hover:-translate-y-1">
-                    <img src="https://images.unsplash.com/photo-1633356122544-f134324a6cee?w=800&h=250&fit=crop"
-                        alt="SQL Basic" class="w-full h-40 object-cover">
-                    <div class="p-6">
-                        <div class="flex items-center justify-between mb-3">
-                            <h4 class="text-xl font-bold">SQL Basic</h4>
-                            <span
-                                class="px-3 py-1 bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400 rounded-full text-sm font-medium">
-                                Basic
-                            </span>
-                        </div>
-                        <p class="text-gray-600 dark:text-gray-400">Dasar-dasar database dan query SQL untuk pemula</p>
-                    </div>
-                </a>
-
-                <a href="features/sql_intermediate.html"
-                    class="module-card block bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all hover:-translate-y-1">
-                    <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=250&fit=crop"
-                        alt="SQL Intermediate" class="w-full h-40 object-cover">
-                    <div class="p-6">
-                        <div class="flex items-center justify-between mb-3">
-                            <h4 class="text-xl font-bold">SQL Intermediate</h4>
-                            <span
-                                class="px-3 py-1 bg-yellow-100 dark:bg-yellow-900/30 text-yellow-700 dark:text-yellow-400 rounded-full text-sm font-medium">
-                                Intermediate
-                            </span>
-                        </div>
-                        <p class="text-gray-600 dark:text-gray-400">Module lanjutan SQL dengan JOIN, Aggregate, Subquery
-                            dan Constraints</p>
-                    </div>
-                </a>
-
-                <a href="features/sql_advanced.html"
-                    class="module-card block bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all hover:-translate-y-1">
-                    <img src="https://static.vecteezy.com/system/resources/previews/008/612/700/non_2x/sql-word-and-sql-statements-structured-query-language-code-on-a-blue-background-3d-illustration-photo.jpg"
-                        alt="SQL Advanced" class="w-full h-40 object-cover">
-                    <div class="p-6">
-                        <div class="flex items-center justify-between mb-3">
-                            <h4 class="text-xl font-bold">SQL Advanced</h4>
-                            <span
-                                class="px-3 py-1 bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-400 rounded-full text-sm font-medium">
-                                Advanced
-                            </span>
-                        </div>
-                        <p class="text-gray-600 dark:text-gray-400">Module advanced SQL Window Function, CTE, Index,
-                            Transaction dan Optimasi</p>
-                    </div>
-                </a>
-
-                <a href="features/sql_supabase_intro.html"
-                    class="module-card block bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all hover:-translate-y-1">
-                    <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=800&h=250&fit=crop"
-                        alt="Supabase Introduction" class="w-full h-40 object-cover">
-                    <div class="p-6">
-                        <div class="flex items-center justify-between mb-3">
-                            <h4 class="text-xl font-bold">Pengenalan SQL & Supabase</h4>
-                            <span
-                                class="px-3 py-1 bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400 rounded-full text-sm font-medium">
-                                Basic
-                            </span>
-                        </div>
-                        <p class="text-gray-600 dark:text-gray-400">Panduan lengkap memahami database dan implementasi
-                            dengan platform Supabase</p>
-                    </div>
-                </a>
-
-                <a href="features/html_basic.html"
-                    class="module-card block bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all hover:-translate-y-1">
-                    <img src="https://images.unsplash.com/photo-1542831371-29b0f74f9713?w=800&h=250&fit=crop"
-                        alt="HTML Basic" class="w-full h-40 object-cover">
-                    <div class="p-6">
-                        <div class="flex items-center justify-between mb-3">
-                            <h4 class="text-xl font-bold">HTML Basic</h4>
-                            <span
-                                class="px-3 py-1 bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400 rounded-full text-sm font-medium">
-                                Basic
-                            </span>
-                        </div>
-                        <p class="text-gray-600 dark:text-gray-400">Dasar-dasar HTML untuk membuat struktur halaman
-                            website</p>
-                    </div>
-                </a>
-
-                <a href="features/html_intermediate.html"
-                    class="module-card block bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all hover:-translate-y-1">
-                    <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=800&h=250&fit=crop"
-                        alt="HTML Intermediate" class="w-full h-40 object-cover">
-                    <div class="p-6">
-                        <div class="flex items-center justify-between mb-3">
-                            <h4 class="text-xl font-bold">HTML Intermediate</h4>
-                            <span
-                                class="px-3 py-1 bg-yellow-100 dark:bg-yellow-900/30 text-yellow-700 dark:text-yellow-400 rounded-full text-sm font-medium">
-                                Intermediate
-                            </span>
-                        </div>
-                        <p class="text-gray-600 dark:text-gray-400">Fitur HTML tingkat menengah untuk website modern dan
-                            terstruktur</p>
-                    </div>
-                </a>
-
-                <a href="features/html_advanced.html"
-                    class="module-card block bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all hover:-translate-y-1">
-                    <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=800&h=250&fit=crop"
-                        alt="HTML Advanced" class="w-full h-40 object-cover">
-                    <div class="p-6">
-                        <div class="flex items-center justify-between mb-3">
-                            <h4 class="text-xl font-bold">HTML Advanced</h4>
-                            <span
-                                class="px-3 py-1 bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-400 rounded-full text-sm font-medium">
-                                Advanced
-                            </span>
-                        </div>
-                        <p class="text-gray-600 dark:text-gray-400">Fitur HTML tingkat lanjut untuk website profesional
-                            dan modern</p>
-                    </div>
-                </a>
-
-                <a href="features/javascript_basic.html"
-                    class="module-card block bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all hover:-translate-y-1">
-                    <img src="https://previews.123rf.com/images/scandinavianstock/scandinavianstock1409/scandinavianstock140900005/31231336-javascript-concept-blue-background-with-blue-text.jpg"
-                        alt="Javascript Basic" class="w-full h-40 object-cover">
-                    <div class="p-6">
-                        <div class="flex items-center justify-between mb-3">
-                            <h4 class="text-xl font-bold">Javascript Basic</h4>
-                            <span
-                                class="px-3 py-1 bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400 rounded-full text-sm font-medium">
-                                Basic
-                            </span>
-                        </div>
-                        <p class="text-gray-600 dark:text-gray-400">Pengenalan dasar pemrograman Javascript untuk web
-                            development</p>
-                    </div>
-                </a>
-
-                <a href="features/javascript_intermediate.html"
-                    class="module-card block bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all hover:-translate-y-1">
-                    <img src="https://images.unsplash.com/photo-1579468118864-1b9ea3c0db4a?w=800&h=250&fit=crop"
-                        alt="Javascript Intermediate" class="w-full h-40 object-cover">
-                    <div class="p-6">
-                        <div class="flex items-center justify-between mb-3">
-                            <h4 class="text-xl font-bold">Javascript Intermediate</h4>
-                            <span
-                                class="px-3 py-1 bg-yellow-100 dark:bg-yellow-900/30 text-yellow-700 dark:text-yellow-400 rounded-full text-sm font-medium">
-                                Intermediate
-                            </span>
-                        </div>
-                        <p class="text-gray-600 dark:text-gray-400">Fitur Javascript tingkat menengah untuk aplikasi web modern</p>
-                    </div>
-                </a>
-
-                <a href="features/javascript_advanced.html"
-                    class="module-card block bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all hover:-translate-y-1">
-                    <img src="https://images.unsplash.com/photo-1516116216624-53e697fedbea?w=800&h=250&fit=crop"
-                        alt="Javascript Advanced" class="w-full h-40 object-cover">
-                    <div class="p-6">
-                        <div class="flex items-center justify-between mb-3">
-                            <h4 class="text-xl font-bold">Javascript Advanced</h4>
-                            <span
-                                class="px-3 py-1 bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-400 rounded-full text-sm font-medium">
-                                Advanced
-                            </span>
-                        </div>
-                        <p class="text-gray-600 dark:text-gray-400">Konsep Javascript tingkat advance untuk developer profesional</p>
-                    </div>
-                </a>
-
-                <a href="features/docker_intro_windows.html"
-                    class="module-card block bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all hover:-translate-y-1">
-                    <img src="https://images.unsplash.com/photo-1605745341112-85968b19335b?w=800&h=250&fit=crop"
-                        alt="Pengertian Docker dan Cara Setup di Windows" class="w-full h-40 object-cover">
-                    <div class="p-6">
-                        <div class="flex items-center justify-between mb-3">
-                            <h4 class="text-xl font-bold">Docker Pengenalan & Setup Windows</h4>
-                            <span
-                                class="px-3 py-1 bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400 rounded-full text-sm font-medium">
-                                Basic
-                            </span>
-                        </div>
-                        <p class="text-gray-600 dark:text-gray-400">Pengertian Docker dan cara install setup Docker Desktop di Windows dengan WSL 2</p>
-                    </div>
-                </a>
-
-                <a href="features/docker_dockerfile.html"
-                    class="module-card block bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all hover:-translate-y-1">
-                    <img src="https://images.unsplash.com/photo-1633356122102-3fe601e05bd2?w=800&h=250&fit=crop"
-                        alt="Dockerfile Pengertian & Contoh" class="w-full h-40 object-cover">
-                    <div class="p-6">
-                        <div class="flex items-center justify-between mb-3">
-                            <h4 class="text-xl font-bold">Dockerfile Pengertian & Contoh</h4>
-                            <span
-                                class="px-3 py-1 bg-yellow-100 dark:bg-yellow-900/30 text-yellow-700 dark:text-yellow-400 rounded-full text-sm font-medium">
-                                Intermediate
-                            </span>
-                        </div>
-                        <p class="text-gray-600 dark:text-gray-400">Pengertian Dockerfile, sintaks, best practice dan contoh pembuatan untuk berbagai aplikasi</p>
-                    </div>
-                </a>
             </div>
 
             <div id="emptySearch" class="hidden text-center py-12">
@@ -291,6 +112,59 @@
 
     <script src="js/main.js"></script>
     <script>
+        // 3D Background Effect
+        function initHeroBackground() {
+            const container = document.querySelector('.hero-bg-3d');
+            if(!container) return;
+            
+            const scene = new THREE.Scene();
+            const camera = new THREE.PerspectiveCamera(75, container.offsetWidth / container.offsetHeight, 0.1, 1000);
+            const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+            
+            renderer.setSize(container.offsetWidth, container.offsetHeight);
+            renderer.setClearColor(0x000000, 0);
+            container.appendChild(renderer.domElement);
+            
+            const particlesCount = 2000;
+            const positions = new Float32Array(particlesCount * 3);
+            
+            for(let i = 0; i < particlesCount * 3; i++) {
+                positions[i] = (Math.random() - 0.5) * 15;
+            }
+            
+            const geometry = new THREE.BufferGeometry();
+            geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+            
+            const material = new THREE.PointsMaterial({
+                color: 0x165DFF,
+                size: 0.08,
+                transparent: true,
+                opacity: 0.7
+            });
+            
+            const particles = new THREE.Points(geometry, material);
+            scene.add(particles);
+            
+            camera.position.z = 5;
+            
+            function animate() {
+                requestAnimationFrame(animate);
+                particles.rotation.x += 0.0005;
+                particles.rotation.y += 0.0008;
+                renderer.render(scene, camera);
+            }
+            animate();
+            
+            window.addEventListener('resize', () => {
+                camera.aspect = container.offsetWidth / container.offsetHeight;
+                camera.updateProjectionMatrix();
+                renderer.setSize(container.offsetWidth, container.offsetHeight);
+            });
+        }
+        
+        // Initialize after page load
+        window.addEventListener('load', initHeroBackground);
+
         // Module Data
         const modules = [
             { id: 1, title: "SQL Basic", category: "sql", level: "basic", path: "features/sql_basic.html", image: "https://images.unsplash.com/photo-1633356122544-f134324a6cee?w=800&h=250&fit=crop", description: "Dasar-dasar database dan query SQL untuk pemula" },
@@ -310,7 +184,8 @@
             { id: 15, title: "Laravel Basic", category: "laravel", level: "basic", path: "features/laravel_basic.html", image: "https://images.unsplash.com/photo-1633356122544-f134324a6cee?w=800&h=250&fit=crop", description: "Module dasar mempelajari framework Laravel MVC, Routing, Controller, View, dan Eloquent ORM" },
             { id: 16, title: "Laravel Intermediate", category: "laravel", level: "intermediate", path: "features/laravel_intermediate.html", image: "https://images.unsplash.com/photo-1633356122544-f134324a6cee?w=800&h=250&fit=crop", description: "Module lanjutan Laravel Validation, Authentication, Eloquent Relationship, Middleware dan Form Request" },
             { id: 17, title: "Laravel Advanced", category: "laravel", level: "advanced", path: "features/laravel_advanced.html", image: "https://images.unsplash.com/photo-1633356122544-f134324a6cee?w=800&h=250&fit=crop", description: "Module Laravel tingkat advance Service Container, Event Listener, Queue Job, Repository Pattern, Testing dan Deployment" },
-            { id: 18, title: "Pengenalan TailwindCSS", category: "css", level: "intermediate", path: "features/tailwindcss_introduction.html", image: "https://images.unsplash.com/photo-1507721999472-8ed4421c4af2?w=800&h=250&fit=crop", description: "Module pengenalan TailwindCSS Utility First CSS, instalasi, konsep dasar dan best practice profesional" }
+            { id: 18, title: "Pengenalan TailwindCSS", category: "css", level: "intermediate", path: "features/tailwindcss_introduction.html", image: "https://images.unsplash.com/photo-1507721999472-8ed4421c4af2?w=800&h=250&fit=crop", description: "Module pengenalan TailwindCSS Utility First CSS, instalasi, konsep dasar dan best practice profesional" },
+            { id: 19, title: "Pengenalan Bootstrap CSS", category: "css", level: "intermediate", path: "features/bootstrap_introduction.html", image: "https://images.unsplash.com/photo-15070032111694-5be0cb4d0a04?w=800&h=250&fit=crop", description: "Module pengenalan Bootstrap CSS framework, grid system, komponen siap pakai dan best practice" }
         ];
 
         // State
