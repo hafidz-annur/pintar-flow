@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PintarFlow - Workflow Automation Zapier Make N8N</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#165DFF',
+                    },
+                }
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .content-auto {
+                content-visibility: auto;
+            }
+            .code-block {
+                @apply rounded-lg overflow-hidden my-4;
+            }
+            .code-block pre {
+                @apply m-0 p-4 !bg-gray-900;
+            }
+            .code-block code {
+                @apply font-mono text-sm leading-relaxed;
+            }
+            .warning-box {
+                @apply bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 p-4 rounded-lg my-4;
+            }
+            .info-box {
+                @apply bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 p-4 rounded-lg my-4;
+            }
+            .comparison-box {
+                @apply bg-white dark:bg-gray-800 rounded-lg p-4 border border-gray-200 dark:border-gray-700;
+            }
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50 dark:bg-gray-900 text-gray-800 dark:text-gray-200 transition-colors duration-300">
+    <!-- Horizontal Scroll Progress -->
+    <div class="progress-scroll" id="progressScroll"></div>
+    <header
+        class="sticky top-0 z-50 bg-white/80 dark:bg-gray-900/80 backdrop-blur-md border-b border-gray-200 dark:border-gray-800">
+        <div class="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
+            <a href="../index.html" class="font-bold text-xl text-primary">PintarFlow</a>
+            <button id="toggleDark" class="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800">
+                <span class="dark:hidden">🌙</span>
+                <span class="hidden dark:inline">☀️</span>
+            </button>
+        </div>
+    </header>
+
+    <main class="max-w-4xl mx-auto px-4 py-8">
+        <div class="mb-12">
+            <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=400&fit=crop"
+                alt="Workflow Automation Zapier Make N8N" class="w-full h-48 object-cover rounded-xl mb-6 shadow-md">
+            <div class="inline-block px-3 py-1 bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400 rounded-full text-sm font-medium mb-4">
+                Basic Level
+            </div>
+            <h1 class="text-4xl font-bold mb-4">Pengertian Workflow Automation dan Perbandingan Zapier vs Make vs N8N</h1>
+            <p class="text-lg text-gray-600 dark:text-gray-400 leading-relaxed">
+                Module ini menjelaskan apa itu Workflow Automation, manfaatnya, dan perbandingan mendalam antara 3 platform otomasi paling populer saat ini: Zapier, Make (Integromat), dan N8N. Setelah mempelajari module ini kamu akan bisa memilih platform yang tepat untuk kebutuhan kamu.
+            </p>
+        </div>
+
+        <div class="bg-white dark:bg-gray-800 rounded-xl p-6 mb-10 border border-gray-200 dark:border-gray-700">
+            <h2 class="text-xl font-bold mb-4">🎯 Learning Objectives</h2>
+            <ul class="space-y-2 text-gray-700 dark:text-gray-300">
+                <li class="flex items-start gap-3">
+                    <span class="text-primary mt-1">✅</span>
+                    <span>Memahami apa itu Workflow Automation dan trigger-action</span>
+                </li>
+                <li class="flex items-start gap-3">
+                    <span class="text-primary mt-1">✅</span>
+                    <span>Mengetahui manfaat menggunakan otomasi untuk bisnis dan personal</span>
+                </li>
+                <li class="flex items-start gap-3">
+                    <span class="text-primary mt-1">✅</span>
+                    <span>Memahami perbedaan konsep antara Zapier, Make, dan N8N</span>
+                </li>
+                <li class="flex items-start gap-3">
+                    <span class="text-primary mt-1">✅</span>
+                    <span>Mengetahui kelebihan dan kekurangan masing-masing platform</span>
+                </li>
+                <li class="flex items-start gap-3">
+                    <span class="text-primary mt-1">✅</span>
+                    <span>Bisa memilih platform yang sesuai dengan kebutuhan</span>
+                </li>
+                <li class="flex items-start gap-3">
+                    <span class="text-primary mt-1">✅</span>
+                    <span>Memahami pricing dan batasan masing-masing platform</span>
+                </li>
+                <li class="flex items-start gap-3">
+                    <span class="text-primary mt-1">✅</span>
+                    <span>Mengetahui use case yang cocok untuk setiap platform</span>
+                </li>
+            </ul>
+        </div>
+
+        <div class="space-y-12">
+            <section class="border-t border-gray-200 dark:border-gray-700 pt-10">
+                <h3 class="text-2xl font-bold mb-4">1. Apa Itu Workflow Automation?</h3>
+                <div class="prose dark:prose-invert max-w-none">
+                    <p class="leading-relaxed mb-4">
+                        Workflow Automation adalah proses mengotomatiskan tugas berulang yang biasanya dilakukan secara manual antar aplikasi yang berbeda.
+                    </p>
+                    <div class="info-box">
+                        <p class="mb-2 font-semibold">Konsep dasar:</p>
+                        <ul class="space-y-1">
+                            <li>✅ <strong>Trigger</strong>: Event yang memulai otomasi (contoh: email masuk, form diisi, ada transaksi baru)</li>
+                            <li>✅ <strong>Action</strong>: Apa yang akan dilakukan setelah trigger terjadi (contoh: kirim pesan wa, tambah data ke spreadsheet, kirim notifikasi)</li>
+                            <li>✅ <strong>App</strong>: Aplikasi / Layanan yang saling terhubung</li>
+                        </ul>
+                    </div>
+                    <h4 class="font-semibold mt-6 mb-2">Manfaat otomasi:</h4>
+                    <ul class="space-y-1 mb-6">
+                        <li>Menghemat waktu puluhan jam per bulan</li>
+                        <li>Menghilangkan human error</li>
+                        <li>Proses menjadi konsisten</li>
+                        <li>Bisa bekerja 24 jam non stop</li>
+                        <li>Tidak perlu coding untuk membuat otomasi</li>
+                    </ul>
+                </div>
+                <div class="mt-6">
+                    <h4 class="font-semibold mb-2">🔄 Contoh Workflow Sederhana:</h4>
+                    <div class="code-block">
+                        <pre><code class="language-text">1. [TRIGGER] Ada orang mengisi form di website
+2. [ACTION 1] Tambahkan data ke Google Sheets
+3. [ACTION 2] Kirim pesan Whatsapp ke admin
+4. [ACTION 3] Kirim email terima kasih ke pengisi form</code></pre>
+                    </div>
+                </div>
+            </section>
+
+            <section class="border-t border-gray-200 dark:border-gray-700 pt-10">
+                <h3 class="text-2xl font-bold mb-4">2. Perbandingan Umum</h3>
+                <div class="overflow-x-auto">
+                    <table class="min-w-full border-collapse">
+                        <thead>
+                            <tr>
+                                <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 bg-gray-100 dark:bg-gray-700 text-left">Fitur</th>
+                                <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 bg-gray-100 dark:bg-gray-700 text-center">Zapier</th>
+                                <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 bg-gray-100 dark:bg-gray-700 text-center">Make</th>
+                                <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 bg-gray-100 dark:bg-gray-700 text-center">N8N</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 font-medium">Tahun Diluncurkan</td>
+                                <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-center">2012</td>
+                                <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-center">2016</td>
+                                <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-center">2019</td>
+                            </tr>
+                            <tr>
+                                <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 font-medium">Jumlah Integrasi</td>
+                                <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-center">6.000+</td>
+                                <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-center">1.500+</td>
+                                <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-center">2.000+</td>
+                            </tr>
+                            <tr>
+                                <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 font-medium">UI Kemudahan</td>
+                                <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-center">⭐⭐⭐⭐⭐</td>
+                                <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-center">⭐⭐⭐⭐</td>
+                                <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-center">⭐⭐⭐</td>
+                            </tr>
+                            <tr>
+                                <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 font-medium">Self Host</td>
+                                <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-center text-red-500">❌</td>
+                                <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-center text-red-500">❌</td>
+                                <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-center text-green-500">✅</td>
+                            </tr>
+                            <tr>
+                                <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 font-medium">Open Source</td>
+                                <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-center text-red-500">❌</td>
+                                <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-center text-red-500">❌</td>
+                                <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-center text-green-500">✅</td>
+                            </tr>
+                            <tr>
+                                <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 font-medium">Harga Termurah</td>
+                                <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-center">$19.99</td>
+                                <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-center">$10.59</td>
+                                <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-center">Gratis</td>
+                            </tr>
+                            <tr>
+                                <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 font-medium">Kekuatan</td>
+                                <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-center">Kemudahan</td>
+                                <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-center">Fleksibilitas</td>
+                                <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-center">Kontrol Penuh</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <section class="border-t border-gray-200 dark:border-gray-700 pt-10">
+                <h3 class="text-2xl font-bold mb-4">3. Zapier Review</h3>
+                <div class="prose dark:prose-invert max-w-none">
+                    <p class="leading-relaxed mb-4">
+                        Zapier adalah platform otomasi paling populer dan paling mudah digunakan di dunia. Cocok untuk pemula, pemilik usaha kecil, dan siapapun yang ingin otomasi cepat tanpa ribet.
+                    </p>
+                    <div class="grid md:grid-cols-2 gap-4 my-6">
+                        <div class="bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 p-4 rounded-lg">
+                            <p class="font-semibold mb-2 text-green-700 dark:text-green-400">✅ Kelebihan Zapier:</p>
+                            <ul class="space-y-1 text-sm">
+                                <li>Interface paling sederhana, cukup drag and drop</li>
+                                <li>Integrasi paling banyak di dunia</li>
+                                <li>Dokumentasi dan komunitas sangat besar</li>
+                                <li>Sangat stabil dan jarang error</li>
+                                <li>Banyak tutorial di internet</li>
+                            </ul>
+                        </div>
+                        <div class="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 p-4 rounded-lg">
+                            <p class="font-semibold mb-2 text-red-700 dark:text-red-400">❌ Kekurangan Zapier:</p>
+                            <ul class="space-y-1 text-sm">
+                                <li>Harga paling mahal</li>
+                                <li>Kurang fleksibel untuk logic kompleks</li>
+                                <li>Batasan task sangat ketat</li>
+                                <li>Tidak bisa self host</li>
+                                <li>Custom logic sulit dilakukan</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="info-box">
+                        <strong>👥 Cocok untuk:</strong> Pemula, UMKM, tim marketing, use case sederhana
+                    </div>
+                </div>
+            </section>
+
+            <section class="border-t border-gray-200 dark:border-gray-700 pt-10">
+                <h3 class="text-2xl font-bold mb-4">4. Make (Integromat) Review</h3>
+                <div class="prose dark:prose-invert max-w-none">
+                    <p class="leading-relaxed mb-4">
+                        Make dulunya bernama Integromat. Ini adalah platform middle ground antara kemudahan dan fleksibilitas. Cocok untuk yang butuh otomasi lebih kompleks tapi masih tidak mau coding.
+                    </p>
+                    <div class="grid md:grid-cols-2 gap-4 my-6">
+                        <div class="bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 p-4 rounded-lg">
+                            <p class="font-semibold mb-2 text-green-700 dark:text-green-400">✅ Kelebihan Make:</p>
+                            <ul class="space-y-1 text-sm">
+                                <li>Visual flow editor yang sangat bagus</li>
+                                <li>Bisa membuat logic kompleks (looping, filter, router)</li>
+                                <li>Harga jauh lebih murah dibanding Zapier</li>
+                                <li>Batasan task jauh lebih longgar</li>
+                                <li>Bisa melihat data yang lewat secara detail</li>
+                            </ul>
+                        </div>
+                        <div class="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 p-4 rounded-lg">
+                            <p class="font-semibold mb-2 text-red-700 dark:text-red-400">❌ Kekurangan Make:</p>
+                            <ul class="space-y-1 text-sm">
+                                <li>Kurang intuitif dibanding Zapier</li>
+                                <li>Learning curve lebih tinggi</li>
+                                <li>Jumlah integrasi lebih sedikit</li>
+                                <li>Beberapa fitur advance butuh pengetahuan teknis</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="info-box">
+                        <strong>👥 Cocok untuk:</strong> Profesional, tim operasional, otomasi menengah, yang butuh fleksibilitas lebih
+                    </div>
+                </div>
+            </section>
+
+            <section class="border-t border-gray-200 dark:border-gray-700 pt-10">
+                <h3 class="text-2xl font-bold mb-4">5. N8N Review</h3>
+                <div class="prose dark:prose-invert max-w-none">
+                    <p class="leading-relaxed mb-4">
+                        N8N adalah platform otomasi open source yang bisa kamu host sendiri di server kamu. Ini adalah pilihan terbaik untuk developer, tim teknis, dan yang butuh kontrol penuh.
+                    </p>
+                    <div class="grid md:grid-cols-2 gap-4 my-6">
+                        <div class="bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 p-4 rounded-lg">
+                            <p class="font-semibold mb-2 text-green-700 dark:text-green-400">✅ Kelebihan N8N:</p>
+                            <ul class="space-y-1 text-sm">
+                                <li>100% open source dan bisa self host GRATIS</li>
+                                <li>Kontrol penuh atas semua data kamu</li>
+                                <li>Bisa menjalankan kode Javascript apapun</li>
+                                <li>Tidak ada batasan task apapun</li>
+                                <li>Bisa dikustomisasi sepenuhnya</li>
+                            </ul>
+                        </div>
+                        <div class="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 p-4 rounded-lg">
+                            <p class="font-semibold mb-2 text-red-700 dark:text-red-400">❌ Kekurangan N8N:</p>
+                            <ul class="space-y-1 text-sm">
+                                <li>Harus setup dan maintain server sendiri</li>
+                                <li>Perlu pengetahuan teknis dasar</li>
+                                <li>Interface paling kompleks</li>
+                                <li>Dukungan resmi kurang bagus</li>
+                                <li>Lebih banyak bug dibanding platform SaaS</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="info-box">
+                        <strong>👥 Cocok untuk:</strong> Developer, tim teknis, perusahaan besar, yang butuh privasi data penuh
+                    </div>
+                </div>
+            </section>
+
+            <section class="border-t border-gray-200 dark:border-gray-700 pt-10">
+                <h3 class="text-2xl font-bold mb-4">6. Perbandingan Harga</h3>
+                <div class="overflow-x-auto">
+                    <table class="min-w-full border-collapse">
+                        <thead>
+                            <tr>
+                                <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 bg-gray-100 dark:bg-gray-700 text-left">Paket</th>
+                                <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 bg-gray-100 dark:bg-gray-700 text-center">Zapier</th>
+                                <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 bg-gray-100 dark:bg-gray-700 text-center">Make</th>
+                                <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 bg-gray-100 dark:bg-gray-700 text-center">N8N Cloud</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 font-medium">Gratis</td>
+                                <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-center">5 Zaps / 100 task</td>
+                                <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-center">1000 operasi</td>
+                                <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-center">5 Workflow / 1000 eksekusi</td>
+                            </tr>
+                            <tr>
+                                <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 font-medium">Starter</td>
+                                <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-center">$19.99 / 750 task</td>
+                                <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-center">$10.59 / 10.000 operasi</td>
+                                <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-center">$34 / 5000 eksekusi</td>
+                            </tr>
+                            <tr>
+                                <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 font-medium">Populer</td>
+                                <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-center">$49 / 3.000 task</td>
+                                <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-center">$38 / 100.000 operasi</td>
+                                <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-center">$79 / 10.000 eksekusi</td>
+                            </tr>
+                            <tr>
+                                <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 font-medium">Unlimited</td>
+                                <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-center">$599 / 100.000 task</td>
+                                <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-center">$238 / 1.000.000 operasi</td>
+                                <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 text-center">$239 / Unlimited</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="info-box mt-4">
+                    💡 Catatan: 1 Task di Zapier = 1 Action. 1 Operasi di Make = 1 step apapun.
+                </div>
+            </section>
+
+            <section class="border-t border-gray-200 dark:border-gray-700 pt-10">
+                <h3 class="text-2xl font-bold mb-4">7. Bagaimana Memilih Platform Yang Tepat?</h3>
+                <div class="space-y-4">
+                    <div class="comparison-box">
+                        <p class="font-semibold mb-2 text-green-600 dark:text-green-400">✅ Pilih Zapier jika:</p>
+                        <ul class="space-y-1">
+                            <li>Kamu pemula dan tidak mau ribet</li>
+                            <li>Cepat dan mudah adalah prioritas utama</li>
+                            <li>Kamu butuh integrasi dengan aplikasi yang jarang</li>
+                            <li>Kamu tidak mau mengurus apapun</li>
+                        </ul>
+                    </div>
+                    <div class="comparison-box">
+                        <p class="font-semibold mb-2 text-yellow-600 dark:text-yellow-400">✅ Pilih Make jika:</p>
+                        <ul class="space-y-1">
+                            <li>Kamu butuh logic yang lebih kompleks</li>
+                            <li>Kamu akan membuat banyak otomasi</li>
+                            <li>Harga dan nilai adalah prioritas</li>
+                            <li>Kamu tidak mau coding</li>
+                        </ul>
+                    </div>
+                    <div class="comparison-box">
+                        <p class="font-semibold mb-2 text-blue-600 dark:text-blue-400">✅ Pilih N8N jika:</p>
+                        <ul class="space-y-1">
+                            <li>Kamu adalah developer / paham teknis</li>
+                            <li>Data privasi adalah hal penting</li>
+                            <li>Kamu ingin kontrol penuh</li>
+                            <li>Kamu tidak keberatan setup server</li>
+                            <li>Kamu butuh menjalankan kode custom</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <section class="border-t border-gray-200 dark:border-gray-700 pt-10">
+                <h3 class="text-2xl font-bold mb-4">8. Kesimpulan</h3>
+                <div class="prose dark:prose-invert max-w-none">
+                    <p class="leading-relaxed mb-4">
+                        Tidak ada platform yang paling bagus semuanya. Setiap platform dibuat untuk target pengguna yang berbeda.
+                    </p>
+                    <ul class="space-y-2 mb-6">
+                        <li>Jika kamu pemula: Mulailah dengan <strong>Zapier</strong></li>
+                        <li>Jika kamu butuh lebih fleksibel: Pindah ke <strong>Make</strong></li>
+                        <li>Jika kamu teknis dan butuh kontrol: Gunakan <strong>N8N</strong></li>
+                    </ul>
+                    <div class="info-box">
+                        Semua 3 platform ini adalah tools yang sangat bagus dan bisa menghemat ribuan jam kerja kamu. Yang terpenting bukan tools mana yang kamu pilih, tapi kamu mulai membuat otomasi hari ini.
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <div class="mt-16 pt-8 border-t border-gray-200 dark:border-gray-700">
+            <div class="flex justify-center">
+                <a href="../index.html"
+                    class="inline-flex items-center gap-2 px-6 py-3 bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors">
+                    ← Kembali ke Menu Utama
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <footer class="mt-20 border-t border-gray-200 dark:border-gray-800 py-8">
+        <div class="max-w-6xl mx-auto px-4 text-center text-gray-500 dark:text-gray-400 text-sm">
+            <p>© 2026 PintarFlow. Seluruh hak cipta dilindungi.</p>
+        </div>
+    </footer>
+
+    <!-- Back To Top Button -->
+    <button class="back-to-top" id="backToTop" title="Kembali ke atas">
+        <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+            stroke-linejoin="round">
+            <polyline points="18 15 12 9 6 15"></polyline>
+        </svg>
+    </button>
+
+    <script src="../js/main.js"></script>
+</body>
+
+</html>

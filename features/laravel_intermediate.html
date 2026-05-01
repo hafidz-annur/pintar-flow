@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PintarFlow - Laravel Intermediate</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#165DFF',
+                    },
+                }
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .content-auto {
+                content-visibility: auto;
+            }
+            .code-block {
+                @apply rounded-lg overflow-hidden my-4;
+            }
+            .code-block pre {
+                @apply m-0 p-4 !bg-gray-900;
+            }
+            .code-block code {
+                @apply font-mono text-sm leading-relaxed;
+            }
+            .warning-box {
+                @apply bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 p-4 rounded-lg my-4;
+            }
+            .info-box {
+                @apply bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 p-4 rounded-lg my-4;
+            }
+            .success-box {
+                @apply bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 p-4 rounded-lg my-4;
+            }
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50 dark:bg-gray-900 text-gray-800 dark:text-gray-200 transition-colors duration-300">
+    <!-- Horizontal Scroll Progress -->
+    <div class="progress-scroll" id="progressScroll"></div>
+    <header
+        class="sticky top-0 z-50 bg-white/80 dark:bg-gray-900/80 backdrop-blur-md border-b border-gray-200 dark:border-gray-800">
+        <div class="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
+            <a href="../index.html" class="font-bold text-xl text-primary">PintarFlow</a>
+            <button id="toggleDark" class="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800">
+                <span class="dark:hidden">🌙</span>
+                <span class="hidden dark:inline">☀️</span>
+            </button>
+        </div>
+    </header>
+
+    <main class="max-w-4xl mx-auto px-4 py-8">
+        <div class="mb-12">
+            <img src="https://images.unsplash.com/photo-1633356122544-f134324a6cee?w=800&h=400&fit=crop"
+                alt="Laravel Intermediate" class="w-full h-48 object-cover rounded-xl mb-6 shadow-md">
+            <div class="inline-block px-3 py-1 bg-yellow-100 dark:bg-yellow-900/30 text-yellow-700 dark:text-yellow-400 rounded-full text-sm font-medium mb-4">
+                Intermediate Level
+            </div>
+            <h1 class="text-4xl font-bold mb-4">Laravel Intermediate</h1>
+            <p class="text-lg text-gray-600 dark:text-gray-400 leading-relaxed">
+                Module lanjutan Laravel yang membahas konsep menengah yang dibutuhkan untuk membuat aplikasi profesional. Mulai dari Request Validation, Authentication, Eloquent Relationship, Middleware, sampai Form Request.
+            </p>
+        </div>
+
+        <div class="bg-white dark:bg-gray-800 rounded-xl p-6 mb-10 border border-gray-200 dark:border-gray-700">
+            <h2 class="text-xl font-bold mb-4">🎯 Learning Objectives</h2>
+            <ul class="space-y-2 text-gray-700 dark:text-gray-300">
+                <li class="flex items-start gap-3">
+                    <span class="text-primary mt-1">✅</span>
+                    <span>Memahami dan bisa menggunakan Request dan Validation</span>
+                </li>
+                <li class="flex items-start gap-3">
+                    <span class="text-primary mt-1">✅</span>
+                    <span>Bisa membuat sistem Authentication dan Authorization</span>
+                </li>
+                <li class="flex items-start gap-3">
+                    <span class="text-primary mt-1">✅</span>
+                    <span>Memahami semua jenis Relationship Eloquent</span>
+                </li>
+                <li class="flex items-start gap-3">
+                    <span class="text-primary mt-1">✅</span>
+                    <span>Bisa membuat dan menggunakan Middleware</span>
+                </li>
+                <li class="flex items-start gap-3">
+                    <span class="text-primary mt-1">✅</span>
+                    <span>Memahami Form Request</span>
+                </li>
+                <li class="flex items-start gap-3">
+                    <span class="text-primary mt-1">✅</span>
+                    <span>Bisa menggunakan File Storage dan Upload</span>
+                </li>
+                <li class="flex items-start gap-3">
+                    <span class="text-primary mt-1">✅</span>
+                    <span>Memahami Event dan Listener</span>
+                </li>
+                <li class="flex items-start gap-3">
+                    <span class="text-primary mt-1">✅</span>
+                    <span>Bisa membuat CRUD dengan fitur lengkap</span>
+                </li>
+            </ul>
+        </div>
+
+        <div class="space-y-12">
+            <section class="border-t border-gray-200 dark:border-gray-700 pt-10">
+                <h3 class="text-2xl font-bold mb-4">1. Request Handling & Validation</h3>
+                <div class="prose dark:prose-invert max-w-none">
+                    <p class="leading-relaxed mb-4">
+                        Semua data input yang masuk ke aplikasi harus divalidasi terlebih dahulu. Laravel menyediakan sistem validasi yang sangat powerful.
+                    </p>
+                </div>
+                <div class="code-block mt-6">
+                    <pre><code class="language-php">public function store(Request $request)
+{
+    $validated = $request->validate([
+        'nama' => 'required|string|max:255',
+        'email' => 'required|email|unique:users,email',
+        'password' => 'required|min:8|confirmed',
+        'tanggal_lahir' => 'nullable|date',
+    ]);
+
+    // Simpan data ke database
+    User::create($validated);
+
+    return redirect()->back();
+}</code></pre>
+                </div>
+                <div class="info-box mt-4">
+                    ✅ Aturan validasi yang sering digunakan:
+                    <code class="bg-gray-100 dark:bg-gray-800 px-1 py-0.5 rounded text-sm">required</code>,
+                    <code class="bg-gray-100 dark:bg-gray-800 px-1 py-0.5 rounded text-sm">email</code>,
+                    <code class="bg-gray-100 dark:bg-gray-800 px-1 py-0.5 rounded text-sm">unique</code>,
+                    <code class="bg-gray-100 dark:bg-gray-800 px-1 py-0.5 rounded text-sm">min</code>,
+                    <code class="bg-gray-100 dark:bg-gray-800 px-1 py-0.5 rounded text-sm">max</code>,
+                    <code class="bg-gray-100 dark:bg-gray-800 px-1 py-0.5 rounded text-sm">numeric</code>,
+                    <code class="bg-gray-100 dark:bg-gray-800 px-1 py-0.5 rounded text-sm">date</code>,
+                    <code class="bg-gray-100 dark:bg-gray-800 px-1 py-0.5 rounded text-sm">exists</code>,
+                    <code class="bg-gray-100 dark:bg-gray-800 px-1 py-0.5 rounded text-sm">confirmed</code>
+                </div>
+            </section>
+
+            <section class="border-t border-gray-200 dark:border-gray-700 pt-10">
+                <h3 class="text-2xl font-bold mb-4">2. Authentication</h3>
+                <div class="prose dark:prose-invert max-w-none">
+                    <p class="leading-relaxed mb-4">
+                        Laravel menyediakan sistem autentikasi lengkap yang tinggal pakai, tidak perlu buat dari nol.
+                    </p>
+                </div>
+                <div class="code-block mt-6">
+                    <pre><code class="language-bash">php artisan make:auth
+
+# Untuk Laravel 10+
+composer require laravel/breeze --dev
+php artisan breeze:install</code></pre>
+                </div>
+                <div class="code-block mt-4">
+                    <pre><code class="language-php">// Mendapatkan user yang sedang login
+Auth::user();
+Auth::id();
+
+// Cek apakah user sudah login
+Auth::check();
+
+// Login user
+Auth::login($user);
+
+// Logout
+Auth::logout();</code></pre>
+                </div>
+            </section>
+
+            <section class="border-t border-gray-200 dark:border-gray-700 pt-10">
+                <h3 class="text-2xl font-bold mb-4">3. Authorization (Gates & Policies)</h3>
+                <div class="code-block mt-6">
+                    <pre><code class="language-php">// Definisikan di AppServiceProvider
+Gate::define('update-post', function (User $user, Post $post) {
+    return $user->id === $post->user_id;
+});
+
+// Gunakan di Controller
+if (Gate::allows('update-post', $post)) {
+    // User boleh update post
+}</code></pre>
+                </div>
+            </section>
+
+            <section class="border-t border-gray-200 dark:border-gray-700 pt-10">
+                <h3 class="text-2xl font-bold mb-4">4. Eloquent Relationship</h3>
+                <div class="code-block mt-6">
+                    <pre><code class="language-php">class User extends Model
+{
+    // Satu user punya banyak post
+    public function posts()
+    {
+        return $this->hasMany(Post::class);
+    }
+}
+
+class Post extends Model
+{
+    // Satu post milik satu user
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+}</code></pre>
+                </div>
+                <div class="info-box mt-4">
+                    ✅ Jenis Relationship yang ada:
+                    <ul class="mt-2 space-y-1">
+                        <li><code class="bg-gray-100 dark:bg-gray-800 px-1 py-0.5 rounded text-sm">hasOne</code> - Satu ke satu</li>
+                        <li><code class="bg-gray-100 dark:bg-gray-800 px-1 py-0.5 rounded text-sm">hasMany</code> - Satu ke banyak</li>
+                        <li><code class="bg-gray-100 dark:bg-gray-800 px-1 py-0.5 rounded text-sm">belongsTo</code> - Kebalikannya hasMany</li>
+                        <li><code class="bg-gray-100 dark:bg-gray-800 px-1 py-0.5 rounded text-sm">belongsToMany</code> - Banyak ke banyak</li>
+                        <li><code class="bg-gray-100 dark:bg-gray-800 px-1 py-0.5 rounded text-sm">hasManyThrough</code> - Hubungan melalui tabel lain</li>
+                        <li><code class="bg-gray-100 dark:bg-gray-800 px-1 py-0.5 rounded text-sm">morphMany</code> - Polymorphic relationship</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section class="border-t border-gray-200 dark:border-gray-700 pt-10">
+                <h3 class="text-2xl font-bold mb-4">5. Eager Loading</h3>
+                <div class="warning-box">
+                    <p class="font-semibold mb-2 text-red-700 dark:text-red-400">❌ Masalah N+1 Query:</p>
+                    <div class="code-block">
+                        <pre><code class="language-php">// Ini akan menjalankan 1 query untuk mengambil semua post
+// Dan 1 query untuk setiap post untuk mengambil user
+$posts = Post::all();
+foreach ($posts as $post) {
+    echo $post->user->nama;
+}</code></pre>
+                    </div>
+                </div>
+                <div class="success-box mt-4">
+                    <p class="font-semibold mb-2 text-green-700 dark:text-green-400">✅ Solusi dengan Eager Loading:</p>
+                    <div class="code-block">
+                        <pre><code class="language-php">// Ini hanya menjalankan 2 query saja, tidak peduli berapa jumlah post
+$posts = Post::with('user')->get();
+foreach ($posts as $post) {
+    echo $post->user->nama;
+}</code></pre>
+                    </div>
+                </div>
+            </section>
+
+            <section class="border-t border-gray-200 dark:border-gray-700 pt-10">
+                <h3 class="text-2xl font-bold mb-4">6. Middleware</h3>
+                <div class="code-block mt-6">
+                    <pre><code class="language-php">public function handle(Request $request, Closure $next)
+{
+    if (!auth()->user()->is_admin) {
+        abort(403);
+    }
+
+    return $next($request);
+}</code></pre>
+                </div>
+                <div class="code-block mt-4">
+                    <pre><code class="language-php">Route::get('/admin', [AdminController::class, 'index'])
+    ->middleware('is_admin');</code></pre>
+                </div>
+            </section>
+
+            <section class="border-t border-gray-200 dark:border-gray-700 pt-10">
+                <h3 class="text-2xl font-bold mb-4">7. Form Request</h3>
+                <div class="code-block mt-6">
+                    <pre><code class="language-php">class StorePostRequest extends FormRequest
+{
+    public function rules()
+    {
+        return [
+            'title' => 'required|max:255',
+            'content' => 'required',
+        ];
+    }
+}</code></pre>
+                </div>
+                <div class="code-block mt-4">
+                    <pre><code class="language-php">public function store(StorePostRequest $request)
+{
+    // Data sudah tervalidasi otomatis
+    Post::create($request->validated());
+}</code></pre>
+                </div>
+            </section>
+
+            <section class="border-t border-gray-200 dark:border-gray-700 pt-10">
+                <h3 class="text-2xl font-bold mb-4">8. File Upload & Storage</h3>
+                <div class="code-block mt-6">
+                    <pre><code class="language-php">public function store(Request $request)
+{
+    $path = $request->file('gambar')->store('public/posts');
+
+    // Simpan path ke database
+    $post->gambar = $path;
+    $post->save();
+}</code></pre>
+                </div>
+            </section>
+
+            <section class="border-t border-gray-200 dark:border-gray-700 pt-10">
+                <h3 class="text-2xl font-bold mb-4">9. Soft Deletes</h3>
+                <div class="code-block mt-6">
+                    <pre><code class="language-php">use Illuminate\Database\Eloquent\SoftDeletes;
+
+class Post extends Model
+{
+    use SoftDeletes;
+}</code></pre>
+                </div>
+                <div class="code-block mt-4">
+                    <pre><code class="language-php">// Soft delete
+$post->delete();
+
+// Ambil semua data termasuk yang dihapus
+Post::withTrashed()->get();
+
+// Restore data yang dihapus
+$post->restore();
+
+// Hapus permanen
+$post->forceDelete();</code></pre>
+                </div>
+            </section>
+
+            <section class="border-t border-gray-200 dark:border-gray-700 pt-10">
+                <h3 class="text-2xl font-bold mb-4">10. Pagination</h3>
+                <div class="code-block mt-6">
+                    <pre><code class="language-php">// Di Controller
+$posts = Post::paginate(10);
+
+// Di View
+@foreach ($posts as $post)
+    {{ $post->title }}
+@endforeach
+
+// Tampilkan link pagination
+{{ $posts->links() }}</code></pre>
+                </div>
+            </section>
+
+            <section class="border-t border-gray-200 dark:border-gray-700 pt-10">
+                <h3 class="text-2xl font-bold mb-4">11. Kesimpulan</h3>
+                <div class="prose dark:prose-invert max-w-none">
+                    <p class="leading-relaxed mb-4">
+                        Dengan memahami konsep yang ada di module ini kamu sudah bisa membuat aplikasi Laravel yang profesional dan production ready.
+                    </p>
+                    <div class="info-box">
+                        Fitur yang bisa dipelajari selanjutnya:
+                        <ol class="mt-2 space-y-1">
+                            <li>Service Container & Binding</li>
+                            <li>Event & Listener</li>
+                            <li>Queue & Job</li>
+                            <li>Notification</li>
+                            <li>Cache</li>
+                            <li>Testing</li>
+                        </ol>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <div class="mt-16 pt-8 border-t border-gray-200 dark:border-gray-700">
+            <div class="flex justify-center">
+                <a href="../index.html"
+                    class="inline-flex items-center gap-2 px-6 py-3 bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors">
+                    ← Kembali ke Menu Utama
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <footer class="mt-20 border-t border-gray-200 dark:border-gray-800 py-8">
+        <div class="max-w-6xl mx-auto px-4 text-center text-gray-500 dark:text-gray-400 text-sm">
+            <p>© 2026 PintarFlow. Seluruh hak cipta dilindungi.</p>
+        </div>
+    </footer>
+
+    <!-- Back To Top Button -->
+    <button class="back-to-top" id="backToTop" title="Kembali ke atas">
+        <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+            stroke-linejoin="round">
+            <polyline points="18 15 12 9 6 15"></polyline>
+        </svg>
+    </button>
+
+    <script src="../js/main.js"></script>
+</body>
+
+</html>

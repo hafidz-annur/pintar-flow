@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PintarFlow</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#165DFF',
+                    },
+                }
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .content-auto {
+                content-visibility: auto;
+            }
+            .code-block {
+                @apply rounded-lg overflow-hidden my-4;
+            }
+            .code-block pre {
+                @apply m-0 p-4 !bg-gray-900;
+            }
+            .code-block code {
+                @apply font-mono text-sm leading-relaxed;
+            }
+            .warning-box {
+                @apply bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 p-4 rounded-lg my-4;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-50 dark:bg-gray-900 text-gray-800 dark:text-gray-200 transition-colors duration-300">
+    <!-- Horizontal Scroll Progress -->
+    <div class="progress-scroll" id="progressScroll"></div>
+    <header class="sticky top-0 z-50 bg-white/80 dark:bg-gray-900/80 backdrop-blur-md border-b border-gray-200 dark:border-gray-800">
+        <div class="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
+            <a href="../index.html" class="font-bold text-xl text-primary">PintarFlow</a>
+            <button id="toggleDark" class="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800">
+                <span class="dark:hidden">🌙</span>
+                <span class="hidden dark:inline">☀️</span>
+            </button>
+        </div>
+    </header>
+
+    <main class="max-w-4xl mx-auto px-4 py-8">
+        <div class="mb-12">
+            <img src="https://images.unsplash.com/photo-1633356122544-f134324a6cee?w=800&h=400&fit=crop" alt="SQL Basic" class="w-full h-48 object-cover rounded-xl mb-6 shadow-md">
+            <div class="inline-block px-3 py-1 bg-primary/10 text-primary rounded-full text-sm font-medium mb-4">
+                Basic Level
+            </div>
+            <h1 class="text-4xl font-bold mb-4">SQL Basic</h1>
+            <p class="text-lg text-gray-600 dark:text-gray-400 leading-relaxed">
+                Module dasar untuk mempelajari Structured Query Language (SQL) bahasa standar untuk mengelola dan memanipulasi data dalam database relasional.
+                Cocok untuk pemula yang belum pernah menyentuh database sama sekali.
+            </p>
+        </div>
+
+        <div class="bg-white dark:bg-gray-800 rounded-xl p-6 mb-10 border border-gray-200 dark:border-gray-700">
+            <h2 class="text-xl font-bold mb-4">🎯 Learning Objectives</h2>
+            <ul class="space-y-2 text-gray-700 dark:text-gray-300">
+                <li class="flex items-start gap-3">
+                    <span class="text-primary mt-1">✅</span>
+                    <span>Memahami apa itu SQL dan fungsinya</span>
+                </li>
+                <li class="flex items-start gap-3">
+                    <span class="text-primary mt-1">✅</span>
+                    <span>Dapat menulis query dasar untuk membaca data</span>
+                </li>
+                <li class="flex items-start gap-3">
+                    <span class="text-primary mt-1">✅</span>
+                    <span>Memahami operasi CRUD dasar</span>
+                </li>
+                <li class="flex items-start gap-3">
+                    <span class="text-primary mt-1">✅</span>
+                    <span>Dapat memfilter dan mengurutkan data</span>
+                </li>
+                <li class="flex items-start gap-3">
+                    <span class="text-primary mt-1">✅</span>
+                    <span>Memahami konsep table dan relasi dasar</span>
+                </li>
+            </ul>
+        </div>
+
+        <div class="space-y-12">
+            <section class="border-t border-gray-200 dark:border-gray-700 pt-10">
+                <h3 class="text-2xl font-bold mb-4">1. Pengenalan SQL</h3>
+                <div class="prose dark:prose-invert max-w-none">
+                    <p class="leading-relaxed mb-4">
+                        SQL (Structured Query Language) adalah bahasa standar internasional yang digunakan untuk berkomunikasi dengan database relasional.
+                        Hampir semua sistem database modern seperti MySQL, PostgreSQL, SQL Server, SQLite menggunakan SQL sebagai bahasa utamanya.
+                    </p>
+                    <p class="mb-4">Dengan SQL kamu bisa:</p>
+                    <ul class="space-y-1 mb-6">
+                        <li>✅ Membaca data dari database</li>
+                        <li>✅ Menyimpan data baru</li>
+                        <li>✅ Mengubah data yang sudah ada</li>
+                        <li>✅ Menghapus data</li>
+                        <li>✅ Membuat struktur tabel dan database</li>
+                    </ul>
+                    <p class="mb-4">
+                        SQL bukan bahasa pemrograman biasa, SQL adalah bahasa deklaratif: kamu menulis APA yang kamu inginkan, bukan BAGAIMANA cara mendapatkannya.
+                    </p>
+                </div>
+                <div class="mt-6">
+                    <h4 class="font-semibold mb-2">📝 Contoh:</h4>
+                    <div class="code-block">
+<pre><code class="language-sql">SELECT * FROM users;</code></pre>
+                    </div>
+                    <p class="text-sm text-gray-600 dark:text-gray-400">Artinya: "Ambil SEMUA kolom dari tabel bernama users"</p>
+                </div>
+            </section>
+
+            <section class="border-t border-gray-200 dark:border-gray-700 pt-10">
+                <h3 class="text-2xl font-bold mb-4">2. SELECT Statement</h3>
+                <div class="prose dark:prose-invert max-w-none">
+                    <p class="leading-relaxed mb-4">
+                        SELECT adalah perintah yang paling sering digunakan di SQL. Fungsinya untuk membaca dan mengambil data dari tabel.
+                        Ini adalah operasi Read dalam konsep CRUD.
+                    </p>
+                    <p class="mb-4">
+                        Kamu bisa memilih kolom mana saja yang ingin diambil, tidak harus semua kolom.
+                        Mengambil hanya kolom yang dibutuhkan akan membuat query berjalan lebih cepat dan efisien.
+                    </p>
+                </div>
+                <div class="mt-6 space-y-4">
+                    <h4 class="font-semibold mb-2">📝 Contoh:</h4>
+                    <div class="code-block">
+<pre><code class="language-sql">SELECT nama, email, no_hp FROM users;</code></pre>
+                    </div>
+                    <p class="text-sm text-gray-600 dark:text-gray-400">✅ Mengambil kolom tertentu saja</p>
+                    
+                    <div class="code-block">
+<pre><code class="language-sql">SELECT 
+  nama AS nama_lengkap,
+  email AS alamat_email
+FROM users;</code></pre>
+                    </div>
+                    <p class="text-sm text-gray-600 dark:text-gray-400">✅ Memberi nama alias pada kolom</p>
+                    
+                    <div class="code-block">
+<pre><code class="language-sql">SELECT * FROM users LIMIT 10;</code></pre>
+                    </div>
+                    <p class="text-sm text-gray-600 dark:text-gray-400">✅ Membatasi jumlah hasil</p>
+                </div>
+            </section>
+
+            <section class="border-t border-gray-200 dark:border-gray-700 pt-10">
+                <h3 class="text-2xl font-bold mb-4">3. WHERE Clause</h3>
+                <div class="prose dark:prose-invert max-w-none">
+                    <p class="leading-relaxed mb-4">
+                        WHERE digunakan untuk memfilter data yang akan diambil.
+                        Dengan WHERE kamu bisa menentukan kondisi mana saja baris data yang ingin ditampilkan.
+                    </p>
+                    <p class="mb-4">
+                        Ini adalah fitur paling penting di SQL, karena hampir tidak pernah kamu butuhkan SEMUA data dalam tabel sekaligus.
+                    </p>
+                     <p class="mb-4">Operator perbandingan yang bisa digunakan: <code class="bg-gray-100 dark:bg-gray-800 px-1 py-0.5 rounded">=, !=, >, <, >=, <=</code></p>
+                 </div>
+                 <div class="mt-6 space-y-4">
+                     <h4 class="font-semibold mb-2">📝 Contoh:</h4>
+                     <div class="code-block">
+<pre><code class="language-sql">SELECT * FROM users WHERE status = 'aktif';</code></pre>
+                     </div>
+                     <p class="text-sm text-gray-600 dark:text-gray-400">✅ Mengambil hanya user yang aktif</p>
+                     
+                     <div class="code-block">
+<pre><code class="language-sql">SELECT nama, umur FROM users WHERE umur > 17;</code></pre>
+                     </div>
+                     <p class="text-sm text-gray-600 dark:text-gray-400">✅ Mengambil user yang berumur diatas 17 tahun</p>
+                     
+                     <div class="code-block">
+<pre><code class="language-sql">SELECT * FROM users 
+WHERE status = 'aktif' 
+AND umur >= 18
+AND kota = 'Jakarta';</code></pre>
+                     </div>
+                     <p class="text-sm text-gray-600 dark:text-gray-400">✅ Menggabungkan beberapa kondisi dengan AND</p>
+                 </div>
+             </section>
+
+             <section class="border-t border-gray-200 dark:border-gray-700 pt-10">
+                 <h3 class="text-2xl font-bold mb-4">4. ORDER BY</h3>
+                 <div class="prose dark:prose-invert max-w-none">
+                     <p class="leading-relaxed mb-4">
+                         ORDER BY digunakan untuk mengurutkan hasil query berdasarkan kolom tertentu.
+                         Kamu bisa mengurutkan secara menaik (ASC) atau menurun (DESC).
+                     </p>
+                     <p class="mb-4">
+                         Secara default jika tidak ditentukan, ORDER BY akan menggunakan urutan ASC.
+                     </p>
+                 </div>
+                 <div class="mt-6 space-y-4">
+                     <h4 class="font-semibold mb-2">📝 Contoh:</h4>
+                     <div class="code-block">
+<pre><code class="language-sql">SELECT nama, email FROM users ORDER BY nama ASC;</code></pre>
+                     </div>
+                     <p class="text-sm text-gray-600 dark:text-gray-400">✅ Urutkan user berdasarkan nama dari A ke Z</p>
+                     
+                     <div class="code-block">
+<pre><code class="language-sql">SELECT * FROM users ORDER BY created_at DESC;</code></pre>
+                     </div>
+                     <p class="text-sm text-gray-600 dark:text-gray-400">✅ Urutkan berdasarkan tanggal pendaftaran terbaru</p>
+                     
+                     <div class="code-block">
+<pre><code class="language-sql">SELECT * FROM users 
+ORDER BY kota ASC, umur DESC;</code></pre>
+                     </div>
+                     <p class="text-sm text-gray-600 dark:text-gray-400">✅ Urutkan dengan lebih dari satu kolom</p>
+                 </div>
+             </section>
+
+             <section class="border-t border-gray-200 dark:border-gray-700 pt-10">
+                 <h3 class="text-2xl font-bold mb-4">5. INSERT Data</h3>
+                 <div class="prose dark:prose-invert max-w-none">
+                     <p class="leading-relaxed mb-4">
+                         INSERT adalah perintah untuk menambahkan baris data baru ke dalam tabel.
+                         Ini adalah operasi Create dalam konsep CRUD.
+                     </p>
+                     <p class="mb-4">
+                         Kamu harus menyebutkan kolom mana yang akan diisi, diikuti dengan nilai-nilai yang sesuai.
+                     </p>
+                 </div>
+                 <div class="mt-6 space-y-4">
+                     <h4 class="font-semibold mb-2">📝 Contoh:</h4>
+                     <div class="code-block">
+<pre><code class="language-sql">INSERT INTO users (nama, email, umur, status)
+VALUES ('Budi Santoso', 'budi@email.com', 23, 'aktif');</code></pre>
+                     </div>
+                     <p class="text-sm text-gray-600 dark:text-gray-400">✅ Menambahkan 1 user baru</p>
+                     
+                     <div class="code-block">
+<pre><code class="language-sql">INSERT INTO users (nama, email, status) VALUES
+  ('Ani Putri', 'ani@email.com', 'aktif'),
+  ('Dedi Rahman', 'dedi@email.com', 'pending'),
+  ('Siti Aminah', 'siti@email.com', 'aktif');</code></pre>
+                     </div>
+                     <p class="text-sm text-gray-600 dark:text-gray-400">✅ Menambahkan banyak data sekaligus</p>
+                 </div>
+             </section>
+
+             <section class="border-t border-gray-200 dark:border-gray-700 pt-10">
+                 <h3 class="text-2xl font-bold mb-4">6. UPDATE Data</h3>
+                 <div class="prose dark:prose-invert max-w-none">
+                     <p class="leading-relaxed mb-4">
+                         UPDATE digunakan untuk mengubah data yang sudah ada di dalam tabel.
+                         Ini adalah operasi Update dalam konsep CRUD.
+                     </p>
+                     <div class="warning-box">
+                         <p class="font-bold text-red-600 dark:text-red-400 mb-2">⚠️ PERINGATAN PALING PENTING:</p>
+                         <p>Selalu gunakan WHERE saat UPDATE! Jika lupa menambahkan WHERE, SEMUA baris di tabel akan berubah!</p>
+                     </div>
+                 </div>
+                 <div class="mt-6 space-y-4">
+                     <h4 class="font-semibold mb-2">📝 Contoh:</h4>
+                     <div class="code-block">
+<pre><code class="language-sql">UPDATE users 
+SET email = 'budi_baru@email.com'
+WHERE id = 5;</code></pre>
+                     </div>
+                     <p class="text-sm text-gray-600 dark:text-gray-400">✅ Mengubah email user tertentu</p>
+                     
+                     <div class="code-block">
+<pre><code class="language-sql">UPDATE users
+SET 
+  status = 'nonaktif',
+  updated_at = NOW()
+WHERE terakhir_login < '2025-01-01';</code></pre>
+                     </div>
+                     <p class="text-sm text-gray-600 dark:text-gray-400">✅ Mengubah lebih dari satu kolom sekaligus</p>
+                 </div>
+             </section>
+
+             <section class="border-t border-gray-200 dark:border-gray-700 pt-10">
+                 <h3 class="text-2xl font-bold mb-4">7. DELETE Data</h3>
+                 <div class="prose dark:prose-invert max-w-none">
+                     <p class="leading-relaxed mb-4">
+                         DELETE adalah perintah untuk menghapus baris data dari tabel.
+                         Ini adalah operasi Delete dalam konsep CRUD.
+                     </p>
+                     <div class="warning-box">
+                         <p class="font-bold text-red-600 dark:text-red-400 mb-2">⚠️ PERINGATAN TERHEBAT:</p>
+                         <p>DELETE bersifat permanen! Tidak ada undo, tidak ada recycle bin di SQL standard.</p>
+                         <p class="mt-2 font-semibold">Selalu gunakan WHERE! Jangan pernah DELETE tanpa WHERE.</p>
+                     </div>
+                 </div>
+                 <div class="mt-6 space-y-4">
+                     <h4 class="font-semibold mb-2">📝 Contoh:</h4>
+                     <div class="code-block">
+<pre><code class="language-sql">DELETE FROM users WHERE id = 12;</code></pre>
+                     </div>
+                     <p class="text-sm text-gray-600 dark:text-gray-400">✅ Menghapus user dengan id tertentu</p>
+                     
+                     <div class="code-block">
+<pre><code class="language-sql">DELETE FROM users 
+WHERE status = 'nonaktif'
+AND terakhir_login < '2024-01-01';</code></pre>
+                     </div>
+                     <p class="text-sm text-gray-600 dark:text-gray-400">✅ Menghapus user yang sudah tidak aktif</p>
+                 </div>
+             </section>
+        </div>
+
+        <div class="mt-16 pt-8 border-t border-gray-200 dark:border-gray-700">
+            <div class="flex justify-center">
+                <a href="../index.html" class="inline-flex items-center gap-2 px-6 py-3 bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors">
+                    ← Kembali ke Menu Utama
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <footer class="mt-20 border-t border-gray-200 dark:border-gray-800 py-8">
+        <div class="max-w-6xl mx-auto px-4 text-center text-gray-500 dark:text-gray-400 text-sm">
+            <p>© 2026 PintarFlow. Seluruh hak cipta dilindungi.</p>
+        </div>
+    </footer>
+
+    <!-- Back To Top Button -->
+    <button class="back-to-top" id="backToTop" title="Kembali ke atas">
+        <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="18 15 12 9 6 15"></polyline>
+        </svg>
+    </button>
+
+    <script src="../js/main.js"></script>
+</body>
+</html>

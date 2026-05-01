@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PintarFlow - Setup N8N dengan Docker</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#165DFF',
+                    },
+                }
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .content-auto {
+                content-visibility: auto;
+            }
+            .code-block {
+                @apply rounded-lg overflow-hidden my-4;
+            }
+            .code-block pre {
+                @apply m-0 p-4 !bg-gray-900;
+            }
+            .code-block code {
+                @apply font-mono text-sm leading-relaxed;
+            }
+            .warning-box {
+                @apply bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 p-4 rounded-lg my-4;
+            }
+            .info-box {
+                @apply bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 p-4 rounded-lg my-4;
+            }
+            .success-box {
+                @apply bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 p-4 rounded-lg my-4;
+            }
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50 dark:bg-gray-900 text-gray-800 dark:text-gray-200 transition-colors duration-300">
+    <!-- Horizontal Scroll Progress -->
+    <div class="progress-scroll" id="progressScroll"></div>
+    <header
+        class="sticky top-0 z-50 bg-white/80 dark:bg-gray-900/80 backdrop-blur-md border-b border-gray-200 dark:border-gray-800">
+        <div class="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
+            <a href="../index.html" class="font-bold text-xl text-primary">PintarFlow</a>
+            <button id="toggleDark" class="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800">
+                <span class="dark:hidden">🌙</span>
+                <span class="hidden dark:inline">☀️</span>
+            </button>
+        </div>
+    </header>
+
+    <main class="max-w-4xl mx-auto px-4 py-8">
+        <div class="mb-12">
+            <img src="https://images.unsplash.com/photo-1605745341112-85968b19335b?w=800&h=400&fit=crop"
+                alt="Setup N8N dengan Docker" class="w-full h-48 object-cover rounded-xl mb-6 shadow-md">
+            <div class="inline-block px-3 py-1 bg-yellow-100 dark:bg-yellow-900/30 text-yellow-700 dark:text-yellow-400 rounded-full text-sm font-medium mb-4">
+                Intermediate Level
+            </div>
+            <h1 class="text-4xl font-bold mb-4">Cara Setup N8N Menggunakan Docker</h1>
+            <p class="text-lg text-gray-600 dark:text-gray-400 leading-relaxed">
+                Module ini menjelaskan langkah demi langkah cara menginstall dan menjalankan N8N self hosted menggunakan Docker dan Docker Compose di server lokal maupun VPS. Termasuk konfigurasi reverse proxy, SSL, dan best practice production.
+            </p>
+        </div>
+
+        <div class="bg-white dark:bg-gray-800 rounded-xl p-6 mb-10 border border-gray-200 dark:border-gray-700">
+            <h2 class="text-xl font-bold mb-4">🎯 Learning Objectives</h2>
+            <ul class="space-y-2 text-gray-700 dark:text-gray-300">
+                <li class="flex items-start gap-3">
+                    <span class="text-primary mt-1">✅</span>
+                    <span>Bisa menjalankan N8N dengan perintah docker run</span>
+                </li>
+                <li class="flex items-start gap-3">
+                    <span class="text-primary mt-1">✅</span>
+                    <span>Bisa membuat docker-compose.yml untuk N8N</span>
+                </li>
+                <li class="flex items-start gap-3">
+                    <span class="text-primary mt-1">✅</span>
+                    <span>Memahami volume dan persistensi data N8N</span>
+                </li>
+                <li class="flex items-start gap-3">
+                    <span class="text-primary mt-1">✅</span>
+                    <span>Bisa melakukan konfigurasi environment variable</span>
+                </li>
+                <li class="flex items-start gap-3">
+                    <span class="text-primary mt-1">✅</span>
+                    <span>Bisa setup reverse proxy dengan Nginx</span>
+                </li>
+                <li class="flex items-start gap-3">
+                    <span class="text-primary mt-1">✅</span>
+                    <span>Bisa setup SSL dengan Letsencrypt</span>
+                </li>
+                <li class="flex items-start gap-3">
+                    <span class="text-primary mt-1">✅</span>
+                    <span>Memahami best practice menjalankan N8N di production</span>
+                </li>
+                <li class="flex items-start gap-3">
+                    <span class="text-primary mt-1">✅</span>
+                    <span>Bisa melakukan update N8N dengan aman</span>
+                </li>
+            </ul>
+        </div>
+
+        <div class="space-y-12">
+            <section class="border-t border-gray-200 dark:border-gray-700 pt-10">
+                <h3 class="text-2xl font-bold mb-4">1. Persiapan Awal</h3>
+                <div class="prose dark:prose-invert max-w-none">
+                    <p class="leading-relaxed mb-4">Yang kamu butuhkan sebelum mulai:</p>
+                    <ul class="space-y-1 mb-6">
+                        <li>✅ Docker dan Docker Compose sudah terinstall</li>
+                        <li>✅ Server / VPS dengan minimal 2GB RAM</li>
+                        <li>✅ Domain name (jika ingin akses publik)</li>
+                        <li>✅ Port 80 dan 443 terbuka di firewall</li>
+                    </ul>
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <div class="comparison-box">
+                            <p class="font-semibold mb-2">Minimum</p>
+                            <ul class="space-y-1 text-sm">
+                                <li>CPU: 1 Core</li>
+                                <li>RAM: 2 GB</li>
+                                <li>Storage: 20 GB SSD</li>
+                            </ul>
+                        </div>
+                        <div class="comparison-box">
+                            <p class="font-semibold mb-2">Rekomendasi</p>
+                            <ul class="space-y-1 text-sm">
+                                <li>CPU: 2 Core</li>
+                                <li>RAM: 4 GB</li>
+                                <li>Storage: 40 GB SSD</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="border-t border-gray-200 dark:border-gray-700 pt-10">
+                <h3 class="text-2xl font-bold mb-4">2. Menjalankan N8N dengan Docker Run</h3>
+                <div class="prose dark:prose-invert max-w-none">
+                    <p class="leading-relaxed mb-4">
+                        Cara tercepat menjalankan N8N hanya dengan satu perintah docker run. Ini cocok untuk testing dan penggunaan lokal.
+                    </p>
+                </div>
+                <div class="mt-6">
+                    <h4 class="font-semibold mb-2">📝 Contoh:</h4>
+                    <div class="code-block">
+                        <pre><code class="language-bash"># Jalankan N8N dengan Docker
+docker run -it --rm --name n8n -p 5678:5678 n8nio/n8n</code></pre>
+                    </div>
+                    <div class="info-box">
+                        Setelah berjalan kamu bisa akses N8N di browser: <code class="bg-gray-100 dark:bg-gray-800 px-1 py-0.5 rounded">http://localhost:5678</code>
+                    </div>
+                    <div class="warning-box mt-4">
+                        ⚠️ Ini akan menjalankan N8N tapi semua data akan hilang ketika container dihentikan.
+                    </div>
+                </div>
+            </section>
+
+            <section class="border-t border-gray-200 dark:border-gray-700 pt-10">
+                <h3 class="text-2xl font-bold mb-4">3. Menjalankan N8N dengan Volume Persistensi</h3>
+                <div class="prose dark:prose-invert max-w-none">
+                    <p class="leading-relaxed mb-4">
+                        Untuk menyimpan data workflow, credential, dan konfigurasi secara permanen kamu butuh mount volume ke dalam container.
+                    </p>
+                </div>
+                <div class="mt-6">
+                    <h4 class="font-semibold mb-2">📝 Contoh:</h4>
+                    <div class="code-block">
+                        <pre><code class="language-bash"># Buat volume untuk n8n
+docker volume create n8n_data
+
+# Jalankan N8N dengan volume
+docker run -d \
+  --name n8n \
+  -p 5678:5678 \
+  -v n8n_data:/home/node/.n8n \
+  --restart unless-stopped \
+  n8nio/n8n</code></pre>
+                    </div>
+                    <div class="success-box mt-4">
+                        <p>✅ Data sekarang akan tersimpan meskipun container di restart / dihapus</p>
+                        <p>✅ Container akan otomatis start ketika server reboot</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="border-t border-gray-200 dark:border-gray-700 pt-10">
+                <h3 class="text-2xl font-bold mb-4">4. Docker Compose Setup</h3>
+                <div class="prose dark:prose-invert max-w-none">
+                    <p class="leading-relaxed mb-4">
+                        Untuk production sebaiknya gunakan Docker Compose agar konfigurasi lebih terstruktur dan mudah di maintain.
+                    </p>
+                </div>
+                <div class="mt-6">
+                    <h4 class="font-semibold mb-2">Buat file docker-compose.yml:</h4>
+                    <div class="code-block">
+                        <pre><code class="language-yaml">version: "3.7"
+
+services:
+  n8n:
+    image: n8nio/n8n:latest
+    restart: unless-stopped
+    ports:
+      - 5678:5678
+    environment:
+      - N8N_HOST=n8n.domainkamu.com
+      - N8N_PROTOCOL=https
+      - NODE_ENV=production
+      - GENERIC_TIMEZONE=Asia/Jakarta
+    volumes:
+      - n8n_data:/home/node/.n8n
+
+volumes:
+  n8n_data:</code></pre>
+                    </div>
+                    <div class="code-block mt-4">
+                        <pre><code class="language-bash"># Jalankan dengan perintah
+docker compose up -d</code></pre>
+                    </div>
+                </div>
+            </section>
+
+            <section class="border-t border-gray-200 dark:border-gray-700 pt-10">
+                <h3 class="text-2xl font-bold mb-4">5. Environment Variable Penting</h3>
+                <div class="overflow-x-auto">
+                    <table class="min-w-full border-collapse">
+                        <thead>
+                            <tr>
+                                <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 bg-gray-100 dark:bg-gray-700 text-left">Variable</th>
+                                <th class="border border-gray-300 dark:border-gray-600 px-4 py-2 bg-gray-100 dark:bg-gray-700 text-left">Fungsi</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 font-mono text-sm">N8N_HOST</td>
+                                <td class="border border-gray-300 dark:border-gray-600 px-4 py-2">Domain name kamu</td>
+                            </tr>
+                            <tr>
+                                <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 font-mono text-sm">N8N_PROTOCOL</td>
+                                <td class="border border-gray-300 dark:border-gray-600 px-4 py-2">http atau https</td>
+                            </tr>
+                            <tr>
+                                <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 font-mono text-sm">GENERIC_TIMEZONE</td>
+                                <td class="border border-gray-300 dark:border-gray-600 px-4 py-2">Timezone server</td>
+                            </tr>
+                            <tr>
+                                <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 font-mono text-sm">N8N_DIAGNOSTICS_ENABLED</td>
+                                <td class="border border-gray-300 dark:border-gray-600 px-4 py-2">Nonaktifkan pengiriman data diagnosa</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <section class="border-t border-gray-200 dark:border-gray-700 pt-10">
+                <h3 class="text-2xl font-bold mb-4">6. Setup Reverse Proxy dengan Nginx</h3>
+                <div class="prose dark:prose-invert max-w-none">
+                    <p class="leading-relaxed mb-4">
+                        Untuk mengakses N8N dengan domain dan SSL kamu butuh reverse proxy. Berikut adalah konfigurasi Nginx yang paling sederhana:
+                    </p>
+                </div>
+                <div class="code-block mt-6">
+                    <pre><code class="language-bash">server {
+    listen 80;
+    server_name n8n.domainkamu.com;
+
+    location / {
+        proxy_pass http://localhost:5678;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        
+        # Websocket support untuk editor N8N
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection "upgrade";
+    }
+}</code></pre>
+                </div>
+                <div class="warning-box mt-4">
+                    💡 Jangan lupa setting Upgrade dan Connection untuk websocket, jika tidak editor N8N tidak akan berfungsi dengan benar.
+                </div>
+            </section>
+
+            <section class="border-t border-gray-200 dark:border-gray-700 pt-10">
+                <h3 class="text-2xl font-bold mb-4">7. Setup SSL Gratis dengan Letsencrypt</h3>
+                <div class="code-block mt-6">
+                    <pre><code class="language-bash"># Install certbot
+apt install certbot python3-certbot-nginx
+
+# Dapatkan sertifikat SSL
+certbot --nginx -d n8n.domainkamu.com</code></pre>
+                </div>
+                <div class="info-box mt-4">
+                    Certbot akan otomatis mengkonfigurasi Nginx kamu, setup redirect HTTP ke HTTPS, dan setup auto renewal sertifikat.
+                </div>
+            </section>
+
+            <section class="border-t border-gray-200 dark:border-gray-700 pt-10">
+                <h3 class="text-2xl font-bold mb-4">8. Best Practice Production</h3>
+                <div class="prose dark:prose-invert max-w-none">
+                    <ul class="space-y-2 mb-6">
+                        <li>✅ Selalu gunakan tag versi spesifik bukan `latest`</li>
+                        <li>✅ Aktifkan autentikasi dengan email dan password</li>
+                        <li>✅ Batasi akses web UI dengan IP jika memungkinkan</li>
+                        <li>✅ Backup volume n8n_data secara berkala</li>
+                        <li>✅ Batasi resource memory dan cpu container</li>
+                        <li>✅ Setup monitoring dan alert</li>
+                        <li>✅ Update N8N secara teratur</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section class="border-t border-gray-200 dark:border-gray-700 pt-10">
+                <h3 class="text-2xl font-bold mb-4">9. Cara Update N8N</h3>
+                <div class="code-block mt-6">
+                    <pre><code class="language-bash"># 1. Stop container lama
+docker compose down
+
+# 2. Backup volume data (PENTING!)
+docker run --rm -v n8n_data:/data -v $(pwd):/backup busybox tar czf /backup/n8n-backup-$(date +%Y%m%d).tar.gz /data
+
+# 3. Pull image versi baru
+docker compose pull
+
+# 4. Jalankan kembali
+docker compose up -d</code></pre>
+                </div>
+                <div class="warning-box mt-4">
+                    ✅ Selalu backup sebelum melakukan update apapun
+                    <br>✅ Jangan lanjutkan update jika backup belum selesai
+                </div>
+            </section>
+
+            <section class="border-t border-gray-200 dark:border-gray-700 pt-10">
+                <h3 class="text-2xl font-bold mb-4">10. Troubleshooting</h3>
+                <div class="space-y-4">
+                    <div class="comparison-box">
+                        <p class="font-semibold mb-2 text-red-600 dark:text-red-400">❌ Editor N8N loading terus</p>
+                        <p class="text-green-600 dark:text-green-400">✅ Pastikan reverse proxy sudah dikonfigurasi untuk websocket</p>
+                    </div>
+                    <div class="comparison-box">
+                        <p class="font-semibold mb-2 text-red-600 dark:text-red-400">❌ Data hilang setelah restart</p>
+                        <p class="text-green-600 dark:text-green-400">✅ Pastikan kamu sudah mount volume dengan benar</p>
+                    </div>
+                    <div class="comparison-box">
+                        <p class="font-semibold mb-2 text-red-600 dark:text-red-400">❌ Workflow error tidak berjalan</p>
+                        <p class="text-green-600 dark:text-green-400">✅ Cek log container dengan <code class="bg-gray-100 dark:bg-gray-800 px-1 py-0.5 rounded">docker compose logs -f n8n</code></p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="border-t border-gray-200 dark:border-gray-700 pt-10">
+                <h3 class="text-2xl font-bold mb-4">11. Kesimpulan</h3>
+                <div class="prose dark:prose-invert max-w-none">
+                    <p class="leading-relaxed mb-4">
+                        Menjalankan N8N self hosted dengan Docker adalah cara terbaik untuk mendapatkan kontrol penuh atas data kamu, tanpa batasan apapun, dan dengan biaya yang jauh lebih murah dibandingkan langganan cloud N8N.
+                    </p>
+                    <div class="success-box">
+                        Dengan mengikuti panduan ini kamu sudah punya setup N8N yang siap untuk production dan bisa menangkap ribuan eksekusi workflow per hari.
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <div class="mt-16 pt-8 border-t border-gray-200 dark:border-gray-700">
+            <div class="flex justify-center">
+                <a href="../index.html"
+                    class="inline-flex items-center gap-2 px-6 py-3 bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors">
+                    ← Kembali ke Menu Utama
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <footer class="mt-20 border-t border-gray-200 dark:border-gray-800 py-8">
+        <div class="max-w-6xl mx-auto px-4 text-center text-gray-500 dark:text-gray-400 text-sm">
+            <p>© 2026 PintarFlow. Seluruh hak cipta dilindungi.</p>
+        </div>
+    </footer>
+
+    <!-- Back To Top Button -->
+    <button class="back-to-top" id="backToTop" title="Kembali ke atas">
+        <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+            stroke-linejoin="round">
+            <polyline points="18 15 12 9 6 15"></polyline>
+        </svg>
+    </button>
+
+    <script src="../js/main.js"></script>
+</body>
+
+</html>

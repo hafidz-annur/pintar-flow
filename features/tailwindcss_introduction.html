@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PintarFlow - Pengenalan TailwindCSS dan Best Practice</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#165DFF',
+                    },
+                }
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .content-auto {
+                content-visibility: auto;
+            }
+            .code-block {
+                @apply rounded-lg overflow-hidden my-4;
+            }
+            .code-block pre {
+                @apply m-0 p-4 !bg-gray-900;
+            }
+            .code-block code {
+                @apply font-mono text-sm leading-relaxed;
+            }
+            .warning-box {
+                @apply bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 p-4 rounded-lg my-4;
+            }
+            .info-box {
+                @apply bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 p-4 rounded-lg my-4;
+            }
+            .success-box {
+                @apply bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 p-4 rounded-lg my-4;
+            }
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50 dark:bg-gray-900 text-gray-800 dark:text-gray-200 transition-colors duration-300">
+    <!-- Horizontal Scroll Progress -->
+    <div class="progress-scroll" id="progressScroll"></div>
+    <header
+        class="sticky top-0 z-50 bg-white/80 dark:bg-gray-900/80 backdrop-blur-md border-b border-gray-200 dark:border-gray-800">
+        <div class="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
+            <a href="../index.html" class="font-bold text-xl text-primary">PintarFlow</a>
+            <button id="toggleDark" class="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800">
+                <span class="dark:hidden">🌙</span>
+                <span class="hidden dark:inline">☀️</span>
+            </button>
+        </div>
+    </header>
+
+    <main class="max-w-4xl mx-auto px-4 py-8">
+        <div class="mb-12">
+            <img src="https://images.unsplash.com/photo-1507721999472-8ed4421c4af2?w=800&h=400&fit=crop"
+                alt="Pengenalan TailwindCSS" class="w-full h-48 object-cover rounded-xl mb-6 shadow-md">
+            <div
+                class="inline-block px-3 py-1 bg-yellow-100 dark:bg-yellow-900/30 text-yellow-700 dark:text-yellow-400 rounded-full text-sm font-medium mb-4">
+                Intermediate Level
+            </div>
+            <h1 class="text-4xl font-bold mb-4">Pengenalan TailwindCSS dan Best Practice</h1>
+            <p class="text-lg text-gray-600 dark:text-gray-400 leading-relaxed">
+                Module pengenalan TailwindCSS dari dasar sampai best practice profesional. Pelajari cara kerja Utility
+                First CSS, instalasi, konsep dasar, komponen, tips dan trik serta best practice yang digunakan oleh
+                developer profesional.
+            </p>
+        </div>
+
+        <div class="bg-white dark:bg-gray-800 rounded-xl p-6 mb-10 border border-gray-200 dark:border-gray-700">
+            <h2 class="text-xl font-bold mb-4">🎯 Learning Objectives</h2>
+            <ul class="space-y-2 text-gray-700 dark:text-gray-300">
+                <li class="flex items-start gap-3">
+                    <span class="text-primary mt-1">✅</span>
+                    <span>Memahami konsep Utility First CSS dan perbedaannya dengan framework lain</span>
+                </li>
+                <li class="flex items-start gap-3">
+                    <span class="text-primary mt-1">✅</span>
+                    <span>Bisa melakukan instalasi dan setup TailwindCSS di project</span>
+                </li>
+                <li class="flex items-start gap-3">
+                    <span class="text-primary mt-1">✅</span>
+                    <span>Memahami semua konsep dasar TailwindCSS</span>
+                </li>
+                <li class="flex items-start gap-3">
+                    <span class="text-primary mt-1">✅</span>
+                    <span>Bisa membuat layout responsive dengan Tailwind</span>
+                </li>
+                <li class="flex items-start gap-3">
+                    <span class="text-primary mt-1">✅</span>
+                    <span>Memahami system design dan configuration</span>
+                </li>
+                <li class="flex items-start gap-3">
+                    <span class="text-primary mt-1">✅</span>
+                    <span>Bisa mengekstrak komponen dan reusable class</span>
+                </li>
+                <li class="flex items-start gap-3">
+                    <span class="text-primary mt-1">✅</span>
+                    <span>Mengetahui best practice penulisan kode Tailwind</span>
+                </li>
+                <li class="flex items-start gap-3">
+                    <span class="text-primary mt-1">✅</span>
+                    <span>Bisa mengoptimasi build production</span>
+                </li>
+            </ul>
+        </div>
+
+        <div class="space-y-12">
+            <section class="border-t border-gray-200 dark:border-gray-700 pt-10">
+                <h3 class="text-2xl font-bold mb-4">1. Apa Itu TailwindCSS?</h3>
+                <div class="prose dark:prose-invert max-w-none">
+                    <p class="leading-relaxed mb-4">
+                        TailwindCSS adalah framework CSS Utility First yang memungkinkan kamu membangun desain custom
+                        dengan cepat tanpa perlu menulis CSS custom.
+                    </p>
+                </div>
+                <div class="success-box mt-4">
+                    <p class="font-semibold mb-2 text-green-700 dark:text-green-400">✅ Keunggulan TailwindCSS:</p>
+                    <ul class="space-y-1">
+                        <li>Tidak perlu memikirkan nama class</li>
+                        <li>Development lebih cepat</li>
+                        <li>Tidak ada dead CSS</li>
+                        <li>Konsisten design system</li>
+                        <li>Mudah buat responsive</li>
+                        <li>Sangat customizable</li>
+                    </ul>
+                </div>
+                <div class="info-box mt-4">
+                    ❌ Perbedaan dengan Bootstrap:
+                    <ul class="mt-2 space-y-1">
+                        <li><strong>Bootstrap</strong> = Component First (sudah ada komponen jadi)</li>
+                        <li><strong>Tailwind</strong> = Utility First (kamu bangun komponen sendiri)</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section class="border-t border-gray-200 dark:border-gray-700 pt-10">
+                <h3 class="text-2xl font-bold mb-4">2. Instalasi & Setup</h3>
+                <div class="code-block mt-6">
+                    <pre><code class="language-bash"># Install TailwindCSS via NPM
+npm install -D tailwindcss postcss autoprefixer
+
+# Inisialisasi konfigurasi
+npx tailwindcss init -p</code></pre>
+                </div>
+                <div class="code-block mt-4">
+                    <pre><code class="language-javascript">/** @type {import('tailwindcss').Config} */
+module.exports = {
+  content: [
+    "./src/**/*.{html,js}"
+  ],
+  theme: {
+    extend: {},
+  },
+  plugins: [],
+}</code></pre>
+                </div>
+                <div class="code-block mt-4">
+                    <pre><code class="language-css">@tailwind base;
+@tailwind components;
+@tailwind utilities;</code></pre>
+                </div>
+            </section>
+
+            <section class="border-t border-gray-200 dark:border-gray-700 pt-10">
+                <h3 class="text-2xl font-bold mb-4">3. Konsep Utility First</h3>
+
+                <div class="warning-box mt-4">
+                    <p class="font-semibold mb-2 text-red-700 dark:text-red-400">❌ Cara Lama: Membuat class custom</p>
+
+                    <div class="code-block mt-2">
+                        <pre><code class="language-html">&lt;div class="card"&gt;
+  Hello World
+&lt;/div&gt;
+
+&lt;style&gt;
+.card {
+  background: white;
+  border-radius: 8px;
+  padding: 16px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+&lt;/style&gt;</code></pre>
+                    </div>
+                </div>
+
+                <div class="success-box mt-4">
+                    <p class="font-semibold mb-2 text-green-700 dark:text-green-400">✅ Cara Tailwind: Pakai Utility
+                        Class</p>
+
+                    <div class="code-block mt-2">
+                        <pre><code class="language-html">&lt;div class="bg-white rounded-lg p-4 shadow-md"&gt;
+  Hello World
+&lt;/div&gt;</code></pre>
+                    </div>
+                </div>
+            </section>
+
+            <section class="border-t border-gray-200 dark:border-gray-700 pt-10">
+                <h3 class="text-2xl font-bold mb-4">4. Konsep Dasar Tailwind</h3>
+                <div class="info-box mt-4">
+                    ✅ Pola umum:
+                    <ul class="mt-2 space-y-1">
+                        <li><code
+                                class="bg-gray-100 dark:bg-gray-800 px-1 py-0.5 rounded text-sm">{property}-{nilai}</code>
+                        </li>
+                        <li><code
+                                class="bg-gray-100 dark:bg-gray-800 px-1 py-0.5 rounded text-sm">{breakpoint}:{property}-{nilai}</code>
+                        </li>
+                        <li><code
+                                class="bg-gray-100 dark:bg-gray-800 px-1 py-0.5 rounded text-sm">{state}:{property}-{nilai}</code>
+                        </li>
+                    </ul>
+                </div>
+                <div class="code-block mt-6">
+                    <pre><code class="language-html">&lt;!-- Warna dan Background --&gt;
+&lt;p class="text-blue-500 bg-gray-100"&gt;Teks biru background abu&lt;/p&gt;
+
+&lt;!-- Spacing --&gt;
+&lt;div class="m-4 p-2 mt-6 mb-3"&gt;Margin dan Padding&lt;/div&gt;
+
+&lt;!-- Typography --&gt;
+&lt;h1 class="text-2xl font-bold"&gt;Heading Besar Tebal&lt;/h1&gt;
+
+&lt;!-- Border --&gt;
+&lt;button class="border border-red-500 rounded"&gt;Tombol border merah&lt;/button&gt;</code></pre>
+                </div>
+            </section>
+
+            <section class="border-t border-gray-200 dark:border-gray-700 pt-10">
+                <h3 class="text-2xl font-bold mb-4">5. Responsive Design</h3>
+                <div class="overflow-x-auto">
+                    <table class="min-w-full border-collapse">
+                        <thead>
+                            <tr>
+                                <th
+                                    class="border border-gray-300 dark:border-gray-600 px-4 py-2 bg-gray-100 dark:bg-gray-700 text-left">
+                                    Breakpoint</th>
+                                <th
+                                    class="border border-gray-300 dark:border-gray-600 px-4 py-2 bg-gray-100 dark:bg-gray-700 text-left">
+                                    Ukuran</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 font-mono text-sm">sm
+                                </td>
+                                <td class="border border-gray-300 dark:border-gray-600 px-4 py-2">640px</td>
+                            </tr>
+                            <tr>
+                                <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 font-mono text-sm">md
+                                </td>
+                                <td class="border border-gray-300 dark:border-gray-600 px-4 py-2">768px</td>
+                            </tr>
+                            <tr>
+                                <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 font-mono text-sm">lg
+                                </td>
+                                <td class="border border-gray-300 dark:border-gray-600 px-4 py-2">1024px</td>
+                            </tr>
+                            <tr>
+                                <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 font-mono text-sm">xl
+                                </td>
+                                <td class="border border-gray-300 dark:border-gray-600 px-4 py-2">1280px</td>
+                            </tr>
+                            <tr>
+                                <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 font-mono text-sm">2xl
+                                </td>
+                                <td class="border border-gray-300 dark:border-gray-600 px-4 py-2">1536px</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="code-block mt-6">
+                    <pre><code class="language-html">&lt;!-- Default: 1 kolom, md: 2 kolom, lg: 3 kolom --&gt;
+&lt;div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"&gt;
+  &lt;div&gt;Item 1&lt;/div&gt;
+  &lt;div&gt;Item 2&lt;/div&gt;
+  &lt;div&gt;Item 3&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+                </div>
+            </section>
+
+            <section class="border-t border-gray-200 dark:border-gray-700 pt-10">
+                <h3 class="text-2xl font-bold mb-4">6. State Variant</h3>
+                <div class="code-block mt-6">
+                    <pre><code class="language-html">&lt;!-- Hover, Focus, Active --&gt;
+&lt;button class="bg-blue-500 hover:bg-blue-600 focus:ring focus:ring-blue-300 active:scale-95"&gt;
+  Tombol
+&lt;/button&gt;</code></pre>
+                </div>
+                <div class="info-box mt-4">
+                    Variant yang tersedia:
+                    <ul class="mt-2 space-y-1">
+                        <li><code class="bg-gray-100 dark:bg-gray-800 px-1 py-0.5 rounded text-sm">hover</code>, <code
+                                class="bg-gray-100 dark:bg-gray-800 px-1 py-0.5 rounded text-sm">focus</code>, <code
+                                class="bg-gray-100 dark:bg-gray-800 px-1 py-0.5 rounded text-sm">active</code>, <code
+                                class="bg-gray-100 dark:bg-gray-800 px-1 py-0.5 rounded text-sm">disabled</code></li>
+                        <li><code class="bg-gray-100 dark:bg-gray-800 px-1 py-0.5 rounded text-sm">checked</code>, <code
+                                class="bg-gray-100 dark:bg-gray-800 px-1 py-0.5 rounded text-sm">first</code>, <code
+                                class="bg-gray-100 dark:bg-gray-800 px-1 py-0.5 rounded text-sm">last</code>, <code
+                                class="bg-gray-100 dark:bg-gray-800 px-1 py-0.5 rounded text-sm">odd</code>, <code
+                                class="bg-gray-100 dark:bg-gray-800 px-1 py-0.5 rounded text-sm">even</code></li>
+                        <li><code class="bg-gray-100 dark:bg-gray-800 px-1 py-0.5 rounded text-sm">placeholder</code>,
+                            <code class="bg-gray-100 dark:bg-gray-800 px-1 py-0.5 rounded text-sm">before</code>, <code
+                                class="bg-gray-100 dark:bg-gray-800 px-1 py-0.5 rounded text-sm">after</code></li>
+                    </ul>
+                </div>
+            </section>
+
+            <section class="border-t border-gray-200 dark:border-gray-700 pt-10">
+                <h3 class="text-2xl font-bold mb-4">7. Custom Configuration</h3>
+                <div class="code-block mt-6">
+                    <pre><code class="language-javascript">module.exports = {
+  theme: {
+    extend: {
+      colors: {
+        primary: '#165DFF',
+        secondary: '#36BFFA',
+        danger: '#F53F3F'
+      },
+      fontFamily: {
+        inter: ['Inter', 'sans-serif']
+      }
+    }
+  }
+}</code></pre>
+                </div>
+                <div class="code-block mt-4">
+                    <pre><code class="language-html">&lt;button class="bg-primary hover:bg-primary/90 font-inter"&gt;
+  Tombol Warna Custom
+&lt;/button&gt;</code></pre>
+                </div>
+            </section>
+
+            <section class="border-t border-gray-200 dark:border-gray-700 pt-10">
+                <h3 class="text-2xl font-bold mb-4">8. Mengekstrak Komponen</h3>
+                <div class="code-block mt-6">
+                    <pre><code class="language-css">@layer components {
+  .btn-primary {
+    @apply bg-primary px-4 py-2 rounded-lg text-white hover:bg-primary/90 transition;
+  }
+}</code></pre>
+                </div>
+                <div class="code-block mt-4">
+                    <pre><code class="language-php">// Di Laravel Blade
+&lt;button {{ $attributes-&gt;merge(['class' =&gt; 'bg-primary px-4 py-2 rounded-lg']) }}&gt;
+  {{ $slot }}
+&lt;/button&gt;</code></pre>
+                </div>
+            </section>
+
+            <section class="border-t border-gray-200 dark:border-gray-700 pt-10">
+                <h3 class="text-2xl font-bold mb-4">9. Best Practice</h3>
+                <div class="success-box mt-4">
+                    <p class="font-semibold mb-2 text-green-700 dark:text-green-400">✅ Best Practice Resmi dari Tim
+                        Tailwind:</p>
+                    <ol class="space-y-2 mt-3">
+                        <li>1. Jangan gunakan <code
+                                class="bg-gray-100 dark:bg-gray-800 px-1 py-0.5 rounded text-sm">@apply</code> terlalu
+                            banyak</li>
+                        <li>2. Urutkan class sesuai urutan eksekusi CSS</li>
+                        <li>3. Gunakan semantic HTML</li>
+                        <li>4. Jangan buat utility class custom jika masih ada yang default</li>
+                        <li>5. Gunakan arbitrary value hanya untuk kasus spesial</li>
+                        <li>6. Jangan lupa aktifkan purge untuk production</li>
+                        <li>7. Gunakan plugin untuk fitur yang umum</li>
+                    </ol>
+                </div>
+                <div class="warning-box mt-6">
+                    <p class="font-semibold mb-2 text-red-700 dark:text-red-400">❌ Yang tidak disarankan:</p>
+                    <div class="code-block mt-2">
+                        <pre><code class="language-html">&lt;!-- ❌ Bad: Terlalu banyak class yang sama berulang --&gt;
+&lt;div class="flex items-center gap-2 p-4 rounded-lg bg-white shadow"&gt;Item 1&lt;/div&gt;
+&lt;div class="flex items-center gap-2 p-4 rounded-lg bg-white shadow"&gt;Item 2&lt;/div&gt;
+&lt;div class="flex items-center gap-2 p-4 rounded-lg bg-white shadow"&gt;Item 3&lt;/div&gt;</code></pre>
+                    </div>
+                </div>
+                <div class="info-box mt-4">
+                    ✅ Yang disarankan: Ekstrak menjadi komponen atau gunakan loop
+                </div>
+            </section>
+
+            <section class="border-t border-gray-200 dark:border-gray-700 pt-10">
+                <h3 class="text-2xl font-bold mb-4">10. Optimasi Production</h3>
+                <div class="code-block mt-6">
+                    <pre><code class="language-bash"># Build untuk production
+npm run build</code></pre>
+                </div>
+                <div class="info-box mt-4">
+                    Tailwind akan otomatis menghapus semua class yang tidak dipakai (tree shaking). Hasil build biasanya
+                    hanya sekitar 10-30KB saja.
+                </div>
+            </section>
+
+            <section class="border-t border-gray-200 dark:border-gray-700 pt-10">
+                <h3 class="text-2xl font-bold mb-4">11. Kesimpulan</h3>
+                <div class="prose dark:prose-invert max-w-none">
+                    <p class="leading-relaxed mb-4">
+                        TailwindCSS adalah cara tercepat dan paling nyaman untuk menulis CSS saat ini. Dengan mengikuti
+                        best practice yang benar kamu bisa membuat project yang maintainable dan scalable.
+                    </p>
+                    <div class="success-box">
+                        Jangan lupa kunjungi dokumentasi resmi tailwindcss.com karena itu adalah referensi terbaik yang
+                        ada.
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <div class="mt-16 pt-8 border-t border-gray-200 dark:border-gray-700">
+            <div class="flex justify-center">
+                <a href="../index.html"
+                    class="inline-flex items-center gap-2 px-6 py-3 bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors">
+                    ← Kembali ke Menu Utama
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <footer class="mt-20 border-t border-gray-200 dark:border-gray-800 py-8">
+        <div class="max-w-6xl mx-auto px-4 text-center text-gray-500 dark:text-gray-400 text-sm">
+            <p>© 2026 PintarFlow. Seluruh hak cipta dilindungi.</p>
+        </div>
+    </footer>
+
+    <!-- Back To Top Button -->
+    <button class="back-to-top" id="backToTop" title="Kembali ke atas">
+        <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+            stroke-linejoin="round">
+            <polyline points="18 15 12 9 6 15"></polyline>
+        </svg>
+    </button>
+
+    <script src="../js/main.js"></script>
+</body>
+
+</html>

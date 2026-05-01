@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PintarFlow - HTML Intermediate</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#165DFF',
+                    },
+                }
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .content-auto {
+                content-visibility: auto;
+            }
+            .code-block {
+                @apply rounded-lg overflow-hidden my-4;
+            }
+            .code-block pre {
+                @apply m-0 p-4 !bg-gray-900;
+            }
+            .code-block code {
+                @apply font-mono text-sm leading-relaxed;
+            }
+            .warning-box {
+                @apply bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 p-4 rounded-lg my-4;
+            }
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50 dark:bg-gray-900 text-gray-800 dark:text-gray-200 transition-colors duration-300">
+    <!-- Horizontal Scroll Progress -->
+    <div class="progress-scroll" id="progressScroll"></div>
+    <header
+        class="sticky top-0 z-50 bg-white/80 dark:bg-gray-900/80 backdrop-blur-md border-b border-gray-200 dark:border-gray-800">
+        <div class="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
+            <a href="../index.html" class="font-bold text-xl text-primary">PintarFlow</a>
+            <button id="toggleDark" class="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800">
+                <span class="dark:hidden">🌙</span>
+                <span class="hidden dark:inline">☀️</span>
+            </button>
+        </div>
+    </header>
+
+    <main class="max-w-4xl mx-auto px-4 py-8">
+        <div class="mb-12">
+            <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=800&h=400&fit=crop"
+                alt="HTML Intermediate" class="w-full h-48 object-cover rounded-xl mb-6 shadow-md">
+            <div class="inline-block px-3 py-1 bg-primary/10 text-primary rounded-full text-sm font-medium mb-4">
+                Intermediate Level
+            </div>
+            <h1 class="text-4xl font-bold mb-4">HTML Intermediate</h1>
+            <p class="text-lg text-gray-600 dark:text-gray-400 leading-relaxed">
+                Module ini membahas fitur-fitur HTML tingkat menengah yang dibutuhkan untuk membangun website modern dan
+                terstruktur. Setelah menyelesaikan module ini, kamu akan bisa membuat halaman web yang semantik,
+                aksesibel, dan siap untuk diintegrasikan dengan CSS serta JavaScript.
+            </p>
+        </div>
+
+        <div class="bg-white dark:bg-gray-800 rounded-xl p-6 mb-10 border border-gray-200 dark:border-gray-700">
+            <h2 class="text-xl font-bold mb-4">🎯 Learning Objectives</h2>
+            <ul class="space-y-2 text-gray-700 dark:text-gray-300">
+                <li class="flex items-start gap-3">
+                    <span class="text-primary mt-1">✅</span>
+                    <span>Memahami dan menggunakan elemen semantik HTML5 dengan benar</span>
+                </li>
+                <li class="flex items-start gap-3">
+                    <span class="text-primary mt-1">✅</span>
+                    <span>Membuat formulir yang lengkap dengan validasi native</span>
+                </li>
+                <li class="flex items-start gap-3">
+                    <span class="text-primary mt-1">✅</span>
+                    <span>Mengimplementasikan multimedia (gambar, audio, video) dengan optimal</span>
+                </li>
+                <li class="flex items-start gap-3">
+                    <span class="text-primary mt-1">✅</span>
+                    <span>Membuat tabel yang terstruktur dan aksesibel</span>
+                </li>
+                <li class="flex items-start gap-3">
+                    <span class="text-primary mt-1">✅</span>
+                    <span>Memahami konsep aksesibilitas web dasar</span>
+                </li>
+            </ul>
+        </div>
+
+        <div class="space-y-12">
+            <section class="border-t border-gray-200 dark:border-gray-700 pt-10">
+                <h3 class="text-2xl font-bold mb-4">1. Elemen Semantik HTML5</h3>
+                <div class="prose dark:prose-invert max-w-none">
+                    <p class="leading-relaxed mb-4">
+                        Elemen semantik adalah elemen HTML yang memiliki makna jelas baik untuk browser maupun
+                        developer. Sebelum HTML5, developer hanya menggunakan
+                    <div> untuk semua bagian halaman. Dengan elemen semantik, struktur halaman menjadi lebih mudah
+                        dibaca, membantu mesin pencari (SEO), dan meningkatkan aksesibilitas untuk pengguna dengan
+                        screen reader.
+                        </p>
+                        <p class="mb-4">Elemen semantik utama yang harus kamu ketahui:</p>
+                        <ul class="space-y-1 mb-6">
+                            <li><code class="bg-gray-100 dark:bg-gray-800 px-1 py-0.5 rounded">&lt;header&gt;</code>:
+                                Bagian atas halaman / bagian konten, biasanya berisi logo dan navigasi</li>
+
+                            <li><code class="bg-gray-100 dark:bg-gray-800 px-1 py-0.5 rounded">&lt;nav&gt;</code>: Area
+                                khusus untuk menu navigasi</li>
+
+                            <li><code class="bg-gray-100 dark:bg-gray-800 px-1 py-0.5 rounded">&lt;main&gt;</code>:
+                                Konten utama halaman (hanya boleh ada 1 per halaman)</li>
+
+                            <li><code class="bg-gray-100 dark:bg-gray-800 px-1 py-0.5 rounded">&lt;section&gt;</code>:
+                                Kelompok konten yang memiliki tema sama</li>
+
+                            <li><code class="bg-gray-100 dark:bg-gray-800 px-1 py-0.5 rounded">&lt;article&gt;</code>:
+                                Konten yang berdiri sendiri dan bisa dibagikan</li>
+
+                            <li><code class="bg-gray-100 dark:bg-gray-800 px-1 py-0.5 rounded">&lt;aside&gt;</code>:
+                                Konten pendukung / sidebar</li>
+
+                            <li><code class="bg-gray-100 dark:bg-gray-800 px-1 py-0.5 rounded">&lt;footer&gt;</code>:
+                                Bagian bawah halaman</li>
+                        </ul>
+                    </div>
+                    <div class="mt-6">
+                        <h4 class="font-semibold mb-2">📝 Contoh:</h4>
+                        <div class="code-block">
+                            <pre><code class="language-html">&lt;body&gt;
+  &lt;header&gt;
+    &lt;h1&gt;Website Saya&lt;/h1&gt;
+    &lt;nav&gt;
+      &lt;a href="/"&gt;Home&lt;/a&gt;
+      &lt;a href="/about"&gt;Tentang&lt;/a&gt;
+    &lt;/nav&gt;
+  &lt;/header&gt;
+
+  &lt;main&gt;
+    &lt;article&gt;
+      &lt;h2&gt;Judul Artikel&lt;/h2&gt;
+      &lt;p&gt;Isi artikel disini...&lt;/p&gt;
+    &lt;/article&gt;
+
+    &lt;aside&gt;
+      &lt;h3&gt;Sidebar&lt;/h3&gt;
+      &lt;p&gt;Informasi tambahan&lt;/p&gt;
+    &lt;/aside&gt;
+  &lt;/main&gt;
+
+  &lt;footer&gt;
+    &lt;p&gt;&amp;copy; 2026 Hak Cipta&lt;/p&gt;
+  &lt;/footer&gt;
+&lt;/body&gt;</code></pre>
+                        </div>
+                    </div>
+            </section>
+
+            <section class="border-t border-gray-200 dark:border-gray-700 pt-10">
+                <h3 class="text-2xl font-bold mb-4">2. Formulir Lanjutan & Validasi</h3>
+                <div class="prose dark:prose-invert max-w-none">
+                    <p class="leading-relaxed mb-4">
+                        HTML5 menyediakan banyak fitur formulir yang sebelumnya hanya bisa dilakukan dengan JavaScript.
+                        Kamu bisa menambahkan validasi, tipe input spesifik, dan atribut kontrol perilaku formulir tanpa
+                        kode tambahan.
+                    </p>
+                    <p class="mb-4">Atribut penting formulir:</p>
+                    <ul class="space-y-1 mb-4">
+                        <li><code class="bg-gray-100 dark:bg-gray-800 px-1 py-0.5 rounded">required</code>: Menandai
+                            field wajib diisi</li>
+                        <li><code class="bg-gray-100 dark:bg-gray-800 px-1 py-0.5 rounded">pattern</code>: Validasi
+                            menggunakan Regular Expression</li>
+                        <li><code class="bg-gray-100 dark:bg-gray-800 px-1 py-0.5 rounded">min</code>, <code
+                                class="bg-gray-100 dark:bg-gray-800 px-1 py-0.5 rounded">max</code>, <code
+                                class="bg-gray-100 dark:bg-gray-800 px-1 py-0.5 rounded">step</code>: Kontrol untuk
+                            input angka</li>
+                        <li><code class="bg-gray-100 dark:bg-gray-800 px-1 py-0.5 rounded">placeholder</code>: Petunjuk
+                            isian untuk pengguna</li>
+                        <li><code class="bg-gray-100 dark:bg-gray-800 px-1 py-0.5 rounded">autocomplete</code>: Membantu
+                            browser mengisi otomatis field</li>
+                    </ul>
+                    <p class="mb-4">Tipe input baru di HTML5: <code
+                            class="bg-gray-100 dark:bg-gray-800 px-1 py-0.5 rounded">email</code>, <code
+                            class="bg-gray-100 dark:bg-gray-800 px-1 py-0.5 rounded">tel</code>, <code
+                            class="bg-gray-100 dark:bg-gray-800 px-1 py-0.5 rounded">url</code>, <code
+                            class="bg-gray-100 dark:bg-gray-800 px-1 py-0.5 rounded">number</code>, <code
+                            class="bg-gray-100 dark:bg-gray-800 px-1 py-0.5 rounded">date</code>, <code
+                            class="bg-gray-100 dark:bg-gray-800 px-1 py-0.5 rounded">time</code>, <code
+                            class="bg-gray-100 dark:bg-gray-800 px-1 py-0.5 rounded">color</code>, <code
+                            class="bg-gray-100 dark:bg-gray-800 px-1 py-0.5 rounded">range</code></p>
+                </div>
+                <div class="mt-6">
+                    <h4 class="font-semibold mb-2">📝 Contoh:</h4>
+                    <div class="code-block">
+                        <pre><code class="language-html">&lt;form action="/daftar" method="POST"&gt;
+
+  &lt;label for="email"&gt;Email:&lt;/label&gt;
+  &lt;input type="email" id="email" name="email" required autocomplete="email"&gt;
+
+  &lt;label for="telepon"&gt;Nomor HP:&lt;/label&gt;
+  &lt;input type="tel" id="telepon" name="telepon" pattern="[0-9]{10,13}" required&gt;
+
+  &lt;label for="usia"&gt;Usia:&lt;/label&gt;
+  &lt;input type="number" id="usia" name="usia" min="13" max="100" required&gt;
+
+  &lt;label for="tanggal"&gt;Tanggal Lahir:&lt;/label&gt;
+  &lt;input type="date" id="tanggal" name="tanggal_lahir"&gt;
+
+  &lt;button type="submit"&gt;Daftar Sekarang&lt;/button&gt;
+
+&lt;/form&gt;</code></pre>
+                    </div>
+                </div>
+            </section>
+
+            <section class="border-t border-gray-200 dark:border-gray-700 pt-10">
+                <h3 class="text-2xl font-bold mb-4">3. Multimedia Optimasi</h3>
+                <div class="prose dark:prose-invert max-w-none">
+                    <p class="leading-relaxed mb-4">
+                        HTML menyediakan elemen native untuk menampilkan gambar, audio, dan video. Kamu bisa
+                        mengoptimalkan pemuatan multimedia agar website tidak lambat dan berjalan baik di semua
+                        perangkat.
+                    </p>
+                    <p class="mb-4">Konsep penting:</p>
+                    <ul class="space-y-1 mb-6">
+                        <li><code class="bg-gray-100 dark:bg-gray-800 px-1 py-0.5 rounded">srcset</code> & <code
+                                class="bg-gray-100 dark:bg-gray-800 px-1 py-0.5 rounded">sizes</code>: Menyediakan versi
+                            gambar berbeda untuk resolusi layar berbeda</li>
+                        <li><code class="bg-gray-100 dark:bg-gray-800 px-1 py-0.5 rounded">loading="lazy"</code>: Memuat
+                            gambar hanya ketika pengguna menggulir ke area tersebut</li>
+                        <li><code class="bg-gray-100 dark:bg-gray-800 px-1 py-0.5 rounded">poster</code>: Gambar
+                            thumbnail untuk video sebelum diputar</li>
+                        <li>Multiple <code class="bg-gray-100 dark:bg-gray-800 px-1 py-0.5 rounded">source</code>:
+                            Menyediakan format file berbeda untuk kompatibilitas browser</li>
+                    </ul>
+                </div>
+                <div class="mt-6">
+                    <h4 class="font-semibold mb-2">📝 Contoh:</h4>
+                    <div class="code-block">
+                        <pre><code class="language-html">&lt;!-- Gambar Responsive --&gt;
+&lt;img 
+  src="gambar-default.jpg" 
+  srcset="gambar-kecil.jpg 480w, gambar-sedang.jpg 800w, gambar-besar.jpg 1200w"
+  sizes="(max-width: 600px) 480px, (max-width: 900px) 800px, 1200px"
+  alt="Deskripsi gambar"
+  loading="lazy"
+&gt;
+
+&lt;!-- Video --&gt;
+&lt;video controls width="100%" poster="thumbnail-video.jpg"&gt;
+  &lt;source src="video.mp4" type="video/mp4"&gt;
+  &lt;source src="video.webm" type="video/webm"&gt;
+  Browser kamu tidak mendukung tag video.
+&lt;/video&gt;
+
+&lt;!-- Audio --&gt;
+&lt;audio controls&gt;
+  &lt;source src="musik.mp3" type="audio/mpeg"&gt;
+  &lt;source src="musik.ogg" type="audio/ogg"&gt;
+&lt;/audio&gt;</code></pre>
+                    </div>
+                </div>
+            </section>
+
+            <section class="border-t border-gray-200 dark:border-gray-700 pt-10">
+                <h3 class="text-2xl font-bold mb-4">4. Tabel Terstruktur</h3>
+
+                <div class="prose dark:prose-invert max-w-none">
+                    <p class="leading-relaxed mb-4">
+                        Tabel HTML bukan cuma baris dan kolom. Kamu bisa membuat struktur tabel yang jelas dan aksesibel
+                        dengan memisahkan bagian header, body, dan footer. Gunakan atribut `scope` untuk memberitahu
+                        screen reader apakah heading untuk baris atau kolom.
+                    </p>
+                </div>
+
+                <div class="mt-6">
+                    <h4 class="font-semibold mb-2">📝 Contoh:</h4>
+
+                    <div class="code-block">
+                        <pre><code class="language-html">&lt;table&gt;
+  &lt;caption&gt;Daftar Nilai Siswa&lt;/caption&gt;
+  
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th scope="col"&gt;No&lt;/th&gt;
+      &lt;th scope="col"&gt;Nama&lt;/th&gt;
+      &lt;th scope="col"&gt;Nilai&lt;/th&gt;
+      &lt;th scope="col"&gt;Keterangan&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;1&lt;/td&gt;
+      &lt;td&gt;Andi&lt;/td&gt;
+      &lt;td&gt;85&lt;/td&gt;
+      &lt;td&gt;Lulus&lt;/td&gt;
+    &lt;/tr&gt;
+
+    &lt;tr&gt;
+      &lt;td&gt;2&lt;/td&gt;
+      &lt;td&gt;Budi&lt;/td&gt;
+      &lt;td&gt;72&lt;/td&gt;
+      &lt;td&gt;Lulus&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+
+  &lt;tfoot&gt;
+    &lt;tr&gt;
+      &lt;th scope="row" colspan="2"&gt;Rata-rata&lt;/th&gt;
+      &lt;td&gt;78.5&lt;/td&gt;
+      &lt;td&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tfoot&gt;
+
+&lt;/table&gt;</code></pre>
+                    </div>
+                </div>
+            </section>
+
+            <section class="border-t border-gray-200 dark:border-gray-700 pt-10">
+                <h3 class="text-2xl font-bold mb-4">5. Aksesibilitas Dasar</h3>
+
+                <div class="prose dark:prose-invert max-w-none">
+                    <p class="leading-relaxed mb-4">
+                        Aksesibilitas (a11y) adalah praktik membuat website yang bisa digunakan oleh semua orang,
+                        termasuk mereka yang memiliki keterbatasan. Beberapa hal dasar yang wajib kamu terapkan di
+                        setiap halaman HTML:
+                    </p>
+
+                    <ol class="space-y-2 mb-6">
+                        <li>Selalu tambahkan `alt` pada setiap gambar</li>
+                        <li>Gunakan heading secara berurutan (h1 → h2 → h3, tidak lompat)</li>
+                        <li>Gunakan elemen semantik bukan hanya &lt;div&gt; dan &lt;span&gt;</li>
+                        <li>Tambahkan `aria-label` untuk elemen yang tidak memiliki teks terlihat</li>
+                        <li>Pastikan semua elemen interaktif bisa diakses dengan keyboard</li>
+                    </ol>
+                </div>
+
+                <div class="mt-6">
+                    <h4 class="font-semibold mb-2">📝 Contoh:</h4>
+
+                    <div class="code-block">
+                        <pre><code class="language-html">&lt;!-- Tombol yang aksesibel --&gt;
+&lt;button aria-label="Tutup popup"&gt;
+  ✕
+&lt;/button&gt;
+
+&lt;!-- Gambar dekoratif tidak butuh deskripsi --&gt;
+&lt;img src="garis-dekorasi.png" alt=""&gt;
+
+&lt;!-- Link yang jelas --&gt;
+&lt;a href="/bantuan"&gt;
+  Baca panduan selengkapnya
+&lt;/a&gt;
+
+&lt;!-- ❌ JANGAN: &lt;a href="/bantuan"&gt;Klik disini&lt;/a&gt; --&gt;</code></pre>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <div class="mt-16 pt-8 border-t border-gray-200 dark:border-gray-700">
+            <div class="flex justify-center">
+                <a href="../index.html"
+                    class="inline-flex items-center gap-2 px-6 py-3 bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors">
+                    ← Kembali ke Menu Utama
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <footer class="mt-20 border-t border-gray-200 dark:border-gray-800 py-8">
+        <div class="max-w-6xl mx-auto px-4 text-center text-gray-500 dark:text-gray-400 text-sm">
+            <p>© 2026 PintarFlow. Seluruh hak cipta dilindungi.</p>
+        </div>
+    </footer>
+
+    <!-- Back To Top Button -->
+    <button class="back-to-top" id="backToTop" title="Kembali ke atas">
+        <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+            stroke-linejoin="round">
+            <polyline points="18 15 12 9 6 15"></polyline>
+        </svg>
+    </button>
+
+    <script src="../js/main.js"></script>
+</body>
+
+</html>

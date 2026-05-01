@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PintarFlow</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#165DFF',
+                    },
+                }
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .content-auto {
+                content-visibility: auto;
+            }
+            .code-block {
+                @apply rounded-lg overflow-hidden my-4;
+            }
+            .code-block pre {
+                @apply m-0 p-4 !bg-gray-900;
+            }
+            .code-block code {
+                @apply font-mono text-sm leading-relaxed;
+            }
+            .warning-box {
+                @apply bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 p-4 rounded-lg my-4;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-50 dark:bg-gray-900 text-gray-800 dark:text-gray-200 transition-colors duration-300">
+    <!-- Horizontal Scroll Progress -->
+    <div class="progress-scroll" id="progressScroll"></div>
+    <header class="sticky top-0 z-50 bg-white/80 dark:bg-gray-900/80 backdrop-blur-md border-b border-gray-200 dark:border-gray-800">
+        <div class="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
+            <a href="../index.html" class="font-bold text-xl text-primary">PintarFlow</a>
+            <button id="toggleDark" class="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800">
+                <span class="dark:hidden">🌙</span>
+                <span class="hidden dark:inline">☀️</span>
+            </button>
+        </div>
+    </header>
+
+    <main class="max-w-4xl mx-auto px-4 py-8">
+        <div class="mb-12">
+            <img src="https://static.vecteezy.com/system/resources/previews/008/612/700/non_2x/sql-word-and-sql-statements-structured-query-language-code-on-a-blue-background-3d-illustration-photo.jpg" alt="SQL Advanced" class="w-full h-48 object-cover rounded-xl mb-6 shadow-md">
+            <div class="inline-block px-3 py-1 bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-400 rounded-full text-sm font-medium mb-4">
+                Advanced Level
+            </div>
+            <h1 class="text-4xl font-bold mb-4">SQL Advanced</h1>
+            <p class="text-lg text-gray-600 dark:text-gray-400 leading-relaxed">
+                Module tingkat tinggi SQL untuk mempelajari konsep advanced dan optimasi yang digunakan dalam skala enterprise dan production.
+                Cocok untuk developer, DBA, dan data analyst yang ingin menguasai SQL secara profesional dan mampu menangani performa database.
+                Materi mencakup window function, CTE, index, transaction, query optimization, dan stored procedure.
+            </p>
+        </div>
+
+        <div class="bg-white dark:bg-gray-800 rounded-xl p-6 mb-10 border border-gray-200 dark:border-gray-700">
+            <h2 class="text-xl font-bold mb-4">🎯 Learning Objectives</h2>
+            <ul class="space-y-2 text-gray-700 dark:text-gray-300">
+                <li class="flex items-start gap-3">
+                    <span class="text-primary mt-1">✅</span>
+                    <span>Menguasai Window Function dan analitik SQL tingkat lanjut</span>
+                </li>
+                <li class="flex items-start gap-3">
+                    <span class="text-primary mt-1">✅</span>
+                    <span>Memahami dan mengimplementasikan Common Table Expression (CTE)</span>
+                </li>
+                <li class="flex items-start gap-3">
+                    <span class="text-primary mt-1">✅</span>
+                    <span>Memahami konsep Index dan cara mengoptimalkan query</span>
+                </li>
+                <li class="flex items-start gap-3">
+                    <span class="text-primary mt-1">✅</span>
+                    <span>Menguasai Transaction dan concurrency control</span>
+                </li>
+                <li class="flex items-start gap-3">
+                    <span class="text-primary mt-1">✅</span>
+                    <span>Dapat melakukan query tuning dan optimasi performa</span>
+                </li>
+                <li class="flex items-start gap-3">
+                    <span class="text-primary mt-1">✅</span>
+                    <span>Memahami Stored Procedure, Trigger, dan View</span>
+                </li>
+                <li class="flex items-start gap-3">
+                    <span class="text-primary mt-1">✅</span>
+                    <span>Dapat menangani case kompleks di skala production</span>
+                </li>
+            </ul>
+        </div>
+
+        <div class="space-y-12">
+            <section class="border-t border-gray-200 dark:border-gray-700 pt-10">
+                <h3 class="text-2xl font-bold mb-4">1. Window Functions</h3>
+                <div class="prose dark:prose-invert max-w-none">
+                    <p class="leading-relaxed mb-4">
+                        Window Function adalah fitur terkuat di SQL modern yang memungkinkan perhitungan di sekelompok baris tanpa melakukan grouping.
+                        Berbeda dengan aggregate function yang menggabungkan baris menjadi satu, window function mempertahankan setiap baris individual dan menambahkan nilai perhitungan di setiap baris.
+                    </p>
+                    <p class="mb-4">Ini adalah fitur yang paling sering digunakan dalam analisis data, reporting, dan kasus ranking.</p>
+                    <p class="mb-4">Fungsi window yang umum:
+                        <code class="bg-gray-100 dark:bg-gray-800 px-1 py-0.5 rounded">ROW_NUMBER()</code>, 
+                        <code class="bg-gray-100 dark:bg-gray-800 px-1 py-0.5 rounded">RANK()</code>, 
+                        <code class="bg-gray-100 dark:bg-gray-800 px-1 py-0.5 rounded">DENSE_RANK()</code>, 
+                        <code class="bg-gray-100 dark:bg-gray-800 px-1 py-0.5 rounded">LAG()</code>, 
+                        <code class="bg-gray-100 dark:bg-gray-800 px-1 py-0.5 rounded">LEAD()</code>, 
+                        <code class="bg-gray-100 dark:bg-gray-800 px-1 py-0.5 rounded">SUM() OVER()</code>, 
+                        <code class="bg-gray-100 dark:bg-gray-800 px-1 py-0.5 rounded">AVG() OVER()</code>
+                    </p>
+                </div>
+                <div class="mt-6 space-y-4">
+                    <h4 class="font-semibold mb-2">📝 Contoh:</h4>
+                    <div class="code-block">
+<pre><code class="language-sql">SELECT 
+  nama_produk,
+  kategori,
+  penjualan,
+  RANK() OVER (PARTITION BY kategori ORDER BY penjualan DESC) AS ranking
+FROM products;</code></pre>
+                    </div>
+                    <p class="text-sm text-gray-600 dark:text-gray-400">✅ Contoh ranking penjualan per kategori</p>
+                    
+                    <div class="code-block">
+<pre><code class="language-sql">SELECT 
+  tanggal,
+  total,
+  LAG(total, 1) OVER (ORDER BY tanggal) AS total_bulan_sebelumnya,
+  ROUND(((total - LAG(total, 1) OVER (ORDER BY tanggal)) / LAG(total, 1) OVER (ORDER BY tanggal)) * 100, 2) AS persentase_pertumbuhan
+FROM penjualan_bulanan;</code></pre>
+                    </div>
+                    <p class="text-sm text-gray-600 dark:text-gray-400">✅ Contoh perbandingan dengan bulan sebelumnya</p>
+                </div>
+            </section>
+
+            <section class="border-t border-gray-200 dark:border-gray-700 pt-10">
+                <h3 class="text-2xl font-bold mb-4">2. Common Table Expression (CTE)</h3>
+                <div class="prose dark:prose-invert max-w-none">
+                    <p class="leading-relaxed mb-4">
+                        CTE adalah cara menulis subquery yang dapat dibaca dan dapat direferensikan beberapa kali dalam query utama.
+                        CTE membuat query kompleks menjadi modular, mudah dibaca, dan dapat di recursive.
+                    </p>
+                    <p class="mb-4">Keunggulan CTE:</p>
+                    <ul class="space-y-1 mb-6">
+                        <li>✅ Bisa dijalankan secara recursive</li>
+                        <li>✅ Lebih mudah dibaca daripada nested subquery</li>
+                        <li>✅ Dapat direferensikan berkali-kali</li>
+                        <li>✅ Cocok untuk query hierarchical dan tree structure</li>
+                    </ul>
+                </div>
+                <div class="mt-6 space-y-4">
+                    <h4 class="font-semibold mb-2">📝 Contoh:</h4>
+                    <div class="code-block">
+<pre><code class="language-sql">WITH penjualan_per_kota AS (
+  SELECT kota, SUM(total) AS total_penjualan
+  FROM orders
+  GROUP BY kota
+)
+SELECT * FROM penjualan_per_kota 
+WHERE total_penjualan > 10000000
+ORDER BY total_penjualan DESC;</code></pre>
+                    </div>
+                    <p class="text-sm text-gray-600 dark:text-gray-400">✅ CTE dasar untuk query bersih</p>
+                    
+                    <div class="code-block">
+<pre><code class="language-sql">WITH RECURSIVE kategori_hirarki AS (
+  SELECT id, nama, parent_id, 0 AS level
+  FROM categories WHERE parent_id IS NULL
+  
+  UNION ALL
+  
+  SELECT c.id, c.nama, c.parent_id, kh.level + 1
+  FROM categories c
+  INNER JOIN kategori_hirarki kh ON c.parent_id = kh.id
+)
+SELECT * FROM kategori_hirarki;</code></pre>
+                    </div>
+                    <p class="text-sm text-gray-600 dark:text-gray-400">✅ Recursive CTE untuk struktur hirarki</p>
+                </div>
+            </section>
+
+            <section class="border-t border-gray-200 dark:border-gray-700 pt-10">
+                <h3 class="text-2xl font-bold mb-4">3. Index & Query Optimization</h3>
+                <div class="prose dark:prose-invert max-w-none">
+                    <p class="leading-relaxed mb-4">
+                        Index adalah struktur data yang mempercepat pencarian data di tabel, seperti index di buku.
+                        Tanpa index, database akan melakukan FULL TABLE SCAN yang sangat lambat ketika data sudah jutaan baris.
+                    </p>
+                    <p class="mb-4">Jenis Index:</p>
+                    <ul class="space-y-1 mb-6">
+                        <li>✅ Primary Key Index</li>
+                        <li>✅ Secondary Index</li>
+                        <li>✅ Composite Index</li>
+                        <li>✅ Unique Index</li>
+                        <li>✅ Full Text Index</li>
+                    </ul>
+                    <p class="mb-4">Aturan penting index:</p>
+                    <ul class="space-y-1 mb-6 ml-5">
+                        <li>Index mempercepat SELECT, tapi memperlambat INSERT/UPDATE/DELETE</li>
+                        <li>Jangan over index</li>
+                        <li>Gunakan index di kolom yang sering dipakai di WHERE, JOIN, ORDER BY</li>
+                    </ul>
+                </div>
+                <div class="mt-6 space-y-4">
+                    <h4 class="font-semibold mb-2">📝 Contoh:</h4>
+                    <div class="code-block">
+<pre><code class="language-sql">-- Index biasa
+CREATE INDEX idx_orders_user_id ON orders(user_id);
+
+-- Composite Index
+CREATE INDEX idx_orders_status_created ON orders(status, created_at);
+
+-- Analisa query dengan EXPLAIN
+EXPLAIN ANALYZE 
+SELECT * FROM orders WHERE user_id = 123 AND status = 'selesai';</code></pre>
+                    </div>
+                    <p class="text-sm text-gray-600 dark:text-gray-400">✅ Membuat index dan analisa query</p>
+                </div>
+            </section>
+
+            <section class="border-t border-gray-200 dark:border-gray-700 pt-10">
+                <h3 class="text-2xl font-bold mb-4">4. Database Transaction</h3>
+                <div class="prose dark:prose-invert max-w-none">
+                    <p class="leading-relaxed mb-4">
+                        Transaction adalah sekelompok operasi SQL yang dianggap sebagai satu kesatuan kerja.
+                        Semua operasi di dalam transaction harus berhasil semua, jika ada satu yang gagal maka semua dibatalkan (rollback).
+                    </p>
+                    <p class="mb-4">Properti ACID:</p>
+                    <ul class="space-y-1 mb-6">
+                        <li><strong>Atomicity:</strong> Semua atau tidak sama sekali</li>
+                        <li><strong>Consistency:</strong> Data selalu konsisten</li>
+                        <li><strong>Isolation:</strong> Transaction tidak saling mengganggu</li>
+                        <li><strong>Durability:</strong> Data yang sudah di commit permanen</li>
+                    </ul>
+                </div>
+                <div class="mt-6 space-y-4">
+                    <h4 class="font-semibold mb-2">📝 Contoh:</h4>
+                    <div class="code-block">
+<pre><code class="language-sql">START TRANSACTION;
+
+UPDATE rekening SET saldo = saldo - 500000 WHERE id = 1;
+UPDATE rekening SET saldo = saldo + 500000 WHERE id = 2;
+
+-- Cek jika semua benar
+SELECT saldo FROM rekening WHERE id IN (1,2);
+
+-- Jika semua ok
+COMMIT;
+
+-- Jika ada kesalahan
+-- ROLLBACK;</code></pre>
+                    </div>
+                    <p class="text-sm text-gray-600 dark:text-gray-400">✅ Transaction transfer uang</p>
+                </div>
+            </section>
+
+            <section class="border-t border-gray-200 dark:border-gray-700 pt-10">
+                <h3 class="text-2xl font-bold mb-4">5. Stored Procedure & Trigger</h3>
+                <div class="prose dark:prose-invert max-w-none">
+                    <p class="leading-relaxed mb-4">
+                        Stored Procedure adalah kode SQL yang disimpan di database dan dapat dipanggil berulang kali.
+                        Trigger adalah prosedur yang otomatis berjalan ketika terjadi event tertentu (INSERT/UPDATE/DELETE) di tabel.
+                    </p>
+                    <p class="mb-4">Keduanya digunakan untuk mengeksekusi logika bisnis secara langsung di level database.</p>
+                </div>
+                <div class="mt-6 space-y-4">
+                    <h4 class="font-semibold mb-2">📝 Contoh:</h4>
+                    <div class="code-block">
+<pre><code class="language-sql">CREATE PROCEDURE BuatOrder(
+  IN p_user_id INT,
+  IN p_total INT,
+  OUT p_order_id INT
+)
+BEGIN
+  INSERT INTO orders (user_id, total, status) VALUES (p_user_id, p_total, 'pending');
+  SET p_order_id = LAST_INSERT_ID();
+  
+  INSERT INTO log_aktivitas (aksi, keterangan) VALUES ('ORDER_BARU', CONCAT('Order dibuat id: ', p_order_id));
+END;</code></pre>
+                    </div>
+                    <p class="text-sm text-gray-600 dark:text-gray-400">✅ Stored Procedure untuk membuat order</p>
+                    
+                    <div class="code-block">
+<pre><code class="language-sql">CREATE TRIGGER after_order_insert
+AFTER INSERT ON order_items
+FOR EACH ROW
+BEGIN
+  UPDATE products SET stok = stok - NEW.kuantitas WHERE id = NEW.produk_id;
+END;</code></pre>
+                    </div>
+                    <p class="text-sm text-gray-600 dark:text-gray-400">✅ Trigger update stok otomatis</p>
+                </div>
+            </section>
+
+            <section class="border-t border-gray-200 dark:border-gray-700 pt-10">
+                <h3 class="text-2xl font-bold mb-4">6. View & Materialized View</h3>
+                <div class="prose dark:prose-invert max-w-none">
+                    <p class="leading-relaxed mb-4">
+                        View adalah query yang disimpan sebagai tabel virtual, tidak menyimpan data fisik hanya menyimpan query.
+                        Materialized View menyimpan hasil query secara fisik dan di refresh secara periodik, sangat cocok untuk reporting.
+                    </p>
+                    <p class="mb-4">View digunakan untuk:</p>
+                    <ul class="space-y-1 mb-6">
+                        <li>✅ Menyederhanakan query kompleks</li>
+                        <li>✅ Security (menyembunyikan kolom sensitif)</li>
+                        <li>✅ Abstraksi lapisan data</li>
+                    </ul>
+                </div>
+                <div class="mt-6 space-y-4">
+                    <h4 class="font-semibold mb-2">📝 Contoh:</h4>
+                    <div class="code-block">
+<pre><code class="language-sql">CREATE VIEW vw_laporan_penjualan AS
+SELECT 
+  DATE(o.created_at) AS tanggal,
+  u.nama AS nama_user,
+  o.no_order,
+  o.total,
+  o.status
+FROM orders o
+JOIN users u ON o.user_id = u.id
+WHERE o.status = 'selesai';
+
+-- Gunakan view seperti tabel biasa
+SELECT * FROM vw_laporan_penjualan WHERE tanggal >= '2026-01-01';</code></pre>
+                    </div>
+                    <p class="text-sm text-gray-600 dark:text-gray-400">✅ Membuat View laporan penjualan</p>
+                </div>
+            </section>
+        </div>
+
+        <div class="mt-16 pt-8 border-t border-gray-200 dark:border-gray-700">
+            <div class="flex justify-center">
+                <a href="../index.html" class="inline-flex items-center gap-2 px-6 py-3 bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors">
+                    ← Kembali ke Menu Utama
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <footer class="mt-20 border-t border-gray-200 dark:border-gray-800 py-8">
+        <div class="max-w-6xl mx-auto px-4 text-center text-gray-500 dark:text-gray-400 text-sm">
+            <p>© 2026 AI Online Course. Seluruh hak cipta dilindungi.</p>
+        </div>
+    </footer>
+
+    <!-- Back To Top Button -->
+    <button class="back-to-top" id="backToTop" title="Kembali ke atas">
+        <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="18 15 12 9 6 15"></polyline>
+        </svg>
+    </button>
+
+    <script src="../js/main.js"></script>
+</body>
+</html>

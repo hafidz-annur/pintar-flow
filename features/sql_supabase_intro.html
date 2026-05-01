@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PintarFlow</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#165DFF',
+                    },
+                }
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .content-auto {
+                content-visibility: auto;
+            }
+            .code-block {
+                @apply rounded-lg overflow-hidden my-4;
+            }
+            .code-block pre {
+                @apply m-0 p-4 !bg-gray-900;
+            }
+            .code-block code {
+                @apply font-mono text-sm leading-relaxed;
+            }
+            .table-block {
+                @apply bg-gray-100 dark:bg-gray-800 p-4 rounded-lg font-mono text-sm my-4 overflow-x-auto;
+            }
+            .warning-box {
+                @apply bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 p-4 rounded-lg my-4;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-50 dark:bg-gray-900 text-gray-800 dark:text-gray-200 transition-colors duration-300">
+    <!-- Horizontal Scroll Progress -->
+    <div class="progress-scroll" id="progressScroll"></div>
+    <header class="sticky top-0 z-50 bg-white/80 dark:bg-gray-900/80 backdrop-blur-md border-b border-gray-200 dark:border-gray-800">
+        <div class="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
+            <a href="../index.html" class="font-bold text-xl text-primary">PintarFlow</a>
+            <button id="toggleDark" class="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800">
+                <span class="dark:hidden">🌙</span>
+                <span class="hidden dark:inline">☀️</span>
+            </button>
+        </div>
+    </header>
+
+    <main class="max-w-4xl mx-auto px-4 py-8">
+        <div class="mb-12">
+            <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=800&h=400&fit=crop" alt="Supabase Introduction" class="w-full h-48 object-cover rounded-xl mb-6 shadow-md">
+            <div class="inline-block px-3 py-1 bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400 rounded-full text-sm font-medium mb-4">
+                Basic Level
+            </div>
+            <h1 class="text-4xl font-bold mb-4">Pengenalan Database SQL & Supabase</h1>
+            <p class="text-lg text-gray-600 dark:text-gray-400 leading-relaxed">
+                Module panduan lengkap memahami database SQL dan cara mengimplementasikannya menggunakan Supabase platform backend modern.
+                Materi dibuat untuk pemula yang ingin membangun aplikasi dengan database secara cepat dan mudah tanpa setup server sendiri.
+                Mencakup konsep dasar sampai praktek langsung membuat tabel dan mengelola data di Supabase.
+            </p>
+        </div>
+
+        <div class="bg-white dark:bg-gray-800 rounded-xl p-6 mb-10 border border-gray-200 dark:border-gray-700">
+            <h2 class="text-xl font-bold mb-4">🎯 Learning Objectives</h2>
+            <ul class="space-y-2 text-gray-700 dark:text-gray-300">
+                <li class="flex items-start gap-3">
+                    <span class="text-primary mt-1">✅</span>
+                    <span>Memahami konsep dasar database dan SQL</span>
+                </li>
+                <li class="flex items-start gap-3">
+                    <span class="text-primary mt-1">✅</span>
+                    <span>Mengenal apa itu Supabase dan keunggulannya</span>
+                </li>
+                <li class="flex items-start gap-3">
+                    <span class="text-primary mt-1">✅</span>
+                    <span>Dapat membuat akun dan project Supabase</span>
+                </li>
+                <li class="flex items-start gap-3">
+                    <span class="text-primary mt-1">✅</span>
+                    <span>Dapat membuat tabel, kolom, dan relasi di Supabase Dashboard</span>
+                </li>
+                <li class="flex items-start gap-3">
+                    <span class="text-primary mt-1">✅</span>
+                    <span>Memahami cara menjalankan query SQL langsung di Supabase</span>
+                </li>
+                <li class="flex items-start gap-3">
+                    <span class="text-primary mt-1">✅</span>
+                    <span>Dapat menghubungkan aplikasi dengan Supabase API</span>
+                </li>
+                <li class="flex items-start gap-3">
+                    <span class="text-primary mt-1">✅</span>
+                    <span>Mengetahui best practice penggunaan Supabase untuk project</span>
+                </li>
+            </ul>
+        </div>
+
+        <div class="space-y-12">
+            <section class="border-t border-gray-200 dark:border-gray-700 pt-10">
+                <h3 class="text-2xl font-bold mb-4">1. Apa itu Database SQL?</h3>
+                <div class="prose dark:prose-invert max-w-none">
+                    <p class="leading-relaxed mb-4">
+                        Database adalah tempat terstruktur untuk menyimpan data secara permanen.
+                        SQL (Structured Query Language) adalah bahasa standar internasional untuk berkomunikasi dengan database relasional.
+                    </p>
+                    <p class="mb-4">Dengan database kamu bisa:</p>
+                    <ul class="space-y-1 mb-6">
+                        <li>✅ Menyimpan data dengan terstruktur</li>
+                        <li>✅ Mencari data dengan sangat cepat</li>
+                        <li>✅ Mengelola jutaan data dengan mudah</li>
+                        <li>✅ Memastikan data aman dan konsisten</li>
+                        <li>✅ Bisa diakses oleh banyak pengguna secara bersamaan</li>
+                    </ul>
+                </div>
+                <div class="mt-6 space-y-4">
+                    <h4 class="font-semibold mb-2">📝 Contoh:</h4>
+                    <p class="text-sm text-gray-600 dark:text-gray-400 mb-2">Contoh data yang disimpan di database:</p>
+                    <div class="code-block">
+<pre><code class="language-text">Tabel: users
++----+----------------+-------------------+------------+
+| id | nama           | email             | created_at |
++----+----------------+-------------------+------------+
+|  1 | Budi Santoso   | budi@email.com    | 2026-01-01 |
+|  2 | Ani Putri      | ani@email.com     | 2026-01-02 |
+|  3 | Dedi Rahman    | dedi@email.com    | 2026-01-03 |
++----+----------------+-------------------+------------+</code></pre>
+                    </div>
+                </div>
+            </section>
+
+            <section class="border-t border-gray-200 dark:border-gray-700 pt-10">
+                <h3 class="text-2xl font-bold mb-4">2. Pengenalan Supabase</h3>
+                <div class="prose dark:prose-invert max-w-none">
+                    <p class="leading-relaxed mb-4">
+                        Supabase adalah platform open source yang menyediakan backend sebagai service lengkap dengan database PostgreSQL.
+                        Supabase mengelola semua urusan server, maintenance, backup, dan security sehingga kamu cukup fokus membuat aplikasi.
+                    </p>
+                    <p class="mb-4">Keunggulan Supabase:</p>
+                    <ul class="space-y-1 mb-6">
+                        <li>✅ Database PostgreSQL Full</li>
+                        <li>✅ Auto Generate API Otomatis</li>
+                        <li>✅ Authentication siap pakai</li>
+                        <li>✅ Realtime Subscription</li>
+                        <li>✅ Storage untuk file</li>
+                        <li>✅ Gratis untuk project kecil</li>
+                    </ul>
+                </div>
+                <div class="mt-6 space-y-4">
+                    <h4 class="font-semibold mb-2">📝 Contoh:</h4>
+                    <p class="text-sm text-gray-600 dark:text-gray-400 mb-2">Alur kerja menggunakan Supabase:</p>
+                    <div class="code-block">1. Daftar akun Supabase
+2. Buat project baru (1 klik)
+3. Buat tabel lewat dashboard
+4. Panggil data dari aplikasi dengan API
+                    </div>
+                </div>
+            </section>
+
+            <section class="border-t border-gray-200 dark:border-gray-700 pt-10">
+                <h3 class="text-2xl font-bold mb-4">3. Membuat Project di Supabase</h3>
+                <div class="prose dark:prose-invert max-w-none">
+                    <p class="leading-relaxed mb-4">Langkah demi langkah membuat project pertama kamu di Supabase:</p>
+                    <ol class="space-y-1 mb-6 ml-5">
+                        <li>Buka situs supabase.com</li>
+                        <li>Klik Start Your Project</li>
+                        <li>Login dengan Github</li>
+                        <li>Klik New Project</li>
+                        <li>Isi nama project, password, dan pilih region</li>
+                        <li>Tunggu sekitar 2 menit sampai project siap</li>
+                    </ol>
+                    <p class="mb-4">Setelah project siap kamu akan mendapatkan:</p>
+                    <ul class="space-y-1 mb-6">
+                        <li>URL Project</li>
+                        <li>API Key Anonymous</li>
+                        <li>Dashboard Admin untuk mengelola database</li>
+                    </ul>
+                </div>
+                <div class="mt-6 space-y-4">
+                    <h4 class="font-semibold mb-2">📝 Contoh:</h4>
+                    <p class="text-sm text-gray-600 dark:text-gray-400">✅ Halaman Dashboard Supabase:</p>
+                    <p class="text-sm text-gray-600 dark:text-gray-400">Di sebelah kiri ada menu: Table Editor, SQL Editor, Authentication, Storage, dan lain-lain</p>
+                    <p class="text-sm text-gray-600 dark:text-gray-400">Semua konfigurasi database bisa kamu lakukan lewat browser tanpa install software apapun</p>
+                </div>
+            </section>
+
+            <section class="border-t border-gray-200 dark:border-gray-700 pt-10">
+                <h3 class="text-2xl font-bold mb-4">4. Membuat Tabel di Supabase</h3>
+                <div class="prose dark:prose-invert max-w-none">
+                    <p class="leading-relaxed mb-4">
+                        Table Editor adalah fitur Supabase yang memudahkan kamu membuat dan mengedit tabel secara visual tanpa menulis kode SQL.
+                    </p>
+                    <p class="mb-4">Cara membuat tabel:</p>
+                    <ol class="space-y-1 mb-6 ml-5">
+                        <li>Buka menu Table Editor</li>
+                        <li>Klik Create Table</li>
+                        <li>Isi nama tabel</li>
+                        <li>Tambahkan kolom dengan tipe data yang sesuai</li>
+                        <li>Tentukan primary key</li>
+                        <li>Klik Save</li>
+                    </ol>
+                    <p class="mb-4">Tipe data yang sering dipakai:</p>
+                    <ul class="space-y-1 mb-6">
+                        <li><code>int8</code> : untuk angka / id</li>
+                        <li><code>varchar</code> : untuk teks pendek</li>
+                        <li><code>text</code> : untuk teks panjang</li>
+                        <li><code>timestamp</code> : untuk tanggal dan waktu</li>
+                        <li><code>boolean</code> : untuk true/false</li>
+                    </ul>
+                </div>
+                <div class="mt-6 space-y-4">
+                    <h4 class="font-semibold mb-2">📝 Contoh:</h4>
+                    <p class="text-sm text-gray-600 dark:text-gray-400 mb-2">✅ Contoh membuat tabel <code>produk</code>:</p>
+                    <div class="code-block">
+<pre><code class="language-text">| Nama Kolom | Tipe Data    | Primary Key | Default Value |
+|------------|--------------|-------------|---------------|
+| id         | int8         | ✅ Yes      | auto increment|
+| nama       | varchar(255) | ❌ No       |               |
+| harga      | int8         | ❌ No       | 0             |
+| stok       | int8         | ❌ No       | 0             |
+| aktif      | boolean      | ❌ No       | true          |
+| created_at | timestamp    | ❌ No       | now()         |</code></pre>
+                    </div>
+                </div>
+            </section>
+
+            <section class="border-t border-gray-200 dark:border-gray-700 pt-10">
+                <h3 class="text-2xl font-bold mb-4">5. Menjalankan Query SQL di Supabase</h3>
+                <div class="prose dark:prose-invert max-w-none">
+                    <p class="leading-relaxed mb-4">
+                        Supabase memiliki SQL Editor yang memungkinkan kamu menjalankan query SQL secara langsung di browser.
+                        Kamu bisa menjalankan SELECT, INSERT, UPDATE, DELETE, dan bahkan membuat struktur tabel kompleks.
+                    </p>
+                    <p class="mb-4">Fitur SQL Editor:</p>
+                    <ul class="space-y-1 mb-6">
+                        <li>✅ Syntax Highlighting</li>
+                        <li>✅ Auto Complete</li>
+                        <li>✅ Riwayat query</li>
+                        <li>✅ Bisa menyimpan query favorit</li>
+                        <li>✅ Hasil query ditampilkan dalam format tabel</li>
+                    </ul>
+                </div>
+                <div class="mt-6 space-y-4">
+                    <h4 class="font-semibold mb-2">📝 Contoh:</h4>
+                    <div class="code-block">
+<pre><code class="language-sql">SELECT * FROM produk ORDER BY nama ASC;</code></pre>
+                    </div>
+                    <p class="text-sm text-gray-600 dark:text-gray-400">✅ Contoh query untuk melihat semua produk</p>
+                    
+                    <div class="code-block">
+<pre><code class="language-sql">INSERT INTO produk (nama, harga, stok)
+VALUES ('Laptop Gaming', 12500000, 15);</code></pre>
+                    </div>
+                    <p class="text-sm text-gray-600 dark:text-gray-400">✅ Contoh query menambah produk baru</p>
+                </div>
+            </section>
+
+            <section class="border-t border-gray-200 dark:border-gray-700 pt-10">
+                <h3 class="text-2xl font-bold mb-4">6. Mengakses Data dengan Supabase API</h3>
+                <div class="prose dark:prose-invert max-w-none">
+                    <p class="leading-relaxed mb-4">
+                        Setelah kamu membuat tabel, Supabase secara otomatis akan membuatkan API yang bisa kamu panggil dari aplikasi frontend.
+                        Kamu tidak perlu membuat backend sendiri, semua operasi CRUD sudah tersedia.
+                    </p>
+                    <p class="mb-4">Supabase menyediakan official library untuk:</p>
+                    <ul class="space-y-1 mb-6">
+                        <li>Javascript / Typescript</li>
+                        <li>React, Vue, Svelte, Next.js</li>
+                        <li>Flutter</li>
+                        <li>Python</li>
+                        <li>Dan banyak bahasa lain</li>
+                    </ul>
+                </div>
+                <div class="mt-6 space-y-4">
+                    <h4 class="font-semibold mb-2">📝 Contoh:</h4>
+                    <div class="code-block">
+<pre><code class="language-javascript">import { createClient } from '@supabase/supabase-js'
+
+const supabase = createClient('URL_PROJECT_KAMU', 'API_KEY_KAMU')
+
+// Ambil semua produk
+const { data: produk, error } = await supabase
+  .from('produk')
+  .select('*')
+  .eq('aktif', true)
+  .order('nama')</code></pre>
+                    </div>
+                    <p class="text-sm text-gray-600 dark:text-gray-400">✅ Contoh kode Javascript mengambil data dari Supabase</p>
+                </div>
+            </section>
+        </div>
+
+        <div class="mt-16 pt-8 border-t border-gray-200 dark:border-gray-700">
+            <div class="flex justify-center">
+                <a href="../index.html" class="inline-flex items-center gap-2 px-6 py-3 bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors">
+                    ← Kembali ke Menu Utama
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <footer class="mt-20 border-t border-gray-200 dark:border-gray-800 py-8">
+        <div class="max-w-6xl mx-auto px-4 text-center text-gray-500 dark:text-gray-400 text-sm">
+            <p>© 2026 AI Online Course. Seluruh hak cipta dilindungi.</p>
+        </div>
+    </footer>
+
+    <!-- Back To Top Button -->
+    <button class="back-to-top" id="backToTop" title="Kembali ke atas">
+        <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="18 15 12 9 6 15"></polyline>
+        </svg>
+    </button>
+
+    <script src="../js/main.js"></script>
+</body>
+</html>

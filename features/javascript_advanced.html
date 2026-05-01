@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PintarFlow - Javascript Advanced</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#165DFF',
+                    },
+                }
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .content-auto {
+                content-visibility: auto;
+            }
+            .code-block {
+                @apply rounded-lg overflow-hidden my-4;
+            }
+            .code-block pre {
+                @apply m-0 p-4 !bg-gray-900;
+            }
+            .code-block code {
+                @apply font-mono text-sm leading-relaxed;
+            }
+            .warning-box {
+                @apply bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 p-4 rounded-lg my-4;
+            }
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50 dark:bg-gray-900 text-gray-800 dark:text-gray-200 transition-colors duration-300">
+    <!-- Horizontal Scroll Progress -->
+    <div class="progress-scroll" id="progressScroll"></div>
+    <header
+        class="sticky top-0 z-50 bg-white/80 dark:bg-gray-900/80 backdrop-blur-md border-b border-gray-200 dark:border-gray-800">
+        <div class="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
+            <a href="../index.html" class="font-bold text-xl text-primary">PintarFlow</a>
+            <button id="toggleDark" class="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800">
+                <span class="dark:hidden">🌙</span>
+                <span class="hidden dark:inline">☀️</span>
+            </button>
+        </div>
+    </header>
+
+    <main class="max-w-4xl mx-auto px-4 py-8">
+        <div class="mb-12">
+            <img src="https://images.unsplash.com/photo-1516116216624-53e697fedbea?w=800&h=400&fit=crop"
+                alt="Javascript Advanced" class="w-full h-48 object-cover rounded-xl mb-6 shadow-md">
+            <div class="inline-block px-3 py-1 bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-400 rounded-full text-sm font-medium mb-4">
+                Advanced Level
+            </div>
+            <h1 class="text-4xl font-bold mb-4">Javascript Advanced</h1>
+            <p class="text-lg text-gray-600 dark:text-gray-400 leading-relaxed">
+                Module ini membahas konsep Javascript tingkat advance yang dibutuhkan developer profesional. Fokus pada arsitektur, performance, pattern, dan konsep mendalam yang membedakan developer junior dan senior.
+            </p>
+        </div>
+
+        <div class="bg-white dark:bg-gray-800 rounded-xl p-6 mb-10 border border-gray-200 dark:border-gray-700">
+            <h2 class="text-xl font-bold mb-4">🎯 Learning Objectives</h2>
+            <ul class="space-y-2 text-gray-700 dark:text-gray-300">
+                <li class="flex items-start gap-3">
+                    <span class="text-primary mt-1">✅</span>
+                    <span>Memahami Prototype dan Prototypal Inheritance</span>
+                </li>
+                <li class="flex items-start gap-3">
+                    <span class="text-primary mt-1">✅</span>
+                    <span>Menguasai This Binding dan Execution Context</span>
+                </li>
+                <li class="flex items-start gap-3">
+                    <span class="text-primary mt-1">✅</span>
+                    <span>Memahami Closure advanced dan Module Pattern</span>
+                </li>
+                <li class="flex items-start gap-3">
+                    <span class="text-primary mt-1">✅</span>
+                    <span>Menggunakan Design Pattern di Javascript</span>
+                </li>
+                <li class="flex items-start gap-3">
+                    <span class="text-primary mt-1">✅</span>
+                    <span>Menguasai Asynchronous Javascript lanjutan</span>
+                </li>
+                <li class="flex items-start gap-3">
+                    <span class="text-primary mt-1">✅</span>
+                    <span>Memahami Event Loop secara mendalam</span>
+                </li>
+                <li class="flex items-start gap-3">
+                    <span class="text-primary mt-1">✅</span>
+                    <span>Memahami Memory Management dan Garbage Collection</span>
+                </li>
+                <li class="flex items-start gap-3">
+                    <span class="text-primary mt-1">✅</span>
+                    <span>Bisa melakukan Performance Optimization Javascript</span>
+                </li>
+            </ul>
+        </div>
+
+        <div class="space-y-12">
+            <section class="border-t border-gray-200 dark:border-gray-700 pt-10">
+                <h3 class="text-2xl font-bold mb-4">1. Execution Context & This Binding</h3>
+                <div class="prose dark:prose-invert max-w-none">
+                    <p class="leading-relaxed mb-4">
+                        Execution Context adalah lingkungan dimana kode Javascript dijalankan. Setiap function dipanggil akan membuat execution context baru yang memiliki 3 komponen: Variable Environment, Lexical Environment, dan This Binding.
+                    </p>
+                    <p class="mb-4">Nilai <code class="bg-gray-100 dark:bg-gray-800 px-1 py-0.5 rounded">this</code> tidak ditentukan dimana function dideklarasikan, tapi ditentukan BAGAIMANA function tersebut dipanggil.</p>
+                </div>
+                <div class="mt-6">
+                    <h4 class="font-semibold mb-2">📝 Contoh:</h4>
+                    <div class="code-block">
+                        <pre><code class="language-javascript">const user = {
+  nama: "Andi",
+  sapa: function() {
+    console.log(`Halo ${this.nama}`);
+  }
+};
+
+user.sapa(); // ✅ this = user (implicit)
+
+const sapa = user.sapa;
+sapa(); // ❌ this = window / undefined
+
+const sapaDenganBind = user.sapa.bind(user);
+sapaDenganBind(); // ✅ this = user (explicit bind)</code></pre>
+                    </div>
+                </div>
+            </section>
+
+            <section class="border-t border-gray-200 dark:border-gray-700 pt-10">
+                <h3 class="text-2xl font-bold mb-4">2. Prototype & Inheritance</h3>
+                <div class="prose dark:prose-invert max-w-none">
+                    <p class="leading-relaxed mb-4">
+                        Javascript adalah bahasa Prototype-Based, bukan Class-Based. Semua object di Javascript memiliki internal property <code class="bg-gray-100 dark:bg-gray-800 px-1 py-0.5 rounded">[[Prototype]]</code> yang menunjuk ke object lain.
+                    </p>
+                    <p class="mb-4">Ketika kamu mengakses property yang tidak ada di object, Javascript akan mencarinya di prototype chain sampai akhirnya null. Ini adalah satu-satunya mekanisme inheritance yang ada di Javascript. Class ES6 hanyalah syntactic sugar diatas prototype.</p>
+                </div>
+                <div class="mt-6">
+                    <h4 class="font-semibold mb-2">📝 Contoh:</h4>
+                    <div class="code-block">
+                        <pre><code class="language-javascript">// Prototype Inheritance
+function Manusia(nama) {
+  this.nama = nama;
+}
+
+Manusia.prototype.sapa = function() {
+  console.log(`Halo nama saya ${this.nama}`);
+};
+
+function Mahasiswa(nama, nim) {
+  Manusia.call(this, nama);
+  this.nim = nim;
+}
+
+// Hubungkan prototype chain
+Mahasiswa.prototype = Object.create(Manusia.prototype);
+Mahasiswa.prototype.constructor = Mahasiswa;
+
+Mahasiswa.prototype.belajar = function() {
+  console.log(`${this.nama} sedang belajar`);
+};
+
+const andi = new Mahasiswa("Andi", "12345");
+andi.sapa(); // ✅ Bisa memanggil method dari Manusia</code></pre>
+                    </div>
+                </div>
+            </section>
+
+            <section class="border-t border-gray-200 dark:border-gray-700 pt-10">
+                <h3 class="text-2xl font-bold mb-4">3. Closure Advanced & Module Pattern</h3>
+                <div class="prose dark:prose-invert max-w-none">
+                    <p class="leading-relaxed mb-4">
+                        Closure adalah dasar dari hampir semua pattern design di Javascript. Dengan closure kamu bisa membuat private variable, encapsulation, dan module system sebelum ES6 Module ada.
+                    </p>
+                    <p class="mb-4">Module Pattern adalah pattern paling populer untuk membuat kode yang terstruktur, terenkapsulasi, dan tidak mencemari global scope.</p>
+                </div>
+                <div class="mt-6">
+                    <h4 class="font-semibold mb-2">📝 Contoh:</h4>
+                    <div class="code-block">
+                        <pre><code class="language-javascript">// Module Pattern dengan IIFE
+const Counter = (function() {
+  // Variable PRIVATE (tidak bisa diakses dari luar)
+  let hitung = 0;
+
+  return {
+    // Method PUBLIC
+    tambah: function() {
+      hitung++;
+    },
+    kurangi: function() {
+      hitung--;
+    },
+    getNilai: function() {
+      return hitung;
+    }
+  }
+})();
+
+Counter.tambah();
+Counter.tambah();
+console.log(Counter.getNilai()); // 2
+console.log(Counter.hitung); // ❌ undefined (private)</code></pre>
+                    </div>
+                </div>
+            </section>
+
+            <section class="border-t border-gray-200 dark:border-gray-700 pt-10">
+                <h3 class="text-2xl font-bold mb-4">4. Async Javascript Lanjutan</h3>
+                <div class="prose dark:prose-invert max-w-none">
+                    <p class="leading-relaxed mb-4">
+                        Konsep asynchronous tingkat advance yang harus dikuasai: Promise Chaining & Error Handling, Promise Combinators, <code class="bg-gray-100 dark:bg-gray-800 px-1 py-0.5 rounded">async/await</code> best practice, Abort Controller, dan Retry Pattern.
+                    </p>
+                </div>
+                <div class="mt-6">
+                    <h4 class="font-semibold mb-2">📝 Contoh:</h4>
+                    <div class="code-block">
+                        <pre><code class="language-javascript">// Promise.allSettled: menunggu SEMUA promise selesai baik sukses maupun gagal
+const urls = [
+  "https://api.example.com/user/1",
+  "https://api.example.com/user/2",
+  "https://api.example.com/user/3"
+];
+
+const hasil = await Promise.allSettled(
+  urls.map(url => fetch(url))
+);
+
+hasil.forEach((result, index) => {
+  if (result.status === "fulfilled") {
+    console.log(`Request ${index} berhasil`);
+  } else {
+    console.log(`Request ${index} gagal`);
+  }
+});</code></pre>
+                    </div>
+                </div>
+            </section>
+
+            <section class="border-t border-gray-200 dark:border-gray-700 pt-10">
+                <h3 class="text-2xl font-bold mb-4">5. Event Loop Mendalam</h3>
+                <div class="prose dark:prose-invert max-w-none">
+                    <p class="leading-relaxed mb-4">
+                        Event Loop adalah jantung dari asynchronous Javascript. Untuk benar-benar memahami Javascript kamu harus memahami setiap bagian dari event loop.
+                    </p>
+                    <p class="mb-4">Microtask selalu dijalankan SEMUA SEKALIGUS sebelum browser melakukan render dan sebelum mengambil task dari macrotask queue.</p>
+                </div>
+                <div class="mt-6">
+                    <h4 class="font-semibold mb-2">📝 Contoh:</h4>
+                    <div class="code-block">
+                        <pre><code class="language-javascript">// Tebak outputnya!
+console.log(1);
+
+setTimeout(() => console.log(2), 0);
+
+Promise.resolve().then(() => {
+  console.log(3);
+  setTimeout(() => console.log(4), 0);
+  Promise.resolve().then(() => console.log(5));
+});
+
+console.log(6);
+
+// Output:
+// 1
+// 6
+// 3
+// 5
+// 2
+// 4</code></pre>
+                    </div>
+                </div>
+            </section>
+
+            <section class="border-t border-gray-200 dark:border-gray-700 pt-10">
+                <h3 class="text-2xl font-bold mb-4">6. Design Pattern Javascript</h3>
+                <div class="prose dark:prose-invert max-w-none">
+                    <p class="leading-relaxed mb-4">
+                        Design Pattern adalah solusi umum yang sudah teruji untuk masalah yang sering muncul di programming. Pattern yang paling sering dipakai di Javascript: Module, Singleton, Observer, Factory, Decorator, Strategy.
+                    </p>
+                </div>
+                <div class="mt-6">
+                    <h4 class="font-semibold mb-2">📝 Contoh:</h4>
+                    <div class="code-block">
+                        <pre><code class="language-javascript">// Singleton Pattern
+class Database {
+  constructor() {
+    if (Database.instance) {
+      return Database.instance;
+    }
+    this.koneksi = this.buatKoneksi();
+    Database.instance = this;
+  }
+
+  buatKoneksi() {
+    console.log("Membuat koneksi database...");
+    return {};
+  }
+}
+
+const db1 = new Database();
+const db2 = new Database();
+console.log(db1 === db2); // ✅ true (object yang sama)</code></pre>
+                    </div>
+                </div>
+            </section>
+
+            <section class="border-t border-gray-200 dark:border-gray-700 pt-10">
+                <h3 class="text-2xl font-bold mb-4">7. Performance Optimization</h3>
+                <div class="prose dark:prose-invert max-w-none">
+                    <p class="leading-relaxed mb-4">
+                        Teknik optimasi performance Javascript: Debounce & Throttle, Lazy Loading, Web Worker, <code class="bg-gray-100 dark:bg-gray-800 px-1 py-0.5 rounded">requestAnimationFrame()</code>, menghindari Memory Leak, dan Big O Notation.
+                    </p>
+                </div>
+                <div class="mt-6">
+                    <h4 class="font-semibold mb-2">📝 Contoh:</h4>
+                    <div class="code-block">
+                        <pre><code class="language-javascript">// Debounce Function
+function debounce(fn, delay) {
+  let timeoutId;
+  return function(...args) {
+    clearTimeout(timeoutId);
+    timeoutId = setTimeout(() => {
+      fn.apply(this, args);
+    }, delay);
+  };
+}
+
+// Gunakan untuk event search yang tidak perlu request setiap ketik
+const search = debounce((keyword) => {
+  fetchAPI(keyword);
+}, 300);
+
+input.addEventListener('input', (e) => {
+  search(e.target.value);
+});</code></pre>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <div class="mt-16 pt-8 border-t border-gray-200 dark:border-gray-700">
+            <div class="flex justify-center">
+                <a href="../index.html"
+                    class="inline-flex items-center gap-2 px-6 py-3 bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors">
+                    ← Kembali ke Menu Utama
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <footer class="mt-20 border-t border-gray-200 dark:border-gray-800 py-8">
+        <div class="max-w-6xl mx-auto px-4 text-center text-gray-500 dark:text-gray-400 text-sm">
+            <p>© 2026 PintarFlow. Seluruh hak cipta dilindungi.</p>
+        </div>
+    </footer>
+
+    <!-- Back To Top Button -->
+    <button class="back-to-top" id="backToTop" title="Kembali ke atas">
+        <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+            stroke-linejoin="round">
+            <polyline points="18 15 12 9 6 15"></polyline>
+        </svg>
+    </button>
+
+    <script src="../js/main.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PintarFlow</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#165DFF',
+                    },
+               }
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .content-auto {
+                content-visibility: auto;
+            }
+            .code-block {
+                @apply rounded-lg overflow-hidden my-4;
+            }
+            .code-block pre {
+                @apply m-0 p-4 !bg-gray-900;
+            }
+            .code-block code {
+                @apply font-mono text-sm leading-relaxed;
+            }
+            .warning-box {
+                @apply bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 p-4 rounded-lg my-4;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-50 dark:bg-gray-900 text-gray-800 dark:text-gray-200 transition-colors duration-300">
+    <!-- Horizontal Scroll Progress -->
+    <div class="progress-scroll" id="progressScroll"></div>
+    <header class="sticky top-0 z-50 bg-white/80 dark:bg-gray-900/80 backdrop-blur-md border-b border-gray-200 dark:border-gray-800">
+        <div class="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
+            <a href="../index.html" class="font-bold text-xl text-primary">PintarFlow</a>
+            <button id="toggleDark" class="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800">
+                <span class="dark:hidden">🌙</span>
+                <span class="hidden dark:inline">☀️</span>
+            </button>
+        </div>
+    </header>
+
+    <main class="max-w-4xl mx-auto px-4 py-8">
+        <div class="mb-12">
+            <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=400&fit=crop" alt="SQL Intermediate" class="w-full h-48 object-cover rounded-xl mb-6 shadow-md">
+            <div class="inline-block px-3 py-1 bg-primary/10 text-primary rounded-full text-sm font-medium mb-4">
+                Intermediate Level
+            </div>
+            <h1 class="text-4xl font-bold mb-4">SQL Intermediate</h1>
+            <p class="text-lg text-gray-600 dark:text-gray-400 leading-relaxed">
+                Module lanjutan SQL untuk mempelajari konsep tingkat menengah yang digunakan dalam aplikasi nyata.
+                Cocok untuk yang sudah memahami SQL dasar dan ingin meningkatkan kemampuan query database secara profesional.
+                Materi mencakup join, aggregate function, subquery, grouping, dan constraint.
+            </p>
+        </div>
+
+        <div class="bg-white dark:bg-gray-800 rounded-xl p-6 mb-10 border border-gray-200 dark:border-gray-700">
+            <h2 class="text-xl font-bold mb-4">🎯 Learning Objectives</h2>
+            <ul class="space-y-2 text-gray-700 dark:text-gray-300">
+                <li class="flex items-start gap-3">
+                    <span class="text-primary mt-1">✅</span>
+                    <span>Memahami dan dapat menggunakan berbagai jenis JOIN tabel</span>
+                </li>
+                <li class="flex items-start gap-3">
+                    <span class="text-primary mt-1">✅</span>
+                    <span>Dapat melakukan perhitungan aggregate pada data</span>
+                </li>
+                <li class="flex items-start gap-3">
+                    <span class="text-primary mt-1">✅</span>
+                    <span>Mengelompokkan data dengan GROUP BY dan HAVING</span>
+                </li>
+                <li class="flex items-start gap-3">
+                    <span class="text-primary mt-1">✅</span>
+                    <span>Memahami dan mengimplementasikan Subquery</span>
+                </li>
+                <li class="flex items-start gap-3">
+                    <span class="text-primary mt-1">✅</span>
+                    <span>Memahami konsep Constraint dan Relationship</span>
+                </li>
+                <li class="flex items-start gap-3">
+                    <span class="text-primary mt-1">✅</span>
+                    <span>Dapat menulis query yang efisien untuk kasus kompleks</span>
+                </li>
+            </ul>
+        </div>
+
+        <div class="space-y-12">
+            <section class="border-t border-gray-200 dark:border-gray-700 pt-10">
+                <h3 class="text-2xl font-bold mb-4">1. SQL JOIN</h3>
+                <div class="prose dark:prose-invert max-w-none">
+                    <p class="leading-relaxed mb-4">
+                        JOIN adalah fitur paling penting di SQL untuk menggabungkan data dari 2 tabel atau lebih berdasarkan hubungan antar kolom.
+                        Dalam database relasional, data tidak disimpan dalam satu tabel besar, melainkan dipecah menjadi beberapa tabel yang saling berhubungan.
+                    </p>
+                    <p class="mb-4">Jenis JOIN yang umum digunakan:</p>
+                    <ul class="space-y-1 mb-6">
+                        <li>✅ INNER JOIN: Mengambil data yang cocok di kedua tabel</li>
+                        <li>✅ LEFT JOIN: Mengambil semua data dari tabel kiri + data yang cocok dari tabel kanan</li>
+                        <li>✅ RIGHT JOIN: Mengambil semua data dari tabel kanan + data yang cocok dari tabel kiri</li>
+                        <li>✅ FULL JOIN: Mengambil semua data dari kedua tabel</li>
+                    </ul>
+                </div>
+                <div class="mt-6 space-y-4">
+                    <h4 class="font-semibold mb-2">📝 Contoh:</h4>
+                    <div class="code-block">
+<pre><code class="language-sql">SELECT 
+  users.nama,
+  orders.no_order,
+  orders.total
+FROM users
+INNER JOIN orders ON users.id = orders.user_id;</code></pre>
+                    </div>
+                    <p class="text-sm text-gray-600 dark:text-gray-400">✅ Contoh INNER JOIN untuk menggabungkan tabel users dan orders</p>
+                    
+                    <div class="code-block">
+<pre><code class="language-sql">SELECT 
+  users.nama,
+  orders.no_order
+FROM users
+LEFT JOIN orders ON users.id = orders.user_id
+WHERE orders.id IS NULL;</code></pre>
+                    </div>
+                    <p class="text-sm text-gray-600 dark:text-gray-400">✅ Contoh LEFT JOIN untuk melihat user yang belum pernah order</p>
+                </div>
+            </section>
+
+            <section class="border-t border-gray-200 dark:border-gray-700 pt-10">
+                <h3 class="text-2xl font-bold mb-4">2. Aggregate Functions</h3>
+                <div class="prose dark:prose-invert max-w-none">
+                    <p class="leading-relaxed mb-4">
+                        Aggregate Function adalah fungsi bawaan SQL untuk melakukan perhitungan pada sekelompok baris dan menghasilkan satu nilai ringkasan.
+                        Ini sangat berguna untuk membuat laporan, statistik, dan analisis data.
+                    </p>
+                    <p class="mb-4">Fungsi aggregate yang sering digunakan:</p>
+                    <ul class="space-y-1 mb-6">
+                        <li><code>COUNT()</code> : Menghitung jumlah baris</li>
+                        <li><code>SUM()</code> : Menjumlahkan nilai numerik</li>
+                        <li><code>AVG()</code> : Menghitung rata-rata</li>
+                        <li><code>MAX()</code> : Mendapatkan nilai tertinggi</li>
+                        <li><code>MIN()</code> : Mendapatkan nilai terendah</li>
+                    </ul>
+                </div>
+                <div class="mt-6 space-y-4">
+                    <h4 class="font-semibold mb-2">📝 Contoh:</h4>
+                    <div class="code-block">
+<pre><code class="language-sql">SELECT COUNT(*) AS total_users FROM users;</code></pre>
+                    </div>
+                    <p class="text-sm text-gray-600 dark:text-gray-400">✅ Hitung total user terdaftar</p>
+                    
+                    <div class="code-block">
+<pre><code class="language-sql">SELECT 
+  SUM(total) AS total_pendapatan,
+  AVG(total) AS rata_rata_order,
+  MAX(total) AS order_terbesar,
+  MIN(total) AS order_terkecil
+FROM orders;</code></pre>
+                    </div>
+                    <p class="text-sm text-gray-600 dark:text-gray-400">✅ Hitung total pendapatan semua order</p>
+                </div>
+            </section>
+
+            <section class="border-t border-gray-200 dark:border-gray-700 pt-10">
+                <h3 class="text-2xl font-bold mb-4">3. GROUP BY Clause</h3>
+                <div class="prose dark:prose-invert max-w-none">
+                    <p class="leading-relaxed mb-4">
+                        GROUP BY digunakan untuk mengelompokkan baris yang memiliki nilai sama pada kolom tertentu, biasanya digunakan bersama dengan aggregate function.
+                        Tanpa GROUP BY, aggregate function hanya akan menghasilkan 1 baris untuk seluruh tabel.
+                    </p>
+                    <p class="mb-4">Aturan penting GROUP BY:</p>
+                    <ol class="space-y-1 mb-6 ml-5">
+                        <li>Semua kolom yang dipilih yang bukan aggregate HARUS ada di GROUP BY</li>
+                        <li>Bisa grouping lebih dari satu kolom sekaligus</li>
+                        <li>Urutan GROUP BY mempengaruhi hasil</li>
+                    </ol>
+                </div>
+                <div class="mt-6 space-y-4">
+                    <h4 class="font-semibold mb-2">📝 Contoh:</h4>
+                    <div class="code-block">
+<pre><code class="language-sql">SELECT 
+  status,
+  COUNT(*) AS jumlah_order
+FROM orders
+GROUP BY status;</code></pre>
+                    </div>
+                    <p class="text-sm text-gray-600 dark:text-gray-400">✅ Hitung jumlah order per status</p>
+                    
+                    <div class="code-block">
+<pre><code class="language-sql">SELECT 
+  DATE_FORMAT(created_at, '%Y-%m') AS bulan,
+  COUNT(*) AS jumlah_order,
+  SUM(total) AS total_penjualan
+FROM orders
+GROUP BY DATE_FORMAT(created_at, '%Y-%m')
+ORDER BY bulan DESC;</code></pre>
+                    </div>
+                    <p class="text-sm text-gray-600 dark:text-gray-400">✅ Hitung total penjualan per bulan</p>
+                </div>
+            </section>
+
+            <section class="border-t border-gray-200 dark:border-gray-700 pt-10">
+                <h3 class="text-2xl font-bold mb-4">4. HAVING Clause</h3>
+                <div class="prose dark:prose-invert max-w-none">
+                    <p class="leading-relaxed mb-4">
+                        HAVING digunakan untuk memfilter hasil setelah GROUP BY dan aggregate function dijalankan.
+                        Perbedaan dengan WHERE: WHERE memfilter baris SEBELUM grouping, HAVING memfilter kelompok SETELAH grouping.
+                    </p>
+                    <p class="mb-4">
+                        Kamu tidak bisa menggunakan aggregate function di WHERE, gunakan HAVING untuk itu.
+                    </p>
+                </div>
+                <div class="mt-6 space-y-4">
+                    <h4 class="font-semibold mb-2">📝 Contoh:</h4>
+                    <div class="code-block">
+<pre><code class="language-sql">SELECT 
+  kota,
+  COUNT(*) AS jumlah_user
+FROM users
+GROUP BY kota
+HAVING COUNT(*) > 10
+ORDER BY jumlah_user DESC;</code></pre>
+                    </div>
+                    <p class="text-sm text-gray-600 dark:text-gray-400">✅ Tampilkan kota yang memiliki lebih dari 10 user</p>
+                    
+                    <div class="code-block">
+<pre><code class="language-sql">SELECT 
+  produk_id,
+  SUM(kuantitas) AS total_terjual
+FROM order_items
+GROUP BY produk_id
+HAVING SUM(kuantitas) > 50;</code></pre>
+                    </div>
+                    <p class="text-sm text-gray-600 dark:text-gray-400">✅ Tampilkan produk yang terjual lebih dari 50 buah</p>
+                </div>
+            </section>
+
+            <section class="border-t border-gray-200 dark:border-gray-700 pt-10">
+                <h3 class="text-2xl font-bold mb-4">5. Subquery</h3>
+                <div class="prose dark:prose-invert max-w-none">
+                    <p class="leading-relaxed mb-4">
+                        Subquery adalah query SQL yang berada di dalam query lain.
+                        Subquery dapat digunakan di WHERE, FROM, atau SELECT clause.
+                        Ini memungkinkan kamu menulis query yang sangat kompleks dalam satu perintah.
+                    </p>
+                    <p class="mb-4">Jenis Subquery:</p>
+                    <ol class="space-y-1 mb-6 ml-5">
+                        <li>Scalar Subquery: Mengembalikan 1 nilai</li>
+                        <li>Row Subquery: Mengembalikan 1 baris</li>
+                        <li>Table Subquery: Mengembalikan banyak baris</li>
+                    </ol>
+                </div>
+                <div class="mt-6 space-y-4">
+                    <h4 class="font-semibold mb-2">📝 Contoh:</h4>
+                    <div class="code-block">
+<pre><code class="language-sql">SELECT nama, email
+FROM users
+WHERE id IN (
+  SELECT user_id 
+  FROM orders 
+  WHERE total > (
+    SELECT AVG(total) FROM orders
+  )
+);</code></pre>
+                    </div>
+                    <p class="text-sm text-gray-600 dark:text-gray-400">✅ Dapatkan user yang melakukan order diatas rata-rata</p>
+                    
+                    <div class="code-block">
+<pre><code class="language-sql">SELECT 
+  rata_rata_per_bulan.total,
+  rata_rata_per_bulan.bulan
+FROM (
+  SELECT 
+    DATE_FORMAT(created_at, '%Y-%m') AS bulan,
+    AVG(total) AS total
+  FROM orders
+  GROUP BY bulan
+) AS rata_rata_per_bulan
+WHERE total > 500000;</code></pre>
+                    </div>
+                    <p class="text-sm text-gray-600 dark:text-gray-400">✅ Gunakan Subquery di FROM</p>
+                </div>
+            </section>
+
+            <section class="border-t border-gray-200 dark:border-gray-700 pt-10">
+                <h3 class="text-2xl font-bold mb-4">6. Table Constraints</h3>
+                <div class="prose dark:prose-invert max-w-none">
+                    <p class="leading-relaxed mb-4">
+                        Constraints adalah aturan yang diterapkan pada kolom tabel untuk memastikan integritas dan keakuratan data.
+                        Constraints mencegah data yang tidak valid masuk ke dalam database.
+                    </p>
+                    <p class="mb-4">Constraints umum:</p>
+                    <ul class="space-y-1 mb-6">
+                        <li><code>PRIMARY KEY</code>: Identitas unik setiap baris</li>
+                        <li><code>FOREIGN KEY</code>: Memastikan hubungan antar tabel valid</li>
+                        <li><code>UNIQUE</code>: Memastikan nilai kolom tidak ada yang sama</li>
+                        <li><code>NOT NULL</code>: Kolom tidak boleh kosong</li>
+                        <li><code>DEFAULT</code>: Memberi nilai default jika tidak diisi</li>
+                        <li><code>CHECK</code>: Memastikan nilai memenuhi kondisi tertentu</li>
+                    </ul>
+                </div>
+                <div class="mt-6 space-y-4">
+                    <h4 class="font-semibold mb-2">📝 Contoh:</h4>
+                    <div class="code-block">
+<pre><code class="language-sql">CREATE TABLE products (
+  id INT PRIMARY KEY AUTO_INCREMENT,
+  nama VARCHAR(255) NOT NULL,
+  sku VARCHAR(50) UNIQUE NOT NULL,
+  harga INT NOT NULL CHECK (harga > 0),
+  stok INT DEFAULT 0,
+  kategori_id INT,
+  created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+  FOREIGN KEY (kategori_id) REFERENCES categories(id)
+);</code></pre>
+                    </div>
+                    <p class="text-sm text-gray-600 dark:text-gray-400">✅ Contoh pembuatan tabel dengan constraints lengkap</p>
+                </div>
+            </section>
+        </div>
+
+        <div class="mt-16 pt-8 border-t border-gray-200 dark:border-gray-700">
+            <div class="flex justify-center">
+                <a href="../index.html" class="inline-flex items-center gap-2 px-6 py-3 bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors">
+                    ← Kembali ke Menu Utama
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <footer class="mt-20 border-t border-gray-200 dark:border-gray-800 py-8">
+        <div class="max-w-6xl mx-auto px-4 text-center text-gray-500 dark:text-gray-400 text-sm">
+            <p>© 2026 AI Online Course. Seluruh hak cipta dilindungi.</p>
+        </div>
+    </footer>
+
+    <!-- Back To Top Button -->
+    <button class="back-to-top" id="backToTop" title="Kembali ke atas">
+        <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="18 15 12 9 6 15"></polyline>
+        </svg>
+    </button>
+
+    <script src="../js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,46 @@
+/* Global Style PintarFlow */
+.back-to-top {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: #165DFF;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(22, 93, 255, 0.3);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(20px);
+    transition: all 0.3s ease;
+    z-index: 9999;
+}
+
+.back-to-top.visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.back-to-top:hover {
+    background: #0d47a1;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(22, 93, 255, 0.4);
+}
+
+/* Horizontal Scroll Progress Bar */
+.progress-scroll {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 0%;
+    height: 3px;
+    background: linear-gradient(90deg, #165DFF, #3b82f6);
+    z-index: 99999;
+    transition: width 0.1s ease;
+    box-shadow: 0 0 10px rgba(22, 93, 255, 0.7);
+}

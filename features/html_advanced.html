@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PintarFlow - HTML Advanced</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#165DFF',
+                    },
+                }
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .content-auto {
+                content-visibility: auto;
+            }
+            .code-block {
+                @apply rounded-lg overflow-hidden my-4;
+            }
+            .code-block pre {
+                @apply m-0 p-4 !bg-gray-900;
+            }
+            .code-block code {
+                @apply font-mono text-sm leading-relaxed;
+            }
+            .warning-box {
+                @apply bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 p-4 rounded-lg my-4;
+            }
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50 dark:bg-gray-900 text-gray-800 dark:text-gray-200 transition-colors duration-300">
+    <!-- Horizontal Scroll Progress -->
+    <div class="progress-scroll" id="progressScroll"></div>
+    <header
+        class="sticky top-0 z-50 bg-white/80 dark:bg-gray-900/80 backdrop-blur-md border-b border-gray-200 dark:border-gray-800">
+        <div class="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
+            <a href="../index.html" class="font-bold text-xl text-primary">PintarFlow</a>
+            <button id="toggleDark" class="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800">
+                <span class="dark:hidden">🌙</span>
+                <span class="hidden dark:inline">☀️</span>
+            </button>
+        </div>
+    </header>
+
+    <main class="max-w-4xl mx-auto px-4 py-8">
+        <div class="mb-12">
+            <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=800&h=400&fit=crop"
+                alt="HTML Advanced" class="w-full h-48 object-cover rounded-xl mb-6 shadow-md">
+            <div
+                class="inline-block px-3 py-1 bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-400 rounded-full text-sm font-medium mb-4">
+                Advanced Level
+            </div>
+            <h1 class="text-4xl font-bold mb-4">HTML Advanced</h1>
+            <p class="text-lg text-gray-600 dark:text-gray-400 leading-relaxed">
+                Module ini membahas fitur-fitur HTML tingkat lanjut untuk membangun website profesional, modern dan
+                future-proof. Setelah menyelesaikan module ini kamu akan memahami konsep HTML yang jarang diketahui tapi
+                sangat powerful untuk performance, keamanan, dan user experience.
+            </p>
+        </div>
+
+        <div class="bg-white dark:bg-gray-800 rounded-xl p-6 mb-10 border border-gray-200 dark:border-gray-700">
+            <h2 class="text-xl font-bold mb-4">🎯 Learning Objectives</h2>
+            <ul class="space-y-2 text-gray-700 dark:text-gray-300">
+                <li class="flex items-start gap-3">
+                    <span class="text-primary mt-1">✅</span>
+                    <span>Memahami dan menggunakan Custom Data Attributes & Dataset API</span>
+                </li>
+                <li class="flex items-start gap-3">
+                    <span class="text-primary mt-1">✅</span>
+                    <span>Mengimplementasikan HTML Template & Shadow DOM</span>
+                </li>
+                <li class="flex items-start gap-3">
+                    <span class="text-primary mt-1">✅</span>
+                    <span>Menggunakan Web Components native</span>
+                </li>
+                <li class="flex items-start gap-3">
+                    <span class="text-primary mt-1">✅</span>
+                    <span>Mengoptimalkan performance dengan fitur HTML modern</span>
+                </li>
+                <li class="flex items-start gap-3">
+                    <span class="text-primary mt-1">✅</span>
+                    <span>Memahami Security Policy dan Meta Tag tingkat lanjut</span>
+                </li>
+                <li class="flex items-start gap-3">
+                    <span class="text-primary mt-1">✅</span>
+                    <span>Menggunakan HTML Drag & Drop API</span>
+                </li>
+                <li class="flex items-start gap-3">
+                    <span class="text-primary mt-1">✅</span>
+                    <span>Memahami Service Worker dan PWA dasar</span>
+                </li>
+            </ul>
+        </div>
+
+        <div class="space-y-12">
+            <section class="border-t border-gray-200 dark:border-gray-700 pt-10">
+                <h3 class="text-2xl font-bold mb-4">1. Custom Data Attributes & Dataset API</h3>
+                <div class="prose dark:prose-invert max-w-none">
+                    <p class="leading-relaxed mb-4">
+                        Custom Data Attribute adalah atribut custom yang bisa kamu tambahkan ke elemen HTML apapun
+                        dengan prefix <code class="bg-gray-100 dark:bg-gray-800 px-1 py-0.5 rounded">data-*</code>. Ini
+                        adalah cara official dan standar untuk menyimpan data tambahan pada elemen HTML tanpa
+                        menggunakan hack seperti class atau id.
+                    </p>
+                    <p class="mb-4">Data yang disimpan disini bisa diakses dengan mudah melalui JavaScript menggunakan
+                        <code class="bg-gray-100 dark:bg-gray-800 px-1 py-0.5 rounded">dataset</code> API secara native
+                        tanpa library apapun. Semua browser modern sudah mendukung fitur ini 100%.
+                    </p>
+                </div>
+                <div class="mt-6">
+                    <h4 class="font-semibold mb-2">📝 Contoh:</h4>
+                    <div class="code-block">
+                        <pre><code class="language-html">&lt;!-- Menyimpan data di HTML --&gt;
+&lt;div 
+  id="product" 
+  data-id="12345" 
+  data-name="Laptop Gaming" 
+  data-price="12500000" 
+  data-category="elektronik"
+  data-in-stock="true"
+&gt;
+  Laptop Gaming RTX 4060
+&lt;/div&gt;</code></pre>
+
+                    </div>
+
+                    <div class="code-block mt-4">
+                        <pre><code class="language-javascript">// Mengakses data di JavaScript
+const product = document.getElementById('product');
+
+console.log(product.dataset.id); // "12345"
+console.log(product.dataset.name); // "Laptop Gaming"
+console.log(product.dataset.price); // "12500000"
+console.log(product.dataset.inStock); // "true" (otomatis dikonversi camelCase)
+
+// Mengubah data
+product.dataset.price = "13000000";</code></pre>
+                    </div>
+                </div>
+            </section>
+
+            <section class="border-t border-gray-200 dark:border-gray-700 pt-10">
+                <h3 class="text-2xl font-bold mb-4">2. Template Element</h3>
+                <div class="prose dark:prose-invert max-w-none">
+                    <p class="leading-relaxed mb-4">
+                        <code class="bg-gray-100 dark:bg-gray-800 px-1 py-0.5 rounded">&lt;template&gt;</code> adalah
+                        elemen
+                        HTML khusus yang isinya tidak akan dirender oleh browser secara default. Konten didalam template
+                        hanya berupa blueprint yang bisa kamu kloning dan tampilkan kapan saja dibutuhkan menggunakan
+                        JavaScript.
+                    </p>
+                    <p class="mb-4">Ini adalah cara paling performant untuk membuat konten yang akan diulang banyak kali
+                        di halaman. Jauh lebih baik dibanding membuat string HTML di dalam JavaScript.</p>
+                </div>
+                <div class="mt-6">
+                    <h4 class="font-semibold mb-2">📝 Contoh:</h4>
+                    <div class="code-block">
+                        <pre><code class="language-html">&lt;!-- Template yang tidak akan terlihat di halaman --&gt;
+&lt;template id="cardUser"&gt;
+  &lt;div class="card"&gt;
+    &lt;img src="" alt="Foto" class="avatar"&gt;
+    &lt;h3 class="nama"&gt;&lt;/h3&gt;
+    &lt;p class="email"&gt;&lt;/p&gt;
+    &lt;button class="btn-hapus"&gt;Hapus&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/template&gt;</code></pre>
+                    </div>
+
+                    <div class="code-block mt-4">
+                        <pre><code class="language-javascript">// Menggunakan template
+const template = document.getElementById('cardUser');
+const container = document.getElementById('daftarUser');
+
+users.forEach(user => {
+  // Kloning template
+  const card = template.content.cloneNode(true);
+  
+  // Isi data
+  card.querySelector('.avatar').src = user.foto;
+  card.querySelector('.nama').textContent = user.nama;
+  card.querySelector('.email').textContent = user.email;
+  
+  // Tambahkan ke halaman
+  container.appendChild(card);
+});</code></pre>
+                    </div>
+                </div>
+            </section>
+
+            <section class="border-t border-gray-200 dark:border-gray-700 pt-10">
+                <h3 class="text-2xl font-bold mb-4">3. Shadow DOM</h3>
+                <div class="prose dark:prose-invert max-w-none">
+                    <p class="leading-relaxed mb-4">
+                        Shadow DOM adalah fitur browser yang memungkinkan kamu membuat DOM terpisah dan terisolasi
+                        didalam elemen biasa. Style dan script didalam shadow DOM tidak akan bocor keluar, dan style
+                        luar juga tidak akan mempengaruhi isi shadow DOM.
+                    </p>
+                    <p class="mb-4">Ini adalah dasar dari Web Components dan alasan mengapa komponen bisa benar-benar
+                        independent tanpa konflik CSS.</p>
+                </div>
+                <div class="mt-6">
+                    <h4 class="font-semibold mb-2">📝 Contoh:</h4>
+                    <div class="code-block">
+                        <pre><code class="language-html">&lt;div id="komponenSaya"&gt;&lt;/div&gt;
+
+&lt;script&gt;
+    const host = document.getElementById('komponenSaya');
+
+    // Membuat Shadow Root
+    const shadow = host.attachShadow({ mode: 'open' });
+
+    // Menambahkan konten kedalam Shadow DOM
+    shadow.innerHTML = `
+  &lt;style&gt;
+    /* Style ini HANYA berlaku didalam shadow DOM saja */
+    h2 {
+      color: blue;
+      font-size: 20px;
+    }
+  &lt;/style&gt;
+  
+  &lt;h2&gt;Ini ada didalam Shadow DOM&lt;/h2&gt;
+  &lt;p&gt;Style disini tidak konflik dengan halaman utama&lt;/p&gt;
+`;
+&lt;/script&gt;</code></pre>
+                    </div>
+                </div>
+            </section>
+
+            <section class="border-t border-gray-200 dark:border-gray-700 pt-10">
+                <h3 class="text-2xl font-bold mb-4">4. Meta Tag & Security</h3>
+                <div class="prose dark:prose-invert max-w-none">
+                    <p class="leading-relaxed mb-4">
+                        Meta tag bukan cuma untuk SEO. Ada banyak meta tag tingkat lanjut yang berfungsi untuk
+                        mengontrol perilaku browser, meningkatkan keamanan, dan mencegah serangan.
+                    </p>
+                    <p class="mb-4">Beberapa yang paling penting:</p>
+                    <ul class="space-y-1 mb-6">
+                        <li><code
+                                class="bg-gray-100 dark:bg-gray-800 px-1 py-0.5 rounded">Content-Security-Policy</code>:
+                            Mencegah XSS attack</li>
+                        <li><code class="bg-gray-100 dark:bg-gray-800 px-1 py-0.5 rounded">Referrer-Policy</code>:
+                            Mengontrol data apa yang dikirim ketika user klik link</li>
+                        <li><code class="bg-gray-100 dark:bg-gray-800 px-1 py-0.5 rounded">Permissions-Policy</code>:
+                            Menonaktifkan fitur browser yang tidak dibutuhkan</li>
+                        <li><code class="bg-gray-100 dark:bg-gray-800 px-1 py-0.5 rounded">X-Frame-Options</code>:
+                            Mencegah website di embed oleh situs lain</li>
+                    </ul>
+                </div>
+                <div class="mt-6">
+                    <h4 class="font-semibold mb-2">📝 Contoh:</h4>
+                    <div class="code-block">
+                        <pre><code class="language-html">&lt;head&gt;
+  &lt;!-- Keamanan Dasar --&gt;
+  &lt;meta http-equiv="X-Frame-Options" content="DENY"&gt;
+  &lt;meta http-equiv="X-Content-Type-Options" content="nosniff"&gt;
+  
+  &lt;!-- Content Security Policy --&gt;
+  &lt;meta http-equiv="Content-Security-Policy" content="
+    default-src 'self';
+    script-src 'self' https://cdn.jsdelivr.net;
+    style-src 'self' 'unsafe-inline';
+    img-src 'self' data: https:;
+    object-src 'none';
+    base-uri 'self';
+    form-action 'self';
+  "&gt;
+  
+  &lt;!-- Referrer Policy --&gt;
+  &lt;meta name="referrer" content="strict-origin-when-cross-origin"&gt;
+  
+  &lt;!-- Disable Fitur Browser yang tidak dipakai --&gt;
+  &lt;meta http-equiv="Permissions-Policy" content="
+    camera=(), 
+    microphone=(), 
+    geolocation=(), 
+    payment=()
+  "&gt;
+&lt;/head&gt;</code></pre>
+                    </div>
+                </div>
+            </section>
+
+            <section class="border-t border-gray-200 dark:border-gray-700 pt-10">
+                <h3 class="text-2xl font-bold mb-4">5. Native Drag & Drop</h3>
+                <div class="prose dark:prose-invert max-w-none">
+                    <p class="leading-relaxed mb-4">
+                        HTML memiliki API Drag & Drop native yang bisa kamu gunakan tanpa library apapun. Fitur ini
+                        memungkinkan user menyeret elemen dari satu tempat ke tempat lain di halaman, bahkan antar
+                        window browser.
+                    </p>
+                    <p class="mb-4">3 konsep utama:</p>
+                    <ol class="space-y-1 mb-6">
+                        <li>Elemen yang bisa diseret (<code
+                                class="bg-gray-100 dark:bg-gray-800 px-1 py-0.5 rounded">draggable="true"</code>)</li>
+                        <li>Event ketika elemen diseret</li>
+                        <li>Elemen target tempat drop</li>
+                    </ol>
+                </div>
+                <div class="mt-6">
+                    <h4 class="font-semibold mb-2">📝 Contoh:</h4>
+                    <div class="code-block">
+                        <pre><code class="language-html">&lt;div class="daftar-tugas"&gt;
+  &lt;div class="tugas" draggable="true" data-id="1"&gt;Tugas A&lt;/div&gt;
+  &lt;div class="tugas" draggable="true" data-id="2"&gt;Tugas B&lt;/div&gt;
+  &lt;div class="tugas" draggable="true" data-id="3"&gt;Tugas C&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class="kolom" id="progress"&gt;
+  &lt;h3&gt;In Progress&lt;/h3&gt;
+&lt;/div&gt;
+
+&lt;div class="kolom" id="done"&gt;
+  &lt;h3&gt;Done&lt;/h3&gt;
+&lt;/div&gt;</code></pre>
+                    </div>
+                </div>
+            </section>
+
+            <section class="border-t border-gray-200 dark:border-gray-700 pt-10">
+                <h3 class="text-2xl font-bold mb-4">6. Performance Optimization HTML</h3>
+                <div class="prose dark:prose-invert max-w-none">
+                    <p class="leading-relaxed mb-4">
+                        Banyak optimasi performance yang bisa dilakukan hanya dengan HTML saja tanpa JavaScript:
+                    </p>
+                    <ul class="space-y-1 mb-6">
+                        <li><code class="bg-gray-100 dark:bg-gray-800 px-1 py-0.5 rounded">preload</code>: Memuat
+                            resource penting lebih awal</li>
+                        <li><code class="bg-gray-100 dark:bg-gray-800 px-1 py-0.5 rounded">prefetch</code>: Memuat
+                            resource untuk halaman selanjutnya</li>
+                        <li><code class="bg-gray-100 dark:bg-gray-800 px-1 py-0.5 rounded">preconnect</code>: Membuat
+                            koneksi awal ke domain lain</li>
+                        <li><code class="bg-gray-100 dark:bg-gray-800 px-1 py-0.5 rounded">dns-prefetch</code>: Resolve
+                            DNS lebih awal</li>
+                        <li><code class="bg-gray-100 dark:bg-gray-800 px-1 py-0.5 rounded">loading="lazy"</code>: Lazy
+                            load untuk gambar dan iframe</li>
+                        <li><code class="bg-gray-100 dark:bg-gray-800 px-1 py-0.5 rounded">decoding="async"</code>:
+                            Decode gambar tanpa block render</li>
+                    </ul>
+                </div>
+                <div class="mt-6">
+                    <h4 class="font-semibold mb-2">📝 Contoh:</h4>
+                    <div class="code-block">
+                        <pre><code class="language-html">&lt;head&gt;
+  &lt;!-- Hubungkan ke CDN sebelum dibutuhkan --&gt;
+  &lt;link rel="preconnect" href="https://fonts.googleapis.com"&gt;
+  &lt;link rel="preconnect" href="https://fonts.gstatic.com" crossorigin&gt;
+  
+  &lt;!-- Preload font penting --&gt;
+  &lt;link rel="preload" href="font/poppins.woff2" as="font" type="font/woff2" crossorigin&gt;
+  
+  &lt;!-- Prefetch halaman yang kemungkinan dikunjungi selanjutnya --&gt;
+  &lt;link rel="prefetch" href="/produk/detail.html"&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+  &lt;!-- Gambar dengan optimasi lengkap --&gt;
+  &lt;img 
+    src="gambar-produk.jpg" 
+    alt="Produk" 
+    loading="lazy" 
+    decoding="async"
+    width="800"
+    height="600"
+  &gt;
+&lt;/body&gt;</code></pre>
+                    </div>
+                </div>
+            </section>
+
+            <section class="border-t border-gray-200 dark:border-gray-700 pt-10">
+                <h3 class="text-2xl font-bold mb-4">7. Web Components Dasar</h3>
+                <div class="prose dark:prose-invert max-w-none">
+                    <p class="leading-relaxed mb-4">
+                        Web Components adalah standar browser untuk membuat elemen HTML custom kamu sendiri. Kamu bisa
+                        mendefinisikan tag baru yang memiliki fungsi, style dan perilaku sendiri yang bisa dipakai
+                        berulang kali di website manapun.
+                    </p>
+                    <p class="mb-4">Web Components terdiri dari 3 teknologi:</p>
+                    <ol class="space-y-1 mb-6">
+                        <li>Custom Elements</li>
+                        <li>Shadow DOM</li>
+                        <li>HTML Templates</li>
+                    </ol>
+                </div>
+                <div class="mt-6">
+                    <h4 class="font-semibold mb-2">📝 Contoh:</h4>
+                    <div class="code-block">
+                        <pre><code class="language-javascript">// Mendefinisikan Custom Element
+class TombolPrimary extends HTMLElement {
+  constructor() {
+    super();
+    this.attachShadow({ mode: 'open' });
+    
+    this.shadowRoot.innerHTML = `
+      &lt;style&gt;
+        button {
+          background: #165DFF;
+          color: white;
+          padding: 12px 24px;
+          border: none;
+          border-radius: 8px;
+          cursor: pointer;
+        }
+        button:hover {
+          opacity: 0.9;
+        }
+      &lt;/style&gt;
+      &lt;button&gt;&lt;slot&gt;&lt;/slot&gt;&lt;/button&gt;
+    `;
+  }
+}
+
+// Daftarkan elemen ke browser
+customElements.define('tombol-primary', TombolPrimary);</code></pre>
+                    </div>
+
+                    <div class="code-block mt-4">
+                        <pre><code class="language-html">&lt;!-- Gunakan seperti tag HTML biasa dimanapun --&gt;
+&lt;tombol-primary&gt;Klik Disini&lt;/tombol-primary&gt;</code></pre>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <div class="mt-16 pt-8 border-t border-gray-200 dark:border-gray-700">
+            <div class="flex justify-center">
+                <a href="../index.html"
+                    class="inline-flex items-center gap-2 px-6 py-3 bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors">
+                    ← Kembali ke Menu Utama
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <footer class="mt-20 border-t border-gray-200 dark:border-gray-800 py-8">
+        <div class="max-w-6xl mx-auto px-4 text-center text-gray-500 dark:text-gray-400 text-sm">
+            <p>© 2026 PintarFlow. Seluruh hak cipta dilindungi.</p>
+        </div>
+    </footer>
+
+    <!-- Back To Top Button -->
+    <button class="back-to-top" id="backToTop" title="Kembali ke atas">
+        <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+            stroke-linejoin="round">
+            <polyline points="18 15 12 9 6 15"></polyline>
+        </svg>
+    </button>
+
+    <script src="../js/main.js"></script>
+</body>
+
+</html>
