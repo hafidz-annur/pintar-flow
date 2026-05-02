@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PintarFlow - Fundamental CSS</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#165DFF',
+                    },
+                    animation: {
+                        'gradient': 'gradient 8s ease infinite',
+                    },
+                    keyframes: {
+                        gradient: {
+                            '0%, 100%': { 'background-position': '0% 50%' },
+                            '50%': { 'background-position': '100% 50%' },
+                        }
+                    },
+                    backgroundSize: {
+                        '300%': '300%',
+                    }
+                }
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .content-auto {
+                content-visibility: auto;
+            }
+            .code-block {
+                @apply rounded-lg overflow-hidden my-4;
+            }
+            .code-block pre {
+                @apply m-0 p-4 !bg-gray-900;
+            }
+            .code-block code {
+                @apply font-mono text-sm leading-relaxed;
+            }
+            .warning-box {
+                @apply bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 p-4 rounded-lg my-4;
+            }
+            .info-box {
+                @apply bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 p-4 rounded-lg my-4;
+            }
+            .success-box {
+                @apply bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 p-4 rounded-lg my-4;
+            }
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50 dark:bg-gray-900 text-gray-800 dark:text-gray-200 transition-colors duration-300">
+    <!-- Horizontal Scroll Progress -->
+    <div class="progress-scroll" id="progressScroll"></div>
+    <header
+        class="sticky top-0 z-50 bg-white/80 dark:bg-gray-900/80 backdrop-blur-md border-b border-gray-200 dark:border-gray-800">
+        <div class="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
+            <a href="../index.html" class="font-bold text-xl text-primary">PintarFlow</a>
+            <button id="toggleDark" class="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800">
+                <span class="dark:hidden">🌙</span>
+                <span class="hidden dark:inline">☀️</span>
+            </button>
+        </div>
+    </header>
+
+    <main class="max-w-4xl mx-auto px-4 py-8">
+        <div class="mb-12">
+            <img src="https://images.unsplash.com/photo-1507721999472-8ed4421c4af2?w=800&h=400&fit=crop"
+                alt="Fundamental CSS" class="w-full h-48 object-cover rounded-xl mb-6 shadow-md">
+            <div
+                class="inline-block px-3 py-1 bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400 rounded-full text-sm font-medium mb-4">
+                Basic Level
+            </div>
+            <h1 class="text-4xl font-bold mb-4">Fundamental CSS</h1>
+            <p class="text-lg text-gray-600 dark:text-gray-400 leading-relaxed">
+                Module CSS Fundamental lengkap dari nol sampai mahir. Pelajari semua konsep dasar CSS yang wajib
+                dipahami oleh setiap web developer. Dari selector, box model, positioning, sampai layout modern dengan
+                Flexbox dan Grid.
+            </p>
+        </div>
+
+        <div class="bg-white dark:bg-gray-800 rounded-xl p-6 mb-10 border border-gray-200 dark:border-gray-700">
+            <h2 class="text-xl font-bold mb-4">🎯 Learning Objectives</h2>
+            <ul class="space-y-2 text-gray-700 dark:text-gray-300">
+                <li class="flex items-start gap-3">
+                    <span class="text-primary mt-1">✅</span>
+                    <span>Memahami apa itu CSS dan cara kerjanya di browser</span>
+                </li>
+                <li class="flex items-start gap-3">
+                    <span class="text-primary mt-1">✅</span>
+                    <span>Bisa menggunakan berbagai jenis selector CSS</span>
+                </li>
+                <li class="flex items-start gap-3">
+                    <span class="text-primary mt-1">✅</span>
+                    <span>Memahami Box Model secara mendalam</span>
+                </li>
+                <li class="flex items-start gap-3">
+                    <span class="text-primary mt-1">✅</span>
+                    <span>Memahami perbedaan tipe display element</span>
+                </li>
+                <li class="flex items-start gap-3">
+                    <span class="text-primary mt-1">✅</span>
+                    <span>Bisa melakukan positioning element dengan benar</span>
+                </li>
+                <li class="flex items-start gap-3">
+                    <span class="text-primary mt-1">✅</span>
+                    <span>Menguasai Flexbox untuk layout satu dimensi</span>
+                </li>
+                <li class="flex items-start gap-3">
+                    <span class="text-primary mt-1">✅</span>
+                    <span>Menguasai CSS Grid untuk layout dua dimensi</span>
+                </li>
+                <li class="flex items-start gap-3">
+                    <span class="text-primary mt-1">✅</span>
+                    <span>Memahami Responsive Design dasar</span>
+                </li>
+                <li class="flex items-start gap-3">
+                    <span class="text-primary mt-1">✅</span>
+                    <span>Mengetahui best practice penulisan CSS</span>
+                </li>
+            </ul>
+        </div>
+
+        <div class="space-y-12">
+            <section class="border-t border-gray-200 dark:border-gray-700 pt-10">
+                <h3 class="text-2xl font-bold mb-4">1. Pengenalan CSS</h3>
+                <div class="prose dark:prose-invert max-w-none">
+                    <p class="leading-relaxed mb-4">
+                        CSS (Cascading Style Sheets) adalah bahasa yang digunakan untuk memberikan style dan tampilan
+                        pada dokumen HTML. CSS memisahkan konten dari tampilan.
+                    </p>
+                </div>
+                <div class="success-box mt-4">
+                    <p class="font-semibold mb-2 text-green-700 dark:text-green-400">✅ 3 Cara Memasukkan CSS:</p>
+                    <ol class="space-y-1 mt-2">
+                        <li>1. <strong>Inline CSS</strong>: <code
+                                class="bg-gray-100 dark:bg-gray-800 px-1 py-0.5 rounded text-sm">style</code> attribute
+                            di tag HTML</li>
+                        <li>
+                            2. <strong>Internal CSS</strong>:
+                            Tag
+                            <code class="bg-gray-100 dark:bg-gray-800 px-1 py-0.5 rounded text-sm">
+    &lt;style&gt;
+  </code>
+                            di dalam
+                            <code class="bg-gray-100 dark:bg-gray-800 px-1 py-0.5 rounded text-sm">
+    &lt;head&gt;
+  </code>
+                        </li>
+                        <li>3. <strong>External CSS</strong>: File .css terpisah yang di-import</li>
+                    </ol>
+                </div>
+            </section>
+
+            <section class="border-t border-gray-200 dark:border-gray-700 pt-10">
+                <h3 class="text-2xl font-bold mb-4">2. Selector CSS</h3>
+                <div class="code-block mt-6">
+                    <pre><code class="language-css">/* Element Selector */
+p { color: red; }
+
+/* Class Selector */
+.text-primary { color: blue; }
+
+/* ID Selector */
+#header { background: gray; }
+
+/* Attribute Selector */
+input[type="text"] { border: 1px solid; }
+
+/* Descendant Selector */
+.container p { margin: 10px; }
+
+/* Pseudo Class */
+button:hover { background: darkblue; }</code></pre>
+                </div>
+            </section>
+
+            <section class="border-t border-gray-200 dark:border-gray-700 pt-10">
+                <h3 class="text-2xl font-bold mb-4">3. Box Model</h3>
+                <div class="info-box mt-4">
+                    Setiap element HTML adalah sebuah kotak yang terdiri dari 4 bagian:
+                    <ol class="mt-2 space-y-1">
+                        <li>1. <strong>Content</strong>: Isi sebenarnya dari element</li>
+                        <li>2. <strong>Padding</strong>: Ruang kosong di dalam element</li>
+                        <li>3. <strong>Border</strong>: Garis pembatas di sekitar padding</li>
+                        <li>4. <strong>Margin</strong>: Ruang kosong di luar element</li>
+                    </ol>
+                </div>
+                <div class="code-block mt-6">
+                    <pre><code class="language-css">.box {
+  width: 200px;
+  height: 100px;
+  padding: 20px;
+  border: 2px solid black;
+  margin: 10px;
+}</code></pre>
+                </div>
+                <div class="success-box mt-4">
+                    ✅ Penting! <code
+                        class="bg-gray-100 dark:bg-gray-800 px-1 py-0.5 rounded text-sm">box-sizing: border-box</code>
+                    membuat total ukuran element tidak berubah ketika menambah padding dan border.
+                </div>
+            </section>
+
+            <section class="border-t border-gray-200 dark:border-gray-700 pt-10">
+                <h3 class="text-2xl font-bold mb-4">4. Display Property</h3>
+                <div class="overflow-x-auto">
+                    <table class="min-w-full border-collapse">
+                        <thead>
+                            <tr>
+                                <th
+                                    class="border border-gray-300 dark:border-gray-600 px-4 py-2 bg-gray-100 dark:bg-gray-700 text-left">
+                                    Value</th>
+                                <th
+                                    class="border border-gray-300 dark:border-gray-600 px-4 py-2 bg-gray-100 dark:bg-gray-700 text-left">
+                                    Keterangan</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 font-mono text-sm">
+                                    block</td>
+                                <td class="border border-gray-300 dark:border-gray-600 px-4 py-2">Memenuhi lebar penuh,
+                                    bisa atur width height</td>
+                            </tr>
+                            <tr>
+                                <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 font-mono text-sm">
+                                    inline</td>
+                                <td class="border border-gray-300 dark:border-gray-600 px-4 py-2">Hanya selebar konten,
+                                    tidak bisa atur width height</td>
+                            </tr>
+                            <tr>
+                                <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 font-mono text-sm">
+                                    inline-block</td>
+                                <td class="border border-gray-300 dark:border-gray-600 px-4 py-2">Seperti inline tapi
+                                    bisa atur ukuran</td>
+                            </tr>
+                            <tr>
+                                <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 font-mono text-sm">none
+                                </td>
+                                <td class="border border-gray-300 dark:border-gray-600 px-4 py-2">Element dihilangkan
+                                    dari halaman</td>
+                            </tr>
+                            <tr>
+                                <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 font-mono text-sm">flex
+                                </td>
+                                <td class="border border-gray-300 dark:border-gray-600 px-4 py-2">Mengaktifkan Flexbox
+                                    Layout</td>
+                            </tr>
+                            <tr>
+                                <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 font-mono text-sm">grid
+                                </td>
+                                <td class="border border-gray-300 dark:border-gray-600 px-4 py-2">Mengaktifkan Grid
+                                    Layout</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <section class="border-t border-gray-200 dark:border-gray-700 pt-10">
+                <h3 class="text-2xl font-bold mb-4">5. Positioning</h3>
+                <div class="overflow-x-auto">
+                    <table class="min-w-full border-collapse">
+                        <thead>
+                            <tr>
+                                <th
+                                    class="border border-gray-300 dark:border-gray-600 px-4 py-2 bg-gray-100 dark:bg-gray-700 text-left">
+                                    Value</th>
+                                <th
+                                    class="border border-gray-300 dark:border-gray-600 px-4 py-2 bg-gray-100 dark:bg-gray-700 text-left">
+                                    Keterangan</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 font-mono text-sm">
+                                    static</td>
+                                <td class="border border-gray-300 dark:border-gray-600 px-4 py-2">Default, posisi normal
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 font-mono text-sm">
+                                    relative</td>
+                                <td class="border border-gray-300 dark:border-gray-600 px-4 py-2">Posisi relatif dari
+                                    posisi aslinya</td>
+                            </tr>
+                            <tr>
+                                <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 font-mono text-sm">
+                                    absolute</td>
+                                <td class="border border-gray-300 dark:border-gray-600 px-4 py-2">Posisi relatif
+                                    terhadap parent terdekat yang position bukan static</td>
+                            </tr>
+                            <tr>
+                                <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 font-mono text-sm">
+                                    fixed</td>
+                                <td class="border border-gray-300 dark:border-gray-600 px-4 py-2">Tetap di posisi yang
+                                    sama meskipun scroll</td>
+                            </tr>
+                            <tr>
+                                <td class="border border-gray-300 dark:border-gray-600 px-4 py-2 font-mono text-sm">
+                                    sticky</td>
+                                <td class="border border-gray-300 dark:border-gray-600 px-4 py-2">Gabungan relative dan
+                                    fixed</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <section class="border-t border-gray-200 dark:border-gray-700 pt-10">
+                <h3 class="text-2xl font-bold mb-4">6. Flexbox</h3>
+                <div class="code-block mt-6">
+                    <pre><code class="language-css">.container {
+  display: flex;
+  justify-content: center; /* align horizontal */
+  align-items: center; /* align vertical */
+  gap: 20px; /* jarak antar item */
+}</code></pre>
+                </div>
+                <div class="info-box mt-4">
+                    ✅ Property Container:
+                    <ul class="mt-2 space-y-1">
+                        <li><code
+                                class="bg-gray-100 dark:bg-gray-800 px-1 py-0.5 rounded text-sm">flex-direction</code>,
+                            <code
+                                class="bg-gray-100 dark:bg-gray-800 px-1 py-0.5 rounded text-sm">justify-content</code>,
+                            <code class="bg-gray-100 dark:bg-gray-800 px-1 py-0.5 rounded text-sm">align-items</code>
+                        </li>
+                        <li><code class="bg-gray-100 dark:bg-gray-800 px-1 py-0.5 rounded text-sm">flex-wrap</code>,
+                            <code class="bg-gray-100 dark:bg-gray-800 px-1 py-0.5 rounded text-sm">gap</code></li>
+                    </ul>
+                </div>
+                <div class="info-box mt-4">
+                    ✅ Property Item:
+                    <ul class="mt-2 space-y-1">
+                        <li><code class="bg-gray-100 dark:bg-gray-800 px-1 py-0.5 rounded text-sm">flex-grow</code>,
+                            <code class="bg-gray-100 dark:bg-gray-800 px-1 py-0.5 rounded text-sm">flex-shrink</code>,
+                            <code class="bg-gray-100 dark:bg-gray-800 px-1 py-0.5 rounded text-sm">align-self</code>,
+                            <code class="bg-gray-100 dark:bg-gray-800 px-1 py-0.5 rounded text-sm">order</code></li>
+                    </ul>
+                </div>
+            </section>
+
+            <section class="border-t border-gray-200 dark:border-gray-700 pt-10">
+                <h3 class="text-2xl font-bold mb-4">7. CSS Grid</h3>
+                <div class="code-block mt-6">
+                    <pre><code class="language-css">.grid-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: auto;
+  gap: 20px;
+}</code></pre>
+                </div>
+                <div class="success-box mt-4">
+                    Dengan Grid kamu bisa membuat layout apapun dengan sangat mudah dan bersih.
+                </div>
+            </section>
+
+            <section class="border-t border-gray-200 dark:border-gray-700 pt-10">
+                <h3 class="text-2xl font-bold mb-4">8. Responsive Design Dasar</h3>
+                <div class="info-box mt-4">
+                    ✅ 3 Komponen Utama:
+                    <ol class="mt-2 space-y-1">
+                        <li>1. Meta Viewport: <code
+                                class="bg-gray-100 dark:bg-gray-800 px-1 py-0.5 rounded text-sm"><meta name="viewport" content="width=device-width, initial-scale=1.0"></code>
+                        </li>
+                        <li>2. Media Query</li>
+                        <li>3. Unit Relative (% , rem, em, vw, vh)</li>
+                    </ol>
+                </div>
+                <div class="code-block mt-6">
+                    <pre><code class="language-css">/* Untuk layar dibawah 768px */
+@media (max-width: 768px) {
+  .container {
+    grid-template-columns: 1fr;
+  }
+}</code></pre>
+                </div>
+            </section>
+
+            <section class="border-t border-gray-200 dark:border-gray-700 pt-10">
+                <h3 class="text-2xl font-bold mb-4">9. Best Practice CSS</h3>
+                <div class="success-box mt-4">
+                    <p class="font-semibold mb-2 text-green-700 dark:text-green-400">✅ Best Practice Penulisan CSS:</p>
+                    <ol class="space-y-2 mt-3">
+                        <li>1. Gunakan class selector bukan ID selector</li>
+                        <li>2. Gunakan nama class yang deskriptif dan bermakna</li>
+                        <li>3. Jangan gunakan <code
+                                class="bg-gray-100 dark:bg-gray-800 px-1 py-0.5 rounded text-sm">!important</code> jika
+                            tidak benar-benar perlu</li>
+                        <li>4. Gunakan External CSS</li>
+                        <li>5. Urutkan property secara logis</li>
+                        <li>6. Gunakan preprocessor untuk project besar</li>
+                        <li>7. Selalu gunakan <code
+                                class="bg-gray-100 dark:bg-gray-800 px-1 py-0.5 rounded text-sm">box-sizing: border-box</code>
+                            untuk semua element</li>
+                        <li>8. Hindari nested selector terlalu dalam</li>
+                    </ol>
+                </div>
+            </section>
+
+            <section class="border-t border-gray-200 dark:border-gray-700 pt-10">
+                <h3 class="text-2xl font-bold mb-4">10. Kesimpulan</h3>
+                <div class="prose dark:prose-invert max-w-none">
+                    <p class="leading-relaxed mb-4">
+                        CSS adalah salah satu pilar utama dari web development. Dengan memahami semua konsep fundamental
+                        di atas kamu sudah punya dasar yang sangat kuat untuk menjadi web developer profesional.
+                    </p>
+                    <div class="success-box">
+                        Setelah menguasai fundamental ini, kamu bisa lanjut mempelajari framework CSS seperti Bootstrap
+                        atau TailwindCSS.
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <div class="mt-16 pt-8 border-t border-gray-200 dark:border-gray-700">
+            <div class="flex justify-center">
+                <a href="../index.html"
+                    class="inline-flex items-center gap-2 px-6 py-3 bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors">
+                    ← Kembali ke Menu Utama
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <footer class="mt-20 border-t border-gray-200 dark:border-gray-800 py-8">
+        <div class="max-w-6xl mx-auto px-4 text-center text-gray-500 dark:text-gray-400 text-sm">
+            <p>© 2026 PintarFlow. Seluruh hak cipta dilindungi.</p>
+        </div>
+    </footer>
+
+    <!-- Back To Top Button -->
+    <button class="back-to-top" id="backToTop" title="Kembali ke atas">
+        <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+            stroke-linejoin="round">
+            <polyline points="18 15 12 9 6 15"></polyline>
+        </svg>
+    </button>
+
+    <script src="../js/main.js"></script>
+</body>
+
+</html>
