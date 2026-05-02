@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PintarFlow - Node.js Fundamental</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#165DFF',
+                    },
+                }
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .content-auto {
+                content-visibility: auto;
+            }
+            .code-block {
+                @apply rounded-lg overflow-hidden my-4;
+            }
+            .code-block pre {
+                @apply m-0 p-4 !bg-gray-900;
+            }
+            .code-block code {
+                @apply font-mono text-sm leading-relaxed;
+            }
+            .warning-box {
+                @apply bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 p-4 rounded-lg my-4;
+            }
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50 dark:bg-gray-900 text-gray-800 dark:text-gray-200 transition-colors duration-300">
+    <!-- Horizontal Scroll Progress -->
+    <div class="progress-scroll" id="progressScroll"></div>
+    <header
+        class="sticky top-0 z-50 bg-white/80 dark:bg-gray-900/80 backdrop-blur-md border-b border-gray-200 dark:border-gray-800">
+        <div class="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
+            <a href="../index.html" class="font-bold text-xl text-primary">PintarFlow</a>
+            <button id="toggleDark" class="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800">
+                <span class="dark:hidden">🌙</span>
+                <span class="hidden dark:inline">☀️</span>
+            </button>
+        </div>
+    </header>
+
+    <main class="max-w-4xl mx-auto px-4 py-8">
+        <div class="mb-12">
+            <img src="https://images.unsplash.com/photo-1627398242454-45a1465c2479?w=800&h=400&fit=crop"
+                alt="Node.js Fundamental" class="w-full h-48 object-cover rounded-xl mb-6 shadow-md">
+            <div
+                class="inline-block px-3 py-1 bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400 rounded-full text-sm font-medium mb-4">
+                Basic Level
+            </div>
+            <h1 class="text-4xl font-bold mb-4">Node.js Fundamental</h1>
+            <p class="text-lg text-gray-600 dark:text-gray-400 leading-relaxed">
+                Module ini akan memperkenalkan kamu tentang dasar-dasar Node.js, runtime JavaScript yang memungkinkan kamu menjalankan kode JavaScript di sisi server. Kamu akan mempelajari konsep inti, cara kerja Node.js, dan bagaimana membangun aplikasi backend sederhana.
+            </p>
+        </div>
+
+        <div class="bg-white dark:bg-gray-800 rounded-xl p-6 mb-10 border border-gray-200 dark:border-gray-700">
+            <h2 class="text-xl font-bold mb-4">🎯 Learning Objectives</h2>
+            <ul class="space-y-2 text-gray-700 dark:text-gray-300">
+                <li class="flex items-start gap-3">
+                    <span class="text-primary mt-1">✅</span>
+                    <span>Memahami apa itu Node.js dan kegunaannya</span>
+                </li>
+                <li class="flex items-start gap-3">
+                    <span class="text-primary mt-1">✅</span>
+                    <span>Mengetahui arsitektur dan cara kerja Node.js</span>
+                </li>
+                <li class="flex items-start gap-3">
+                    <span class="text-primary mt-1">✅</span>
+                    <span>Dapat membuat server HTTP sederhana dengan Node.js</span>
+                </li>
+                <li class="flex items-start gap-3">
+                    <span class="text-primary mt-1">✅</span>
+                    <span>Memahami sistem module Node.js (CommonJS)</span>
+                </li>
+                <li class="flex items-start gap-3">
+                    <span class="text-primary mt-1">✅</span>
+                    <span>Dapat bekerja dengan file sistem menggunakan Node.js</span>
+                </li>
+                <li class="flex items-start gap-3">
+                    <span class="text-primary mt-1">✅</span>
+                    <span>Memahami konsep asynchronous dan event loop di Node.js</span>
+                </li>
+            </ul>
+        </div>
+
+        <div class="space-y-12">
+            <section class="border-t border-gray-200 dark:border-gray-700 pt-10">
+                <h3 class="text-2xl font-bold mb-4">1. Pengenalan Node.js</h3>
+                <div class="prose dark:prose-invert max-w-none">
+                    <p class="leading-relaxed mb-4">
+                        Node.js adalah runtime JavaScript open-source yang dibangun di atas engine V8 Google Chrome. Berbeda dengan JavaScript yang biasanya berjalan di browser, Node.js memungkinkan kamu menjalankan kode JavaScript di server, komputer lokal, atau perangkat apapun tanpa membutuhkan browser.
+                    </p>
+                    <p class="leading-relaxed mb-4">
+                        Node.js dirancang dengan arsitektur event-driven dan non-blocking I/O yang membuatnya sangat ringan dan efisien. Ini menjadikan Node.js sangat cocok untuk membangun aplikasi real-time, API, microservice, dan aplikasi data-intensive.
+                    </p>
+                </div>
+                <div class="mt-6">
+                    <h4 class="font-semibold mb-2">📝 Contoh:</h4>
+                    <div class="code-block">
+                        <pre><code class="language-bash"># Untuk memeriksa apakah Node.js sudah terinstal
+node --version
+
+# Untuk menjalankan file JavaScript dengan Node.js
+node app.js
+</code></pre>
+                    </div>
+                </div>
+            </section>
+
+            <section class="border-t border-gray-200 dark:border-gray-700 pt-10">
+                <h3 class="text-2xl font-bold mb-4">2. Module System (CommonJS)</h3>
+                <div class="prose dark:prose-invert max-w-none">
+                    <p class="leading-relaxed mb-4">
+                        Node.js menggunakan sistem module CommonJS dimana setiap file JavaScript dianggap sebagai module terpisah. Kamu bisa mengekspor fungsi, variabel, atau objek dari satu file dan mengimpornya di file lain.
+                    </p>
+                    <p class="mb-4">Ada 3 jenis module di Node.js:</p>
+                    <ol class="space-y-1 mb-4">
+                        <li>Core Modules - Module bawaan Node.js (http, fs, path, os dll)</li>
+                        <li>Local Modules - Module yang kamu buat sendiri</li>
+                        <li>Third Party Modules - Module yang diinstall dari NPM</li>
+                    </ol>
+                </div>
+                <div class="mt-6">
+                    <h4 class="font-semibold mb-2">📝 Contoh:</h4>
+                    <div class="code-block">
+                        <pre><code class="language-javascript">// file: math.js
+function tambah(a, b) {
+  return a + b;
+}
+
+function kurang(a, b) {
+  return a - b;
+}
+
+module.exports = { tambah, kurang };
+</code></pre>
+                    </div>
+                    <div class="code-block">
+                        <pre><code class="language-javascript">// file: app.js
+const { tambah, kurang } = require('./math');
+
+console.log(tambah(5, 3)); // Output: 8
+console.log(kurang(10, 4)); // Output: 6
+</code></pre>
+                    </div>
+                </div>
+            </section>
+
+            <section class="border-t border-gray-200 dark:border-gray-700 pt-10">
+                <h3 class="text-2xl font-bold mb-4">3. Membuat Server HTTP</h3>
+                <div class="prose dark:prose-invert max-w-none">
+                    <p class="leading-relaxed mb-4">
+                        Salah satu fitur paling umum dari Node.js adalah kemampuan untuk membuat web server tanpa membutuhkan software web server eksternal seperti Apache atau Nginx. Node.js menyediakan core module `http` yang bisa kamu gunakan untuk membuat server HTTP.
+                    </p>
+                    <p class="leading-relaxed mb-4">
+                        Setiap request ke server akan memicu event, dan kamu menentukan bagaimana server merespon setiap request tersebut.
+                    </p>
+                </div>
+                <div class="mt-6">
+                    <h4 class="font-semibold mb-2">📝 Contoh:</h4>
+                    <div class="code-block">
+                        <pre><code class="language-javascript">// file: server.js
+const http = require('http');
+
+const server = http.createServer((req, res) => {
+  res.writeHead(200, { 'Content-Type': 'text/plain' });
+  res.end('Hello World dari Node.js!');
+});
+
+const PORT = 3000;
+server.listen(PORT, () => {
+  console.log(`Server berjalan di http://localhost:${PORT}`);
+});
+</code></pre>
+                    </div>
+                    <p class="text-sm text-gray-600 dark:text-gray-400 mt-2">Jalankan server dengan perintah: <code class="bg-gray-100 dark:bg-gray-700 px-2 py-1 rounded">node server.js</code></p>
+                </div>
+            </section>
+
+            <section class="border-t border-gray-200 dark:border-gray-700 pt-10">
+                <h3 class="text-2xl font-bold mb-4">4. File System (fs Module)</h3>
+                <div class="prose dark:prose-invert max-w-none">
+                    <p class="leading-relaxed mb-4">
+                        Node.js menyediakan core module `fs` (file system) yang memungkinkan kamu untuk berinteraksi dengan file sistem di komputer. Kamu bisa membaca file, menulis file, menghapus file, membuat folder, dan operasi file lainnya.
+                    </p>
+                    <p class="mb-4">Module fs menyediakan 2 jenis operasi:</p>
+                    <ul class="space-y-1 mb-4">
+                        <li><strong>Synchronous (blocking)</strong> - Menunggu operasi selesai sebelum melanjutkan kode selanjutnya</li>
+                        <li><strong>Asynchronous (non-blocking)</strong> - Tidak menunggu, menjalankan callback ketika operasi selesai</li>
+                    </ul>
+                </div>
+                <div class="mt-6">
+                    <h4 class="font-semibold mb-2">📝 Contoh:</h4>
+                    <div class="code-block">
+                        <pre><code class="language-javascript">const fs = require('fs');
+
+// Membaca file secara Asynchronous
+fs.readFile('data.txt', 'utf8', (err, data) => {
+  if (err) {
+    console.error('Error membaca file:', err);
+    return;
+  }
+  console.log('Isi file:', data);
+});
+
+// Menulis file
+const konten = 'Ini adalah konten yang akan ditulis ke file';
+fs.writeFile('output.txt', konten, (err) => {
+  if (err) {
+    console.error('Error menulis file:', err);
+    return;
+  }
+  console.log('File berhasil ditulis');
+});
+</code></pre>
+                    </div>
+                </div>
+            </section>
+
+            <section class="border-t border-gray-200 dark:border-gray-700 pt-10">
+                <h3 class="text-2xl font-bold mb-4">5. Event Loop dan Asynchronous</h3>
+                <div class="prose dark:prose-invert max-w-none">
+                    <p class="leading-relaxed mb-4">
+                        Event Loop adalah jantung dari Node.js yang membuatnya bisa menangani banyak request secara bersamaan dengan single thread. Berbeda dengan model thread-per-request, Node.js menggunakan event loop yang memproses operasi I/O di background dan menjalankan callback ketika operasi selesai.
+                    </p>
+                    <p class="leading-relaxed mb-4">
+                        Ini adalah alasan mengapa Node.js sangat efisien untuk operasi I/O intensive seperti API, database access, dan operasi file.
+                    </p>
+                </div>
+                <div class="mt-6">
+                    <h4 class="font-semibold mb-2">📝 Contoh:</h4>
+                    <div class="code-block">
+                        <pre><code class="language-javascript">console.log('Mulai');
+
+setTimeout(() => {
+  console.log('Timeout selesai');
+}, 0);
+
+Promise.resolve().then(() => {
+  console.log('Promise selesai');
+});
+
+console.log('Selesai');
+</code></pre>
+                    </div>
+                    <div class="bg-gray-100 dark:bg-gray-800 p-4 rounded-lg mt-4">
+                        <p class="font-semibold mb-2">Output:</p>
+                        <pre class="text-sm">Mulai
+Selesai
+Promise selesai
+Timeout selesai</pre>
+                        <p class="text-sm text-gray-600 dark:text-gray-400 mt-2">Ini menunjukkan urutan eksekusi event loop di Node.js.</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <div class="mt-16 pt-8 border-t border-gray-200 dark:border-gray-700">
+            <div class="flex justify-center">
+                <a href="../index.html"
+                    class="inline-flex items-center gap-2 px-6 py-3 bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors">
+                    ← Kembali ke Menu Utama
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <footer class="mt-20 border-t border-gray-200 dark:border-gray-800 py-8">
+        <div class="max-w-6xl mx-auto px-4 text-center text-gray-500 dark:text-gray-400 text-sm">
+            <p>© 2026 PintarFlow. Seluruh hak cipta dilindungi.</p>
+        </div>
+    </footer>
+
+    <!-- Back To Top Button -->
+    <button class="back-to-top" id="backToTop" title="Kembali ke atas">
+        <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+            stroke-linejoin="round">
+            <polyline points="18 15 12 9 6 15"></polyline>
+        </svg>
+    </button>
+
+    <script src="../js/main.js"></script>
+</body>
+
+</html>

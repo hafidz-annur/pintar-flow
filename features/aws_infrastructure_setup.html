@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PintarFlow - Setup AWS Infrastructure (VPC, EC2, ALB, WAF)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#165DFF',
+                    },
+                }
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .content-auto {
+                content-visibility: auto;
+            }
+            .code-block {
+                @apply rounded-lg overflow-hidden my-4;
+            }
+            .code-block pre {
+                @apply m-0 p-4 !bg-gray-900;
+            }
+            .code-block code {
+                @apply font-mono text-sm leading-relaxed;
+            }
+            .warning-box {
+                @apply bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 p-4 rounded-lg my-4;
+            }
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50 dark:bg-gray-900 text-gray-800 dark:text-gray-200 transition-colors duration-300">
+    <!-- Horizontal Scroll Progress -->
+    <div class="progress-scroll" id="progressScroll"></div>
+    <header
+        class="sticky top-0 z-50 bg-white/80 dark:bg-gray-900/80 backdrop-blur-md border-b border-gray-200 dark:border-gray-800">
+        <div class="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
+            <a href="../index.html" class="font-bold text-xl text-primary">PintarFlow</a>
+            <button id="toggleDark" class="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800">
+                <span class="dark:hidden">🌙</span>
+                <span class="hidden dark:inline">☀️</span>
+            </button>
+        </div>
+    </header>
+
+    <main class="max-w-4xl mx-auto px-4 py-8">
+        <div class="mb-12">
+            <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=800&h=400&fit=crop"
+                alt="Setup AWS Infrastructure" class="w-full h-48 object-cover rounded-xl mb-6 shadow-md">
+            <div
+                class="inline-block px-3 py-1 bg-yellow-100 dark:bg-yellow-900/30 text-yellow-700 dark:text-yellow-400 rounded-full text-sm font-medium mb-4">
+                Intermediate Level
+            </div>
+            <h1 class="text-4xl font-bold mb-4">Setup AWS Infrastructure (VPC, EC2, ALB, WAF)</h1>
+            <p class="text-lg text-gray-600 dark:text-gray-400 leading-relaxed">
+                Module ini akan mengajarkan kamu step by step bagaimana membangun arsitektur infrastructure di AWS Cloud yang production ready. Kamu akan mempelajari dan mempraktekkan langsung pembuatan VPC, EC2 Instance, Application Load Balancer, dan Web Application Firewall dengan konfigurasi best practice.
+            </p>
+        </div>
+
+        <div class="bg-white dark:bg-gray-800 rounded-xl p-6 mb-10 border border-gray-200 dark:border-gray-700">
+            <h2 class="text-xl font-bold mb-4">🎯 Learning Objectives</h2>
+            <ul class="space-y-2 text-gray-700 dark:text-gray-300">
+                <li class="flex items-start gap-3">
+                    <span class="text-primary mt-1">✅</span>
+                    <span>Memahami konsep dasar jaringan di AWS VPC</span>
+                </li>
+                <li class="flex items-start gap-3">
+                    <span class="text-primary mt-1">✅</span>
+                    <span>Dapat membuat VPC dengan Subnet Public & Private</span>
+                </li>
+                <li class="flex items-start gap-3">
+                    <span class="text-primary mt-1">✅</span>
+                    <span>Memahami fungsi Internet Gateway, Route Table, Security Group</span>
+                </li>
+                <li class="flex items-start gap-3">
+                    <span class="text-primary mt-1">✅</span>
+                    <span>Dapat membuat dan mengkonfigurasi EC2 Instance</span>
+                </li>
+                <li class="flex items-start gap-3">
+                    <span class="text-primary mt-1">✅</span>
+                    <span>Memahami dan mengimplementasikan Application Load Balancer</span>
+                </li>
+                <li class="flex items-start gap-3">
+                    <span class="text-primary mt-1">✅</span>
+                    <span>Memahami konsep dan konfigurasi AWS WAF untuk keamanan</span>
+                </li>
+                <li class="flex items-start gap-3">
+                    <span class="text-primary mt-1">✅</span>
+                    <span>Dapat merancang arsitektur 3 Tier yang production ready</span>
+                </li>
+                <li class="flex items-start gap-3">
+                    <span class="text-primary mt-1">✅</span>
+                    <span>Mengetahui best practice security AWS infrastructure</span>
+                </li>
+            </ul>
+        </div>
+
+        <div class="space-y-12">
+            <section class="border-t border-gray-200 dark:border-gray-700 pt-10">
+                <h3 class="text-2xl font-bold mb-4">1. Pengenalan AWS VPC (Virtual Private Cloud)</h3>
+                <div class="prose dark:prose-invert max-w-none">
+                    <p class="leading-relaxed mb-4">
+                        VPC adalah jaringan virtual pribadi yang kamu buat di lingkungan AWS. VPC merupakan dasar dari seluruh infrastructure AWS kamu, semua resource AWS seperti EC2, RDS, ALB harus berada di dalam sebuah VPC.
+                    </p>
+                    <p class="mb-4">Dengan VPC kamu memiliki kontrol penuh terhadap:</p>
+                    <ul class="space-y-1 mb-4">
+                        <li>Rentang IP Address yang kamu gunakan (CIDR Block)</li>
+                        <li>Pembagian Subnet</li>
+                        <li>Routing table</li>
+                        <li>Network Access Control List</li>
+                        <li>Security Group</li>
+                    </ul>
+                    <p class="mb-4">Setiap VPC terisolasi secara default dari jaringan lain dan dari internet.</p>
+                </div>
+                <div class="mt-6">
+                    <h4 class="font-semibold mb-2">📝 Contoh:</h4>
+                    <div class="code-block">
+                        <pre><code class="language-bash">VPC CIDR: 10.0.0.0/16 (Total 65536 IP Address)
+
+Dibagi menjadi:
+✅ Public Subnet 1A: 10.0.1.0/24
+✅ Public Subnet 1B: 10.0.2.0/24
+✅ Private Subnet 1A: 10.0.10.0/24
+✅ Private Subnet 1B: 10.0.11.0/24
+</code></pre>
+                    </div>
+                </div>
+            </section>
+
+            <section class="border-t border-gray-200 dark:border-gray-700 pt-10">
+                <h3 class="text-2xl font-bold mb-4">2. Membuat VPC & Komponen Jaringan</h3>
+                <div class="prose dark:prose-invert max-w-none">
+                    <p class="leading-relaxed mb-4">
+                        Langkah pertama membangun infrastructure adalah membuat VPC dan komponen pendukungnya:
+                    </p>
+                    <ol class="space-y-2 mb-4">
+                        <li><strong>Internet Gateway (IGW)</strong>: Gateway yang menghubungkan VPC kamu dengan internet public</li>
+                        <li><strong>Route Table</strong>: Menentukan kemana traffic jaringan akan diarahkan</li>
+                        <li><strong>Subnet</strong>: Pembagian jaringan VPC menjadi bagian lebih kecil</li>
+                        <li><strong>NAT Gateway</strong>: Memungkinkan resource di Private Subnet mengakses internet tapi tidak bisa diakses dari internet</li>
+                        <li><strong>Security Group</strong>: Firewall level instance yang mengontrol inbound dan outbound traffic</li>
+                    </ol>
+                    <div class="bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 p-4 rounded-lg my-4">
+                        <p class="font-semibold mb-2">💡 Best Practice:</p>
+                        <p>Selalu buat Subnet di minimal 2 Availability Zone untuk High Availability.</p>
+                    </div>
+                </div>
+                <div class="mt-6">
+                    <h4 class="font-semibold mb-2">📝 Contoh:</h4>
+                    <div class="code-block">
+                        <pre><code class="language-bash">Langkah-langkah pembuatan VPC di AWS Console:
+1. Buka VPC Dashboard → Your VPCs → Create VPC
+2. Nama VPC: production-vpc
+3. IPv4 CIDR: 10.0.0.0/16
+4. Buat Internet Gateway dan attach ke VPC
+5. Buat 2 Public Subnet di AZ a dan b
+6. Buat 2 Private Subnet di AZ a dan b
+7. Buat Route Table untuk Public Subnet dengan default route ke IGW
+8. Buat NAT Gateway di Public Subnet
+9. Buat Route Table untuk Private Subnet dengan default route ke NAT Gateway
+</code></pre>
+                    </div>
+                </div>
+            </section>
+
+            <section class="border-t border-gray-200 dark:border-gray-700 pt-10">
+                <h3 class="text-2xl font-bold mb-4">3. Launch EC2 Instance</h3>
+                <div class="prose dark:prose-invert max-w-none">
+                    <p class="leading-relaxed mb-4">
+                        EC2 adalah virtual server di AWS yang menjadi tempat kamu menjalankan aplikasi. EC2 berada di dalam Subnet dan memiliki Security Group sebagai firewall.
+                    </p>
+                    <p class="mb-4">Ketika membuat EC2 kamu harus menentukan:</p>
+                    <ul class="space-y-1 mb-4">
+                        <li>Amazon Machine Image (AMI): Sistem Operasi yang akan digunakan</li>
+                        <li>Instance Type: Spesifikasi CPU dan Memory</li>
+                        <li>Key Pair: SSH key untuk mengakses server</li>
+                        <li>VPC & Subnet: Tempat EC2 akan ditempatkan</li>
+                        <li>Security Group: Aturan firewall</li>
+                        <li>Storage: Ukuran dan tipe EBS Volume</li>
+                    </ul>
+                    <div class="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 p-4 rounded-lg my-4">
+                        <p class="font-semibold mb-2">⚠️ Penting:</p>
+                        <p>Jangan pernah menempatkan aplikasi backend di Public Subnet, selalu gunakan Private Subnet.</p>
+                    </div>
+                </div>
+                <div class="mt-6">
+                    <h4 class="font-semibold mb-2">📝 Contoh:</h4>
+                    <div class="code-block">
+                        <pre><code class="language-bash"># Konfigurasi EC2 Web Server:
+✅ AMI: Amazon Linux 2
+✅ Instance Type: t2.micro
+✅ Subnet: Private Subnet
+✅ Key Pair: aws-production
+✅ Security Group:
+  Inbound:
+    - HTTP 80 dari ALB Security Group
+    - SSH 22 dari IP kantor saja
+✅ User Data:
+#!/bin/bash
+yum update -y
+yum install -y httpd
+systemctl start httpd
+systemctl enable httpd
+echo "<h1>Hello dari EC2 Instance $(hostname -f)</h1>" > /var/www/html/index.html
+</code></pre>
+                    </div>
+                </div>
+            </section>
+
+            <section class="border-t border-gray-200 dark:border-gray-700 pt-10">
+                <h3 class="text-2xl font-bold mb-4">4. Setup Application Load Balancer (ALB)</h3>
+                <div class="prose dark:prose-invert max-w-none">
+                    <p class="leading-relaxed mb-4">
+                        Application Load Balancer adalah Layer 7 Load Balancer yang berfungsi mendistribusikan traffic HTTP/HTTPS secara merata ke beberapa EC2 Instance dibelakangnya.
+                    </p>
+                    <p class="leading-relaxed mb-4">
+                        ALB berjalan di Public Subnet dan menjadi satu-satunya entry point yang terbuka ke internet. Semua user akan mengakses aplikasi melalui ALB, tidak langsung ke EC2.
+                    </p>
+                    <p class="mb-4">Keuntungan menggunakan ALB:</p>
+                    <ul class="space-y-1 mb-4">
+                        <li>High Availability</li>
+                        <li>SSL Termination</li>
+                        <li>Health Check</li>
+                        <li>Path based routing</li>
+                        <li>Automatic scaling</li>
+                    </ul>
+                </div>
+                <div class="mt-6">
+                    <h4 class="font-semibold mb-2">📝 Contoh:</h4>
+                    <div class="code-block">
+                        <pre><code class="language-bash">Langkah pembuatan ALB:
+1. Buka EC2 Dashboard → Load Balancers → Create Load Balancer
+2. Pilih Application Load Balancer
+3. Skema: Internet-facing
+4. Pilih VPC dan semua Public Subnet
+5. Buat Security Group ALB:
+   Inbound: HTTP 80, HTTPS 443 dari 0.0.0.0/0
+6. Buat Target Group dan register EC2 Instance yang sudah dibuat
+7. Konfigurasi Health Check di path /health
+8. Pastikan Health Status menjadi Healthy
+</code></pre>
+                    </div>
+                </div>
+            </section>
+
+            <section class="border-t border-gray-200 dark:border-gray-700 pt-10">
+                <h3 class="text-2xl font-bold mb-4">5. Konfigurasi AWS WAF (Web Application Firewall)</h3>
+                <div class="prose dark:prose-invert max-w-none">
+                    <p class="leading-relaxed mb-4">
+                        AWS WAF adalah Web Application Firewall yang melindungi aplikasi kamu dari serangan web umum seperti SQL Injection, Cross Site Scripting (XSS), DDoS, dan exploit umum lainnya.
+                    </p>
+                    <p class="leading-relaxed mb-4">
+                        WAF bekerja di depan Application Load Balancer dan memeriksa setiap request sebelum sampai ke aplikasi kamu. Kamu bisa membuat aturan kustom atau menggunakan managed rules yang sudah disediakan AWS.
+                    </p>
+                    <p class="mb-4">Managed Rules AWS yang wajib diaktifkan:</p>
+                    <ul class="space-y-1 mb-4">
+                        <li>AWSManagedRulesCommonRuleSet</li>
+                        <li>AWSManagedRulesSQLiRuleSet</li>
+                        <li>AWSManagedRulesKnownBadInputsRuleSet</li>
+                        <li>AWSManagedRulesAmazonIpReputationList</li>
+                    </ul>
+                </div>
+                <div class="mt-6">
+                    <h4 class="font-semibold mb-2">📝 Contoh:</h4>
+                    <div class="code-block">
+                        <pre><code class="language-bash">Langkah implementasi WAF:
+1. Buka WAF & Shield Dashboard
+2. Buat Web ACL baru
+3. Resource Type: Application Load Balancer
+4. Pilih Region dan ALB yang sudah dibuat
+5. Tambahkan AWS Managed Rules yang diperlukan
+6. Set Default Action: Allow
+7. Aktifkan CloudWatch Metrics dan logging
+8. Deploy Web ACL ke ALB
+9. Test dengan mengirim request berbahaya untuk memastikan WAF bekerja
+</code></pre>
+                    </div>
+                </div>
+            </section>
+
+            <section class="border-t border-gray-200 dark:border-gray-700 pt-10">
+                <h3 class="text-2xl font-bold mb-4">6. Arsitektur Akhir & Best Practice</h3>
+                <div class="prose dark:prose-invert max-w-none">
+                    <p class="leading-relaxed mb-4">
+                        Setelah semua komponen selesai dibuat, kamu akan memiliki arsitektur 3 Tier standar yang merupakan best practice industri:
+                    </p>
+                    <ol class="space-y-1 mb-4">
+                        <li><strong>Edge Tier</strong>: AWS WAF</li>
+                        <li><strong>Load Balancer Tier</strong>: Application Load Balancer di Public Subnet</li>
+                        <li><strong>Web Tier</strong>: EC2 Instance di Private Subnet</li>
+                        <li><strong>Database Tier</strong>: RDS di Private Subnet (terpisah)</li>
+                    </ol>
+                    <p class="mb-4">Semua traffic dari internet hanya bisa sampai ke ALB, tidak ada resource lain yang terekspos langsung ke internet.</p>
+                    <p class="mb-4">Checklist Keamanan Wajib:</p>
+                    <ul class="space-y-1 mb-4">
+                        <li>✅ Semua EC2 di Private Subnet</li>
+                        <li>✅ Security Group menggunakan prinsip least privilege</li>
+                        <li>✅ SSH hanya diizinkan dari IP terpercaya</li>
+                        <li>✅ Semua password dan key dirotasi secara rutin</li>
+                        <li>✅ CloudTrail diaktifkan untuk audit semua aktivitas</li>
+                    </ul>
+                </div>
+                <div class="mt-6">
+                    <h4 class="font-semibold mb-2">📝 Contoh:</h4>
+                    <div class="code-block">
+                        <pre><code>🔒 Alur Traffic Production:
+
+User → Internet → AWS WAF → Application Load Balancer → EC2 Instance Private Subnet → RDS Database Private Subnet
+
+✅ Tidak ada resource lain yang memiliki Public IP
+✅ Semua komunikasi internal menggunakan private IP
+✅ Semua access terkontrol dengan Security Group
+✅ Semua aktivitas terlog di CloudWatch
+</code></pre>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <div class="mt-16 pt-8 border-t border-gray-200 dark:border-gray-700">
+            <div class="flex justify-center">
+                <a href="../index.html"
+                    class="inline-flex items-center gap-2 px-6 py-3 bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors">
+                    ← Kembali ke Menu Utama
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <footer class="mt-20 border-t border-gray-200 dark:border-gray-800 py-8">
+        <div class="max-w-6xl mx-auto px-4 text-center text-gray-500 dark:text-gray-400 text-sm">
+            <p>© 2026 PintarFlow. Seluruh hak cipta dilindungi.</p>
+        </div>
+    </footer>
+
+    <!-- Back To Top Button -->
+    <button class="back-to-top" id="backToTop" title="Kembali ke atas">
+        <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+            stroke-linejoin="round">
+            <polyline points="18 15 12 9 6 15"></polyline>
+        </svg>
+    </button>
+
+    <script src="../js/main.js"></script>
+</body>
+
+</html>

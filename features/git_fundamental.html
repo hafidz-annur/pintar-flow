@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PintarFlow - Git Fundamental</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#165DFF',
+                    },
+                }
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .content-auto {
+                content-visibility: auto;
+            }
+            .code-block {
+                @apply rounded-lg overflow-hidden my-4;
+            }
+            .code-block pre {
+                @apply m-0 p-4 !bg-gray-900;
+            }
+            .code-block code {
+                @apply font-mono text-sm leading-relaxed;
+            }
+            .warning-box {
+                @apply bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 p-4 rounded-lg my-4;
+            }
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50 dark:bg-gray-900 text-gray-800 dark:text-gray-200 transition-colors duration-300">
+    <!-- Horizontal Scroll Progress -->
+    <div class="progress-scroll" id="progressScroll"></div>
+    <header
+        class="sticky top-0 z-50 bg-white/80 dark:bg-gray-900/80 backdrop-blur-md border-b border-gray-200 dark:border-gray-800">
+        <div class="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
+            <a href="../index.html" class="font-bold text-xl text-primary">PintarFlow</a>
+            <button id="toggleDark" class="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800">
+                <span class="dark:hidden">🌙</span>
+                <span class="hidden dark:inline">☀️</span>
+            </button>
+        </div>
+    </header>
+
+    <main class="max-w-4xl mx-auto px-4 py-8">
+        <div class="mb-12">
+            <img src="https://images.unsplash.com/photo-1556075798-4825dfaaf498?w=800&h=400&fit=crop"
+                alt="Git Fundamental" class="w-full h-48 object-cover rounded-xl mb-6 shadow-md">
+            <div
+                class="inline-block px-3 py-1 bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400 rounded-full text-sm font-medium mb-4">
+                Basic Level
+            </div>
+            <h1 class="text-4xl font-bold mb-4">Git Fundamental</h1>
+            <p class="text-lg text-gray-600 dark:text-gray-400 leading-relaxed">
+                Module ini akan memperkenalkan kamu tentang dasar-dasar Git, version control system terpopuler di dunia. Kamu akan mempelajari konsep inti Git, cara kerja repository, perintah dasar Git, alur kerja yang benar, dan best practice dalam penggunaan Git untuk project development.
+            </p>
+        </div>
+
+        <div class="bg-white dark:bg-gray-800 rounded-xl p-6 mb-10 border border-gray-200 dark:border-gray-700">
+            <h2 class="text-xl font-bold mb-4">🎯 Learning Objectives</h2>
+            <ul class="space-y-2 text-gray-700 dark:text-gray-300">
+                <li class="flex items-start gap-3">
+                    <span class="text-primary mt-1">✅</span>
+                    <span>Memahami apa itu Git dan Version Control System</span>
+                </li>
+                <li class="flex items-start gap-3">
+                    <span class="text-primary mt-1">✅</span>
+                    <span>Mengetahui perbedaan Git dan GitHub</span>
+                </li>
+                <li class="flex items-start gap-3">
+                    <span class="text-primary mt-1">✅</span>
+                    <span>Dapat melakukan instalasi dan konfigurasi Git</span>
+                </li>
+                <li class="flex items-start gap-3">
+                    <span class="text-primary mt-1">✅</span>
+                    <span>Memahami 3 area utama Git: Working Directory, Staging Area, Repository</span>
+                </li>
+                <li class="flex items-start gap-3">
+                    <span class="text-primary mt-1">✅</span>
+                    <span>Dapat menggunakan perintah dasar Git untuk menyimpan perubahan</span>
+                </li>
+                <li class="flex items-start gap-3">
+                    <span class="text-primary mt-1">✅</span>
+                    <span>Memahami konsep commit, log, dan history perubahan</span>
+                </li>
+                <li class="flex items-start gap-3">
+                    <span class="text-primary mt-1">✅</span>
+                    <span>Dapat membuat branch dan melakukan merge</span>
+                </li>
+                <li class="flex items-start gap-3">
+                    <span class="text-primary mt-1">✅</span>
+                    <span>Dapat bekerja dengan remote repository GitHub</span>
+                </li>
+            </ul>
+        </div>
+
+        <div class="space-y-12">
+            <section class="border-t border-gray-200 dark:border-gray-700 pt-10">
+                <h3 class="text-2xl font-bold mb-4">1. Pengenalan Git & Version Control</h3>
+                <div class="prose dark:prose-invert max-w-none">
+                    <p class="leading-relaxed mb-4">
+                        Git adalah Version Control System (VCS) terdistribusi yang digunakan untuk mencatat setiap perubahan pada file kode selama proses development. Git memungkinkan banyak developer bekerja bersama pada project yang sama tanpa menimpa pekerjaan satu sama lain.
+                    </p>
+                    <p class="mb-4">Version Control System membantu kamu:</p>
+                    <ul class="space-y-1 mb-4">
+                        <li>Menyimpan history setiap perubahan kode</li>
+                        <li>Kembali ke versi sebelumnya jika terjadi error</li>
+                        <li>Bekerja paralel dengan fitur Branch</li>
+                        <li>Kolaborasi dengan tim developer lain</li>
+                        <li>Mengetahui siapa yang mengubah apa dan kapan</li>
+                    </ul>
+                    <div class="bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-800 p-4 rounded-lg my-4">
+                        <p class="font-semibold mb-2">❗ Penting:</p>
+                        <p>Git != GitHub: Git adalah software VCS, sedangkan GitHub adalah platform hosting untuk repository Git.</p>
+                    </div>
+                </div>
+                <div class="mt-6">
+                    <h4 class="font-semibold mb-2">📝 Contoh:</h4>
+                    <div class="code-block">
+                        <pre><code class="language-bash"># Periksa apakah Git sudah terinstal
+git --version
+
+# Konfigurasi awal Git
+git config --global user.name "Nama Kamu"
+git config --global user.email "email@example.com"
+
+# Cek konfigurasi
+git config --list
+</code></pre>
+                    </div>
+                </div>
+            </section>
+
+            <section class="border-t border-gray-200 dark:border-gray-700 pt-10">
+                <h3 class="text-2xl font-bold mb-4">2. Membuat Repository Git</h3>
+                <div class="prose dark:prose-invert max-w-none">
+                    <p class="leading-relaxed mb-4">
+                        Repository adalah folder project yang di-track oleh Git. Ada 2 cara membuat repository Git:
+                    </p>
+                    <ol class="space-y-1 mb-4">
+                        <li><code>git init</code> - Membuat repository baru di folder yang sedang aktif</li>
+                        <li><code>git clone</code> - Menyalin repository yang sudah ada dari remote server</li>
+                    </ol>
+                    <p class="mb-4">Setiap repository Git memiliki 3 area utama:</p>
+                    <ul class="space-y-1 mb-4">
+                        <li><strong>Working Directory</strong> - Tempat kamu mengedit file</li>
+                        <li><strong>Staging Area</strong> - Tempat penampungan perubahan yang akan disimpan</li>
+                        <li><strong>Repository</strong> - Tempat penyimpanan permanen semua history commit</li>
+                    </ul>
+                </div>
+                <div class="mt-6">
+                    <h4 class="font-semibold mb-2">📝 Contoh:</h4>
+                    <div class="code-block">
+                        <pre><code class="language-bash"># Buat folder project baru
+mkdir project-kita
+cd project-kita
+
+# Inisialisasi Git di folder ini
+git init
+
+# Cek status repository
+git status
+</code></pre>
+                    </div>
+                </div>
+            </section>
+
+            <section class="border-t border-gray-200 dark:border-gray-700 pt-10">
+                <h3 class="text-2xl font-bold mb-4">3. Menyimpan Perubahan (Commit)</h3>
+                <div class="prose dark:prose-invert max-w-none">
+                    <p class="leading-relaxed mb-4">
+                        Commit adalah snapshot permanen dari perubahan file kamu. Setiap commit memiliki ID unik (hash), pesan deskripsi, informasi author, dan waktu pembuatan.
+                    </p>
+                    <p class="mb-4">Alur dasar menyimpan perubahan:</p>
+                    <ol class="space-y-1 mb-4">
+                        <li>Edit file di Working Directory</li>
+                        <li>Tambahkan perubahan ke Staging Area dengan <code>git add</code></li>
+                        <li>Simpan secara permanen ke Repository dengan <code>git commit</code></li>
+                    </ol>
+                    <p class="mb-4">Setiap commit harus memiliki pesan yang jelas dan deskriptif agar mudah dibaca oleh tim lain.</p>
+                </div>
+                <div class="mt-6">
+                    <h4 class="font-semibold mb-2">📝 Contoh:</h4>
+                    <div class="code-block">
+                        <pre><code class="language-bash"># Tambahkan 1 file ke staging
+git add index.html
+
+# Tambahkan semua file yang berubah
+git add .
+
+# Simpan perubahan dengan pesan commit
+git commit -m "Menambahkan struktur dasar halaman homepage"
+
+# Lihat daftar semua commit
+git log
+
+# Lihat log dalam format ringkas
+git log --oneline
+</code></pre>
+                    </div>
+                </div>
+            </section>
+
+            <section class="border-t border-gray-200 dark:border-gray-700 pt-10">
+                <h3 class="text-2xl font-bold mb-4">4. Melihat Perubahan & Membatalkan</h3>
+                <div class="prose dark:prose-invert max-w-none">
+                    <p class="leading-relaxed mb-4">
+                        Git menyediakan berbagai perintah untuk melihat apa yang berubah, membandingkan versi, dan membatalkan perubahan jika kamu tidak sengaja merusak kode.
+                    </p>
+                    <p class="mb-4">Beberapa perintah penting:</p>
+                    <ul class="space-y-1 mb-4">
+                        <li><code>git diff</code> - Melihat perubahan yang belum di-staging</li>
+                        <li><code>git restore</code> - Membatalkan perubahan di working directory</li>
+                        <li><code>git reset</code> - Menghapus file dari staging area</li>
+                        <li><code>git checkout</code> - Kembali ke commit sebelumnya</li>
+                    </ul>
+                </div>
+                <div class="mt-6">
+                    <h4 class="font-semibold mb-2">📝 Contoh:</h4>
+                    <div class="code-block">
+                        <pre><code class="language-bash"># Melihat perubahan yang belum di add
+git diff
+
+# Melihat perubahan yang sudah di add tapi belum di commit
+git diff --staged
+
+# Membatalkan perubahan file index.html (kembali ke commit terakhir)
+git restore index.html
+
+# Menghapus file dari staging area
+git reset HEAD index.html
+</code></pre>
+                    </div>
+                </div>
+            </section>
+
+            <section class="border-t border-gray-200 dark:border-gray-700 pt-10">
+                <h3 class="text-2xl font-bold mb-4">5. Branch & Merge</h3>
+                <div class="prose dark:prose-invert max-w-none">
+                    <p class="leading-relaxed mb-4">
+                        Branch adalah fitur paling powerful di Git. Branch memungkinkan kamu membuat cabang development terpisah dari kode utama, sehingga kamu bisa mengembangkan fitur baru tanpa merusak kode yang sudah stabil.
+                    </p>
+                    <p class="mb-4">Workflow standar:</p>
+                    <ol class="space-y-1 mb-4">
+                        <li>Buat branch baru untuk setiap fitur</li>
+                        <li>Lakukan development di branch tersebut</li>
+                        <li>Jika selesai dan teruji, gabungkan (merge) kembali ke branch utama <code>main</code> atau <code>master</code></li>
+                    </ol>
+                </div>
+                <div class="mt-6">
+                    <h4 class="font-semibold mb-2">📝 Contoh:</h4>
+                    <div class="code-block">
+                        <pre><code class="language-bash"># Lihat daftar branch yang ada
+git branch
+
+# Buat branch baru
+git branch fitur-login
+
+# Pindah ke branch yang lain
+git checkout fitur-login
+
+# Buat dan pindah sekaligus
+git checkout -b fitur-registrasi
+
+# Gabungkan branch ke main
+git checkout main
+git merge fitur-login
+
+# Hapus branch yang sudah selesai
+git branch -d fitur-login
+</code></pre>
+                    </div>
+                </div>
+            </section>
+
+            <section class="border-t border-gray-200 dark:border-gray-700 pt-10">
+                <h3 class="text-2xl font-bold mb-4">6. Remote Repository & GitHub</h3>
+                <div class="prose dark:prose-invert max-w-none">
+                    <p class="leading-relaxed mb-4">
+                        Remote Repository adalah salinan repository Git yang berada di server internet (seperti GitHub, GitLab, Bitbucket). Remote memungkinkan kamu mensinkronkan pekerjaan lokal dengan tim developer lain.
+                    </p>
+                    <p class="mb-4">Perintah dasar untuk bekerja dengan remote:</p>
+                    <ul class="space-y-1 mb-4">
+                        <li><code>git remote add</code> - Menghubungkan repository lokal ke remote</li>
+                        <li><code>git push</code> - Mengirim commit lokal ke remote</li>
+                        <li><code>git pull</code> - Mengambil commit terbaru dari remote ke lokal</li>
+                        <li><code>git clone</code> - Menyalin repository dari remote ke komputer lokal</li>
+                    </ul>
+                </div>
+                <div class="mt-6">
+                    <h4 class="font-semibold mb-2">📝 Contoh:</h4>
+                    <div class="code-block">
+                        <pre><code class="language-bash"># Hubungkan lokal ke GitHub
+git remote add origin https://github.com/username/project-kita.git
+
+# Kirim commit lokal ke GitHub
+git push origin main
+
+# Ambil update terbaru dari GitHub
+git pull origin main
+
+# Clone repository yang sudah ada
+git clone https://github.com/username/project-kita.git
+</code></pre>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <div class="mt-16 pt-8 border-t border-gray-200 dark:border-gray-700">
+            <div class="flex justify-center">
+                <a href="../index.html"
+                    class="inline-flex items-center gap-2 px-6 py-3 bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors">
+                    ← Kembali ke Menu Utama
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <footer class="mt-20 border-t border-gray-200 dark:border-gray-800 py-8">
+        <div class="max-w-6xl mx-auto px-4 text-center text-gray-500 dark:text-gray-400 text-sm">
+            <p>© 2026 PintarFlow. Seluruh hak cipta dilindungi.</p>
+        </div>
+    </footer>
+
+    <!-- Back To Top Button -->
+    <button class="back-to-top" id="backToTop" title="Kembali ke atas">
+        <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+            stroke-linejoin="round">
+            <polyline points="18 15 12 9 6 15"></polyline>
+        </svg>
+    </button>
+
+    <script src="../js/main.js"></script>
+</body>
+
+</html>

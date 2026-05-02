@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PintarFlow - PHP Fundamental</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#165DFF',
+                    },
+                }
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .content-auto {
+                content-visibility: auto;
+            }
+            .code-block {
+                @apply rounded-lg overflow-hidden my-4;
+            }
+            .code-block pre {
+                @apply m-0 p-4 !bg-gray-900;
+            }
+            .code-block code {
+                @apply font-mono text-sm leading-relaxed;
+            }
+            .warning-box {
+                @apply bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 p-4 rounded-lg my-4;
+            }
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50 dark:bg-gray-900 text-gray-800 dark:text-gray-200 transition-colors duration-300">
+    <!-- Horizontal Scroll Progress -->
+    <div class="progress-scroll" id="progressScroll"></div>
+    <header
+        class="sticky top-0 z-50 bg-white/80 dark:bg-gray-900/80 backdrop-blur-md border-b border-gray-200 dark:border-gray-800">
+        <div class="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
+            <a href="../index.html" class="font-bold text-xl text-primary">PintarFlow</a>
+            <button id="toggleDark" class="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800">
+                <span class="dark:hidden">🌙</span>
+                <span class="hidden dark:inline">☀️</span>
+            </button>
+        </div>
+    </header>
+
+    <main class="max-w-4xl mx-auto px-4 py-8">
+        <div class="mb-12">
+            <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=800&h=400&fit=crop"
+                alt="PHP Fundamental" class="w-full h-48 object-cover rounded-xl mb-6 shadow-md">
+            <div
+                class="inline-block px-3 py-1 bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400 rounded-full text-sm font-medium mb-4">
+                Basic Level
+            </div>
+            <h1 class="text-4xl font-bold mb-4">PHP Fundamental</h1>
+            <p class="text-lg text-gray-600 dark:text-gray-400 leading-relaxed">
+                Module ini akan mempelajari dasar-dasar pemrograman PHP, bahasa scripting server-side yang paling banyak
+                digunakan di dunia untuk pengembangan website. Anda akan mempelajari sintaks dasar, tipe data, variabel,
+                fungsi, struktur kontrol, dan konsep dasar pemrograman dengan PHP.
+            </p>
+        </div>
+
+        <div class="bg-white dark:bg-gray-800 rounded-xl p-6 mb-10 border border-gray-200 dark:border-gray-700">
+            <h2 class="text-xl font-bold mb-4">🎯 Learning Objectives</h2>
+            <ul class="space-y-2 text-gray-700 dark:text-gray-300">
+                <li class="flex items-start gap-3">
+                    <span class="text-primary mt-1">✅</span>
+                    <span>Memahami apa itu PHP dan kegunaannya dalam pengembangan web</span>
+                </li>
+                <li class="flex items-start gap-3">
+                    <span class="text-primary mt-1">✅</span>
+                    <span>Menulis dan menjalankan kode PHP pertama</span>
+                </li>
+                <li class="flex items-start gap-3">
+                    <span class="text-primary mt-1">✅</span>
+                    <span>Memahami variabel, tipe data, dan operator di PHP</span>
+                </li>
+                <li class="flex items-start gap-3">
+                    <span class="text-primary mt-1">✅</span>
+                    <span>Menggunakan struktur kontrol (percabangan dan perulangan)</span>
+                </li>
+                <li class="flex items-start gap-3">
+                    <span class="text-primary mt-1">✅</span>
+                    <span>Membuat dan menggunakan fungsi di PHP</span>
+                </li>
+                <li class="flex items-start gap-3">
+                    <span class="text-primary mt-1">✅</span>
+                    <span>Memahami array dan cara mengolahnya</span>
+                </li>
+                <li class="flex items-start gap-3">
+                    <span class="text-primary mt-1">✅</span>
+                    <span>Mampu membuat program sederhana dengan PHP</span>
+                </li>
+            </ul>
+        </div>
+
+        <div class="space-y-12">
+            <section class="border-t border-gray-200 dark:border-gray-700 pt-10">
+                <h3 class="text-2xl font-bold mb-4">1. Pengenalan PHP</h3>
+                <div class="prose dark:prose-invert max-w-none">
+                    <p class="leading-relaxed mb-4">
+                        PHP (Hypertext Preprocessor) adalah bahasa pemrograman server-side open source yang dirancang
+                        khusus untuk pengembangan web. PHP dapat disematkan langsung ke dalam dokumen HTML dan akan
+                        dieksekusi di server sebelum dikirimkan ke browser pengguna.
+                    </p>
+                    <p class="mb-4">PHP sangat populer karena:</p>
+                    <ul class="space-y-1 mb-4">
+                        <li>Mudah dipelajari untuk pemula</li>
+                        <li>Bisa berjalan di hampir semua sistem operasi</li>
+                        <li>Mendukung hampir semua database yang ada</li>
+                        <li>Memiliki komunitas yang sangat besar</li>
+                        <li>Gratis dan open source</li>
+                    </ul>
+                    <p class="mb-4">Contoh penggunaan PHP:</p>
+                    <ul class="space-y-1 mb-6">
+                        <li>Website dinamis</li>
+                        <li>Sistem manajemen konten (WordPress, Drupal, Joomla)</li>
+                        <li>E-commerce</li>
+                        <li>API backend</li>
+                        <li>Aplikasi web skala besar</li>
+                    </ul>
+                </div>
+                <div class="mt-6">
+                    <h4 class="font-semibold mb-2">📝 Contoh:</h4>
+                    <div class="code-block">
+                        <pre><code class="language-php">// Ini adalah kode PHP pertama
+echo "Hello World! Selamat belajar PHP";
+</code></pre>
+                    </div>
+                </div>
+            </section>
+
+            <section class="border-t border-gray-200 dark:border-gray-700 pt-10">
+                <h3 class="text-2xl font-bold mb-4">2. Variabel dan Tipe Data</h3>
+                <div class="prose dark:prose-invert max-w-none">
+                    <p class="leading-relaxed mb-4">
+                        Variabel adalah tempat penyimpanan data yang nilainya bisa berubah-ubah. Di PHP, variabel
+                        diawali dengan tanda dollar <code>$</code> diikuti nama variabel.
+                    </p>
+                    <p class="mb-4">Tipe data dasar di PHP:</p>
+                    <ol class="space-y-1 mb-4">
+                        <li><code>String</code> - Teks / kalimat</li>
+                        <li><code>Integer</code> - Bilangan bulat</li>
+                        <li><code>Float</code> - Bilangan desimal</li>
+                        <li><code>Boolean</code> - Nilai true/false</li>
+                        <li><code>Array</code> - Kumpulan data</li>
+                        <li><code>NULL</code> - Variabel tanpa nilai</li>
+                    </ol>
+                    <p class="mb-4">Aturan penamaan variabel PHP:</p>
+                    <ul class="space-y-1 mb-6">
+                        <li>Harus dimulai dengan huruf atau underscore</li>
+                        <li>Tidak boleh dimulai dengan angka</li>
+                        <li>Hanya boleh mengandung huruf, angka, dan underscore</li>
+                        <li>Case sensitive ($nama berbeda dengan $Nama)</li>
+                    </ul>
+                </div>
+                <div class="mt-6">
+                    <h4 class="font-semibold mb-2">📝 Contoh:</h4>
+                    <div class="code-block">
+                        <pre><code class="language-php">// Contoh variabel dan tipe data
+$nama = "Ahmad"; // String
+$umur = 25; // Integer
+$tinggi = 175.5; // Float
+$mahasiswa = true; // Boolean
+$alamat = NULL; // NULL
+
+// Menampilkan nilai variabel
+echo "Nama: " . $nama;
+echo "<br>";
+echo "Umur: " . $umur . " tahun";
+</code></pre>
+                    </div>
+                </div>
+            </section>
+
+            <section class="border-t border-gray-200 dark:border-gray-700 pt-10">
+                <h3 class="text-2xl font-bold mb-4">3. Operator</h3>
+                <div class="prose dark:prose-invert max-w-none">
+                    <p class="leading-relaxed mb-4">
+                        Operator adalah simbol yang digunakan untuk melakukan operasi pada variabel dan nilai.
+                    </p>
+                    <p class="mb-4">Jenis operator di PHP:</p>
+                    <ul class="space-y-1 mb-6">
+                        <li><strong>Aritmatika</strong>: <code>+</code> <code>-</code> <code>*</code> <code>/</code>
+                            <code>%</code> <code>**</code></li>
+                        <li><strong>Penugasan</strong>: <code>=</code> <code>+=</code> <code>-=</code> <code>*=</code>
+                            <code>/=</code> <code>.=</code></li>
+                        <li><strong>Perbandingan</strong>: <code>==</code> <code>===</code> <code>!=</code>
+                            <code>!==</code> <code>></code> <code><</code> <code>>=</code> <code><=</code></li>
+                        <li><strong>Logika</strong>: <code>&&</code> <code>||</code> <code>!</code></li>
+                        <li><strong>Concatenation</strong>: <code>.</code> (titik) untuk menggabungkan string</li>
+                    </ul>
+                </div>
+                <div class="mt-6">
+                    <h4 class="font-semibold mb-2">📝 Contoh:</h4>
+                    <div class="code-block">
+                        <pre><code class="language-php">$a = 10;
+$b = 3;
+
+echo $a + $b; // 13
+echo $a - $b; // 7
+echo $a * $b; // 30
+echo $a / $b; // 3.333333...
+echo $a % $b; // 1 (sisa bagi)
+
+// Operator perbandingan
+var_dump($a > $b); // bool(true)
+var_dump($a == 10); // bool(true)
+</code></pre>
+                    </div>
+                </div>
+            </section>
+
+            <section class="border-t border-gray-200 dark:border-gray-700 pt-10">
+                <h3 class="text-2xl font-bold mb-4">4. Struktur Kontrol Percabangan</h3>
+                <div class="prose dark:prose-invert max-w-none">
+                    <p class="leading-relaxed mb-4">
+                        Struktur kontrol digunakan untuk mengatur alur eksekusi program berdasarkan kondisi tertentu.
+                    </p>
+                    <p class="mb-4">Jenis percabangan di PHP:</p>
+                    <ol class="space-y-1 mb-4">
+                        <li><code>if</code> <code>else</code> <code>elseif</code></li>
+                        <li><code>switch</code></li>
+                    </ol>
+                    <p class="mb-6">Percabangan memungkinkan program membuat keputusan dan menjalankan kode yang berbeda
+                        tergantung pada kondisi yang terpenuhi.</p>
+                </div>
+                <div class="mt-6">
+                    <h4 class="font-semibold mb-2">📝 Contoh:</h4>
+                    <div class="code-block">
+                        <pre><code class="language-php">$nilai = 85;
+
+if ($nilai >= 90) {
+    echo "Nilai A";
+} elseif ($nilai >= 80) {
+    echo "Nilai B";
+} elseif ($nilai >= 70) {
+    echo "Nilai C";
+} elseif ($nilai >= 60) {
+    echo "Nilai D";
+} else {
+    echo "Nilai E";
+}
+
+// Contoh switch
+$hari = 3;
+switch ($hari) {
+    case 1: echo "Senin"; break;
+    case 2: echo "Selasa"; break;
+    case 3: echo "Rabu"; break;
+    case 4: echo "Kamis"; break;
+    case 5: echo "Jumat"; break;
+    default: echo "Akhir Pekan";
+}
+</code></pre>
+                    </div>
+                </div>
+            </section>
+
+            <section class="border-t border-gray-200 dark:border-gray-700 pt-10">
+                <h3 class="text-2xl font-bold mb-4">5. Perulangan (Loop)</h3>
+                <div class="prose dark:prose-invert max-w-none">
+                    <p class="leading-relaxed mb-4">
+                        Perulangan digunakan untuk menjalankan blok kode berulang kali selama kondisi tertentu
+                        terpenuhi.
+                    </p>
+                    <p class="mb-4">Jenis perulangan di PHP:</p>
+                    <ol class="space-y-1 mb-6">
+                        <li><code>for</code> - Perulangan dengan jumlah yang sudah diketahui</li>
+                        <li><code>while</code> - Perulangan selama kondisi true</li>
+                        <li><code>do...while</code> - Perulangan minimal dijalankan 1x</li>
+                        <li><code>foreach</code> - Khusus perulangan array</li>
+                    </ol>
+                </div>
+                <div class="mt-6">
+                    <h4 class="font-semibold mb-2">📝 Contoh:</h4>
+                    <div class="code-block">
+                        <pre><code class="language-php">// Contoh for
+for ($i = 1; $i <= 5; $i++) {
+    echo "Nomor: " . $i . "<br>";
+}
+
+// Contoh while
+$angka = 1;
+while ($angka <= 5) {
+    echo $angka . " ";
+    $angka++;
+}
+
+// Contoh foreach
+$buah = ["Apel", "Mangga", "Jeruk"];
+foreach ($buah as $b) {
+    echo $b . "<br>";
+}
+</code></pre>
+                    </div>
+                </div>
+            </section>
+
+            <h3 class="text-2xl font-bold mb-4">6. Fungsi</h3>
+            <div class="prose dark:prose-invert max-w-none">
+                <p class="leading-relaxed mb-4">
+                    Fungsi adalah blok kode yang dapat dipanggil berulang kali untuk menjalankan tugas tertentu. Fungsi
+                    dapat menerima parameter dan mengembalikan nilai.
+                </p>
+                <p class="mb-4">Keuntungan menggunakan fungsi:</p>
+                <ul class="space-y-1 mb-6">
+                    <li>Kode menjadi lebih terorganisir</li>
+                    <li>Mengurangi duplikasi kode</li>
+                    <li>Mudah di maintenance</li>
+                    <li>Dapat digunakan kembali</li>
+                </ul>
+            </div>
+            <div class="mt-6">
+                <h4 class="font-semibold mb-2">📝 Contoh:</h4>
+                <div class="code-block">
+                    <pre><code class="language-php">// Membuat fungsi
+function hitungLuasPersegi($sisi) {
+    $luas = $sisi * $sisi;
+    return $luas;
+}
+
+// Memanggil fungsi
+echo hitungLuasPersegi(5); // 25
+echo hitungLuasPersegi(7); // 49
+
+// Fungsi dengan default parameter
+function sapa($nama = "Tamu") {
+    return "Halo, " . $nama . "!";
+}
+
+echo sapa(); // Halo, Tamu!
+echo sapa("Budi"); // Halo, Budi!
+</code></pre>
+                </div>
+            </div>
+            </section>
+
+            <section class="border-t border-gray-200 dark:border-gray-700 pt-10">
+                <h3 class="text-2xl font-bold mb-4">7. Array</h3>
+                <div class="prose dark:prose-invert max-w-none">
+                    <p class="leading-relaxed mb-4">
+                        Array adalah variabel yang dapat menyimpan banyak nilai sekaligus dalam satu variabel. Setiap
+                        nilai di array memiliki indeks atau kunci untuk mengaksesnya.
+                    </p>
+                    <p class="mb-4">Jenis array di PHP:</p>
+                    <ol class="space-y-1 mb-6">
+                        <li>Array Numerik - Indeks berupa angka</li>
+                        <li>Array Asosiatif - Indeks berupa string (key)</li>
+                        <li>Array Multidimensi - Array di dalam array</li>
+                    </ol>
+                </div>
+                <div class="mt-6">
+                    <h4 class="font-semibold mb-2">📝 Contoh:</h4>
+                    <div class="code-block">
+                        <pre><code class="language-php">// Array Numerik
+$mahasiswa = ["Ahmad", "Budi", "Citra"];
+echo $mahasiswa[0]; // Ahmad
+
+// Array Asosiatif
+$user = [
+    "nama" => "Dian",
+    "umur" => 28,
+    "email" => "dian@email.com"
+];
+echo $user["email"]; // dian@email.com
+
+// Menampilkan semua isi array
+print_r($user);
+var_dump($user);
+</code></pre>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <div class="mt-16 pt-8 border-t border-gray-200 dark:border-gray-700">
+            <div class="flex justify-center">
+                <a href="../index.html"
+                    class="inline-flex items-center gap-2 px-6 py-3 bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors">
+                    ← Kembali ke Menu Utama
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <footer class="mt-20 border-t border-gray-200 dark:border-gray-800 py-8">
+        <div class="max-w-6xl mx-auto px-4 text-center text-gray-500 dark:text-gray-400 text-sm">
+            <p>© 2026 PintarFlow. Seluruh hak cipta dilindungi.</p>
+        </div>
+    </footer>
+
+    <!-- Back To Top Button -->
+    <button class="back-to-top" id="backToTop" title="Kembali ke atas">
+        <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+            stroke-linejoin="round">
+            <polyline points="18 15 12 9 6 15"></polyline>
+        </svg>
+    </button>
+
+    <script src="../js/main.js"></script>
+</body>
+
+</html>
