@@ -1,0 +1,779 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PintarFlow - React Fundamental</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+    
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#165DFF',
+                    },
+                }
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .content-auto {
+                content-visibility: auto;
+            }
+            .code-block {
+                @apply rounded-lg overflow-hidden my-4;
+            }
+            .code-block pre {
+                @apply m-0 p-4 !bg-gray-900;
+            }
+            .code-block code {
+                @apply font-mono text-sm leading-relaxed;
+            }
+            .warning-box {
+                @apply bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 p-4 rounded-lg my-4;
+            }
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50 dark:bg-gray-900 text-gray-800 dark:text-gray-200 transition-colors duration-300">
+    <!-- Horizontal Scroll Progress -->
+    <div class="progress-scroll" id="progressScroll"></div>
+    <header
+        class="sticky top-0 z-50 bg-white/80 dark:bg-gray-900/80 backdrop-blur-md border-b border-gray-200 dark:border-gray-800">
+        <div class="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
+            <a href="../index.html" class="font-bold text-xl text-primary">PintarFlow</a>
+            <button id="toggleDark" class="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800">
+                <span class="dark:hidden">🌙</span>
+                <span class="hidden dark:inline">☀️</span>
+            </button>
+        </div>
+    </header>
+
+    <main class="max-w-4xl mx-auto px-4 py-8">
+        <div class="mb-12">
+            <img src="https://images.unsplash.com/photo-1633356122544-f134324a6cee?w=800&h=400&fit=crop" alt="React Fundamental" class="w-full h-48 object-cover rounded-xl mb-6 shadow-md">
+            <div
+                class="inline-block px-3 py-1 bg-yellow-100 dark:bg-yellow-900/30 text-yellow-700 dark:text-yellow-400 rounded-full text-sm font-medium mb-4">
+                Intermediate Level
+            </div>
+            <h1 class="text-4xl font-bold mb-4">React Fundamental</h1>
+            <p class="text-lg text-gray-600 dark:text-gray-400 leading-relaxed">
+                Module ini akan memperkenalkan kamu tentang dasar-dasar React.js, JavaScript library yang paling populer untuk membangun user interface. Kamu akan mempelajari konsep inti React, JSX syntax, component, state, props, hooks, dan fitur-fitur utama React yang digunakan dalam development aplikasi modern.
+            </p>
+        </div>
+
+        <div class="bg-white dark:bg-gray-800 rounded-xl p-6 mb-10 border border-gray-200 dark:border-gray-700">
+            <h2 class="text-xl font-bold mb-4">🎯 Learning Objectives</h2>
+            <ul class="space-y-2 text-gray-700 dark:text-gray-300">
+                <li class="flex items-start gap-3">
+                    <span class="text-primary mt-1">✅</span>
+                    <span>Memahami apa itu React dan keunggulannya</span>
+                </li>
+                <li class="flex items-start gap-3">
+                    <span class="text-primary mt-1">✅</span>
+                    <span>Dapat membuat project React dengan Vite</span>
+                </li>
+                <li class="flex items-start gap-3">
+                    <span class="text-primary mt-1">✅</span>
+                    <span>Memahami JSX syntax dan cara penggunaannya</span>
+                </li>
+                <li class="flex items-start gap-3">
+                    <span class="text-primary mt-1">✅</span>
+                    <span>Memahami konsep Component dan props</span>
+                </li>
+                <li class="flex items-start gap-3">
+                    <span class="text-primary mt-1">✅</span>
+                    <span>Memahami State dan Hook (useState, useEffect)</span>
+                </li>
+                <li class="flex items-start gap-3">
+                    <span class="text-primary mt-1">✅</span>
+                    <span>Dapat menangani Event di React</span>
+                </li>
+                <li class="flex items-start gap-3">
+                    <span class="text-primary mt-1">✅</span>
+                    <span>Memahami Conditional Rendering dan List Rendering</span>
+                </li>
+                <li class="flex items-start gap-3">
+                    <span class="text-primary mt-1">✅</span>
+                    <span>Dapat membuat aplikasi sederhana dengan React</span>
+                </li>
+            </ul>
+        </div>
+
+        <div class="space-y-12">
+            <section class="border-t border-gray-200 dark:border-gray-700 pt-10">
+                <h3 class="text-2xl font-bold mb-4">1. Pengenalan React</h3>
+                <div class="prose dark:prose-invert max-w-none">
+                    <p class="leading-relaxed mb-4">
+                        React adalah JavaScript library yang dikembangkan oleh Meta (Facebook) untuk membangun user interface, khususnya untuk single-page application. React berfokus pada View Layer dan memungkinkan developer membuat UI yang interaktif dengan cara yang deklaratif.
+                    </p>
+                    <p class="mb-4">Keunggulan utama React:</p>
+                    <ul class="space-y-1 mb-4">
+                        <li>✅ Component-based architecture - UI dibangun dari komponen yang reusable</li>
+                        <li>✅ Virtual DOM - Performa rendering yang optimal</li>
+                        <li>✅ Unidirectional data flow - Alur data yang mudah diprediksi</li>
+                        <li>✅ JSX syntax - Menulis HTML-like syntax di JavaScript</li>
+                        <li>✅ Ekosistem yang besar - Banyak library dan tools pendukung</li>
+                        <li>✅ React Native - Bisa digunakan untuk mobile development</li>
+                    </ul>
+                    <p class="mb-4">React adalah library yang powerful dan fleksibel, cocok untuk aplikasi kecil hingga skala besar.</p>
+                </div>
+                <div class="mt-6">
+                    <h4 class="font-semibold mb-2">📝 Contoh:</h4>
+                    <p class="mb-2">Membuat project React dengan Vite:</p>
+                    <div class="code-block">
+                        <pre><code class="language-bash"># Buat project baru
+npm create vite@latest my-react-app -- --template react
+
+cd my-react-app
+npm install
+npm run dev</code></pre>
+                    </div>
+                    <p class="font-semibold mb-2 mt-4">Struktur project React:</p>
+                    <div class="code-block">
+                        <pre><code class="language-bash">my-react-app/
+├── src/
+│   ├── components/
+│   ├── App.jsx
+│   ├── App.css
+│   ├── main.jsx
+│   └── index.css
+├── index.html
+├── package.json
+└── vite.config.js</code></pre>
+                    </div>
+                </div>
+            </section>
+
+            <section class="border-t border-gray-200 dark:border-gray-700 pt-10">
+                <h3 class="text-2xl font-bold mb-4">2. JSX Syntax</h3>
+                <div class="prose dark:prose-invert max-w-none">
+                    <p class="leading-relaxed mb-4">
+                        JSX (JavaScript XML) adalah syntax extension untuk JavaScript yang memungkinkan kamu menulis HTML-like syntax di dalam file JavaScript. JSX bukan string HTML biasa, melainkan syntax yang akan dikompilasi menjadi JavaScript.
+                    </p>
+                    <p class="mb-4">Aturan penting JSX:</p>
+                    <ul class="space-y-1 mb-4">
+                        <li>Harus return satu parent element (atau gunakan Fragment <code class="bg-gray-100 dark:bg-gray-700 px-1.5 py-0.5 rounded text-sm">&lt;&gt;...&lt;/&gt;</code>)</li>
+                        <li>Gunakan <code class="bg-gray-100 dark:bg-gray-700 px-1.5 py-0.5 rounded text-sm">className</code> bukan <code class="bg-gray-100 dark:bg-gray-700 px-1.5 py-0.5 rounded text-sm">class</code> untuk CSS class</li>
+                        <li>Gunakan <code class="bg-gray-100 dark:bg-gray-700 px-1.5 py-0.5 rounded text-sm">htmlFor</code> bukan <code class="bg-gray-100 dark:bg-gray-700 px-1.5 py-0.5 rounded text-sm">for</code> untuk label</li>
+                        <li>Inline styles menggunakan camelCase (contoh: <code class="bg-gray-100 dark:bg-gray-700 px-1.5 py-0.5 rounded text-sm">backgroundColor</code>)</li>
+                        <li>JavaScript expression ditulis di dalam curly braces <code class="bg-gray-100 dark:bg-gray-700 px-1.5 py-0.5 rounded text-sm">{}</code></li>
+                    </ul>
+                    <p class="mb-4">JSX membuat kode React lebih mudah dibaca dan ditulis, terutama untuk UI yang kompleks.</p>
+                </div>
+                <div class="mt-6">
+                    <h4 class="font-semibold mb-2">📝 Contoh:</h4>
+                    <div class="code-block">
+                        <pre><code class="language-jsx">// Contoh JSX dasar
+function App() {
+  const name = 'React Developer'
+  const isLoggedIn = true
+  const items = ['Item 1', 'Item 2', 'Item 3']
+
+  return (
+    &lt;div className="container"&gt;
+      &lt;h1&gt;Halo, {name}!&lt;/h1&gt;
+
+      {isLoggedIn ? (
+        &lt;p&gt;Selamat datang di aplikasi React&lt;/p&gt;
+      ) : (
+        &lt;p&gt;Silahkan login terlebih dahulu&lt;/p&gt;
+      )}
+
+      &lt;ul&gt;
+        {items.map((item, index) =&gt; (
+          &lt;li key={index}&gt;{item}&lt;/li&gt;
+        ))}
+      &lt;/ul&gt;
+
+      &lt;button style={{ backgroundColor: 'blue', color: 'white' }}&gt;
+        Klik Saya
+      &lt;/button&gt;
+    &lt;/div&gt;
+  )
+}</code></pre>
+                    </div>
+                </div>
+            </section>
+
+            <section class="border-t border-gray-200 dark:border-gray-700 pt-10">
+                <h3 class="text-2xl font-bold mb-4">3. Component &amp; Props</h3>
+                <div class="prose dark:prose-invert max-w-none">
+                    <p class="leading-relaxed mb-4">
+                        Component adalah blok bangunan dasar di React. Setiap component adalah fungsi JavaScript yang mengembalikan JSX. Component memungkinkan kita memecah UI menjadi bagian-bagian kecil yang reusable.
+                    </p>
+                    <p class="mb-4">Props (properties) adalah cara untuk mengirim data dari parent component ke child component. Props bersifat read-only (immutable) - child component tidak boleh mengubah props yang diterima.</p>
+                    <p class="mb-4">Jenis component di React:</p>
+                    <ul class="space-y-1 mb-4">
+                        <li><strong>Functional Component</strong>: Function yang return JSX (recommended)</li>
+                        <li><strong>Class Component</strong>: Class ES6 yang extend React.Component (legacy)</li>
+                    </ul>
+                    <div class="bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 p-4 rounded-lg my-4">
+                        <p class="font-semibold mb-2">💡 Best Practice:</p>
+                        <p>Selalu buat component yang kecil, fokus pada satu tanggung jawab, dan mudah digunakan kembali.</p>
+                    </div>
+                </div>
+                <div class="mt-6">
+                    <h4 class="font-semibold mb-2">📝 Contoh:</h4>
+                    <p class="mb-2"><code class="bg-gray-100 dark:bg-gray-700 px-1.5 py-0.5 rounded text-sm">&lt;!-- Parent Component (App.jsx) --&gt;</code></p>
+                    <div class="code-block">
+                        <pre><code class="language-jsx">import UserProfile from './UserProfile'
+
+function App() {
+  const user = {
+    name: 'John Doe',
+    email: 'john@example.com',
+    role: 'Developer'
+  }
+
+  return (
+    &lt;div&gt;
+      &lt;UserProfile
+        name={user.name}
+        email={user.email}
+        role={user.role}
+      /&gt;
+      &lt;UserProfile
+        name="Jane Smith"
+        email="jane@example.com"
+        role="Designer"
+      /&gt;
+    &lt;/div&gt;
+  )
+}</code></pre>
+                    </div>
+                    <p class="font-semibold mb-2 mt-4">Child Component (UserProfile.jsx):</p>
+                    <div class="code-block">
+                        <pre><code class="language-jsx">function UserProfile({ name, email, role }) {
+  return (
+    &lt;div className="user-card"&gt;
+      &lt;h2&gt;{name}&lt;/h2&gt;
+      &lt;p&gt;{role}&lt;/p&gt;
+      &lt;p&gt;{email}&lt;/p&gt;
+    &lt;/div&gt;
+  )
+}
+
+export default UserProfile</code></pre>
+                    </div>
+                </div>
+            </section>
+
+            <section class="border-t border-gray-200 dark:border-gray-700 pt-10">
+                <h3 class="text-2xl font-bold mb-4">4. State &amp; useState Hook</h3>
+                <div class="prose dark:prose-invert max-w-none">
+                    <p class="leading-relaxed mb-4">
+                        State adalah data yang dapat berubah (mutable) di dalam component. Ketika state berubah, React akan re-render component tersebut. State membuat component menjadi interaktif dan dinamis.
+                    </p>
+                    <p class="mb-4"><code class="bg-gray-100 dark:bg-gray-700 px-1.5 py-0.5 rounded text-sm">useState</code> adalah Hook yang memungkinkan functional component memiliki state. Hook adalah fungsi khusus yang hanya bisa dipanggil di level atas component.</p>
+                    <p class="mb-4">Cara kerja useState:</p>
+                    <div class="code-block">
+                        <pre><code class="language-jsx">const [stateValue, setStateFunction] = useState(initialValue)</code></pre>
+                    </div>
+                    <ul class="space-y-1 mb-4 mt-4">
+                        <li><code class="bg-gray-100 dark:bg-gray-700 px-1.5 py-0.5 rounded text-sm">stateValue</code>: nilai state saat ini</li>
+                        <li><code class="bg-gray-100 dark:bg-gray-700 px-1.5 py-0.5 rounded text-sm">setStateFunction</code>: function untuk mengupdate state</li>
+                        <li><code class="bg-gray-100 dark:bg-gray-700 px-1.5 py-0.5 rounded text-sm">initialValue</code>: nilai awal state</li>
+                    </ul>
+                    <div class="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 p-4 rounded-lg my-4">
+                        <p class="font-semibold mb-2">⚠️ Penting:</p>
+                        <p>Selalu gunakan setState function untuk mengupdate state, jangan langsung assign nilai!</p>
+                    </div>
+                </div>
+                <div class="mt-6">
+                    <h4 class="font-semibold mb-2">📝 Contoh:</h4>
+                    <div class="code-block">
+                        <pre><code class="language-jsx">import { useState } from 'react'
+
+function Counter() {
+  // State untuk counter
+  const [count, setCount] = useState(0)
+
+  // State untuk input text
+  const [text, setText] = useState('')
+
+  // State untuk array
+  const [items, setItems] = useState([])
+
+  function increment() {
+    setCount(count + 1)
+    // Atau: setCount(prevCount =&gt; prevCount + 1)
+  }
+
+  function addItem() {
+    if (text.trim()) {
+      setItems([...items, text])
+      setText('')
+    }
+  }
+
+  return (
+    &lt;div&gt;
+      &lt;h2&gt;Counter: {count}&lt;/h2&gt;
+      &lt;button onClick={increment}&gt;Tambah&lt;/button&gt;
+
+      &lt;hr /&gt;
+
+      &lt;input
+        value={text}
+        onChange={(e) =&gt; setText(e.target.value)}
+        placeholder="Masukkan item"
+      /&gt;
+      &lt;button onClick={addItem}&gt;Tambah Item&lt;/button&gt;
+
+      &lt;ul&gt;
+        {items.map((item, index) =&gt; (
+          &lt;li key={index}&gt;{item}&lt;/li&gt;
+        ))}
+      &lt;/ul&gt;
+    &lt;/div&gt;
+  )
+}</code></pre>
+                    </div>
+                </div>
+            </section>
+
+            <section class="border-t border-gray-200 dark:border-gray-700 pt-10">
+                <h3 class="text-2xl font-bold mb-4">5. Event Handling</h3>
+                <div class="prose dark:prose-invert max-w-none">
+                    <p class="leading-relaxed mb-4">
+                        Event handling di React mirip dengan DOM events, tetapi with beberapa perbedaan:
+                    </p>
+                    <ul class="space-y-1 mb-4">
+                        <li>Event di React menggunakan camelCase (<code class="bg-gray-100 dark:bg-gray-700 px-1.5 py-0.5 rounded text-sm">onClick</code>, <code class="bg-gray-100 dark:bg-gray-700 px-1.5 py-0.5 rounded text-sm">onChange</code>, <code class="bg-gray-100 dark:bg-gray-700 px-1.5 py-0.5 rounded text-sm">onSubmit</code>)</li>
+                        <li>Handler menerima SyntheticEvent (wrapper React untuk event browser)</li>
+                        <li>Untuk mencegah default behavior, gunakan <code class="bg-gray-100 dark:bg-gray-700 px-1.5 py-0.5 rounded text-sm">e.preventDefault()</code></li>
+                        <li>Event handler biasanya berupa arrow function atau method reference</li>
+                    </ul>
+                    <p class="mb-4">Event yang sering digunakan:</p>
+                    <ul class="space-y-1 mb-4">
+                        <li><code class="bg-gray-100 dark:bg-gray-700 px-1.5 py-0.5 rounded text-sm">onClick</code> - Klik mouse</li>
+                        <li><code class="bg-gray-100 dark:bg-gray-700 px-1.5 py-0.5 rounded text-sm">onChange</code> - Perubahan value (input, select, textarea)</li>
+                        <li><code class="bg-gray-100 dark:bg-gray-700 px-1.5 py-0.5 rounded text-sm">onSubmit</code> - Submit form</li>
+                        <li><code class="bg-gray-100 dark:bg-gray-700 px-1.5 py-0.5 rounded text-sm">onMouseEnter</code> / <code class="bg-gray-100 dark:bg-gray-700 px-1.5 py-0.5 rounded text-sm">onMouseLeave</code> - Hover</li>
+                        <li><code class="bg-gray-100 dark:bg-gray-700 px-1.5 py-0.5 rounded text-sm">onKeyDown</code> / <code class="bg-gray-100 dark:bg-gray-700 px-1.5 py-0.5 rounded text-sm">onKeyUp</code> - Keyboard events</li>
+                    </ul>
+                </div>
+                <div class="mt-6">
+                    <h4 class="font-semibold mb-2">📝 Contoh:</h4>
+                    <div class="code-block">
+                        <pre><code class="language-jsx">import { useState } from 'react'
+
+function EventDemo() {
+  const [formData, setFormData] = useState({
+    username: '',
+    email: '',
+    message: ''
+  })
+
+  // Handle input change
+  function handleChange(e) {
+    const { name, value } = e.target
+    setFormData(prev =&gt; ({
+      ...prev,
+      [name]: value
+    }))
+  }
+
+  // Handle form submit
+  function handleSubmit(e) {
+    e.preventDefault()
+    console.log('Form submitted:', formData)
+    alert('Form berhasil dikirim!')
+  }
+
+  // Handle button click
+  function handleClick(message) {
+    console.log(message)
+  }
+
+  return (
+    &lt;form onSubmit={handleSubmit}&gt;
+      &lt;div&gt;
+        &lt;label&gt;Username:&lt;/label&gt;
+        &lt;input
+          type="text"
+          name="username"
+          value={formData.username}
+          onChange={handleChange}
+        /&gt;
+      &lt;/div&gt;
+
+      &lt;div&gt;
+        &lt;label&gt;Email:&lt;/label&gt;
+        &lt;input
+          type="email"
+          name="email"
+          value={formData.email}
+          onChange={handleChange}
+        /&gt;
+      &lt;/div&gt;
+
+      &lt;div&gt;
+        &lt;label&gt;Message:&lt;/label&gt;
+        &lt;textarea
+          name="message"
+          value={formData.message}
+          onChange={handleChange}
+        /&gt;
+      &lt;/div&gt;
+
+      &lt;button type="submit"&gt;Kirim&lt;/button&gt;
+      &lt;button type="button" onClick={() =&gt; handleClick('Button clicked!')}&gt;
+        Test Click
+      &lt;/button&gt;
+    &lt;/form&gt;
+  )
+}</code></pre>
+                    </div>
+                </div>
+            </section>
+
+            <section class="border-t border-gray-200 dark:border-gray-700 pt-10">
+                <h3 class="text-2xl font-bold mb-4">6. useEffect Hook</h3>
+                <div class="prose dark:prose-invert max-w-none">
+                    <p class="leading-relaxed mb-4">
+                        <code class="bg-gray-100 dark:bg-gray-700 px-1.5 py-0.5 rounded text-sm">useEffect</code> adalah Hook yang memungkinkan kamu menjalankan side effects di functional component. Side effects adalah operasi yang mempengaruhi sesuatu di luar component, seperti:
+                    </p>
+                    <ul class="space-y-1 mb-4">
+                        <li>Fetching data dari API</li>
+                        <li>Manipulasi DOM langsung</li>
+                        <li>Setting up subscriptions atau timers</li>
+                        <li>Logging</li>
+                    </ul>
+                    <p class="mb-4">useEffect dijalankan setelah render selesai, dan bisa dijalankan ulang ketika dependencies berubah.</p>
+                    <p class="mb-4">Syntax:</p>
+                    <div class="code-block">
+                        <pre><code class="language-jsx">useEffect(() =&gt; {
+  // Code yang dijalankan setelah render
+  return () =&gt; {
+    // Cleanup function (optional)
+  }
+}, [dependencies]) // Array dependencies</code></pre>
+                    </div>
+                    <ul class="space-y-1 mb-4 mt-4">
+                        <li>Jika dependencies kosong <code class="bg-gray-100 dark:bg-gray-700 px-1.5 py-0.5 rounded text-sm">[]</code>, effect hanya dijalankan sekali (seperti componentDidMount)</li>
+                        <li>Jika dependencies berisi variable, effect dijalankan setiap variable berubah</li>
+                        <li>Jika tidak ada dependencies, effect dijalankan setiap render</li>
+                    </ul>
+                </div>
+                <div class="mt-6">
+                    <h4 class="font-semibold mb-2">📝 Contoh:</h4>
+                    <div class="code-block">
+                        <pre><code class="language-jsx">import { useState, useEffect } from 'react'
+
+function TimerComponent() {
+  const [count, setCount] = useState(0)
+  const [data, setData] = useState(null)
+
+  // Effect tanpa dependencies - dijalankan setiap render
+  useEffect(() =&gt; {
+    console.log('Component rendered')
+  })
+
+  // Effect dengan empty dependencies - dijalankan sekali saja
+  useEffect(() =&gt; {
+    console.log('Component mounted')
+
+    // Cleanup function
+    return () =&gt; {
+      console.log('Component will unmount')
+    }
+  }, [])
+
+  // Effect dengan dependencies - dijalankan saat count berubah
+  useEffect(() =&gt; {
+    console.log(`Count berubah menjadi: ${count}`)
+    document.title = `Count: ${count}`
+  }, [count])
+
+  // Fetch data dari API
+  useEffect(() =&gt; {
+    async function fetchData() {
+      try {
+        const response = await fetch('https://api.example.com/data')
+        const result = await response.json()
+        setData(result)
+      } catch (error) {
+        console.error('Error fetching data:', error)
+      }
+    }
+
+    fetchData()
+  }, [])
+
+  return (
+    &lt;div&gt;
+      &lt;p&gt;Count: {count}&lt;/p&gt;
+      &lt;button onClick={() =&gt; setCount(count + 1)}&gt;
+        Tambah
+      &lt;/button&gt;
+
+      {data &amp;&amp; (
+        &lt;pre&gt;{JSON.stringify(data, null, 2)}&lt;/pre&gt;
+      )}
+    &lt;/div&gt;
+  )
+}</code></pre>
+                    </div>
+                </div>
+            </section>
+
+            <section class="border-t border-gray-200 dark:border-gray-700 pt-10">
+                <h3 class="text-2xl font-bold mb-4">7. Conditional Rendering &amp; List Rendering</h3>
+                <div class="prose dark:prose-invert max-w-none">
+                    <p class="leading-relaxed mb-4">
+                        <strong>Conditional Rendering</strong> adalah teknik menampilkan component atau element berdasarkan kondisi tertentu. Di React, ada beberapa cara untuk conditional rendering:
+                    </p>
+                    <ul class="space-y-1 mb-4">
+                        <li><code class="bg-gray-100 dark:bg-gray-700 px-1.5 py-0.5 rounded text-sm">if/else</code> statement</li>
+                        <li>Ternary operator <code class="bg-gray-100 dark:bg-gray-700 px-1.5 py-0.5 rounded text-sm">condition ? true : false</code></li>
+                        <li>Logical AND <code class="bg-gray-100 dark:bg-gray-700 px-1.5 py-0.5 rounded text-sm">condition &amp;&amp; element</code></li>
+                        <li>Early return pattern</li>
+                    </ul>
+                    <p class="mb-4 mt-4"><strong>List Rendering</strong> adalah teknik menampilkan daftar element dari array. Di React, gunakan <code class="bg-gray-100 dark:bg-gray-700 px-1.5 py-0.5 rounded text-sm">map()</code> function untuk mengubah array menjadi array of JSX elements.</p>
+                    <div class="bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-800 p-4 rounded-lg my-4">
+                        <p class="font-semibold mb-2">⚠️ Penting:</p>
+                        <p>Selalu berikan <code class="bg-gray-100 dark:bg-gray-700 px-1.5 py-0.5 rounded text-sm">key</code> prop yang unique untuk setiap element dalam list. Key membantu React mengidentifikasi item mana yang berubah, ditambah, atau dihapus.</p>
+                    </div>
+                </div>
+                <div class="mt-6">
+                    <h4 class="font-semibold mb-2">📝 Contoh:</h4>
+                    <div class="code-block">
+                        <pre><code class="language-jsx">import { useState } from 'react'
+
+function UserList() {
+  const [users, setUsers] = useState([
+    { id: 1, name: 'Alice', role: 'Admin', active: true },
+    { id: 2, name: 'Bob', role: 'User', active: false },
+    { id: 3, name: 'Charlie', role: 'User', active: true }
+  ])
+  const [showInactive, setShowInactive] = useState(true)
+
+  // Filter users berdasarkan kondisi
+  const filteredUsers = users.filter(user =&gt; {
+    return showInactive || user.active
+  })
+
+  // Conditional rendering dengan ternary
+  const statusBadge = (isActive) =&gt; {
+    return isActive ? (
+      &lt;span className="badge-active"&gt;Active&lt;/span&gt;
+    ) : (
+      &lt;span className="badge-inactive"&gt;Inactive&lt;/span&gt;
+    )
+  }
+
+  return (
+    &lt;div&gt;
+      &lt;h2&gt;User List&lt;/h2&gt;
+
+      {/* Conditional rendering with logical AND */}
+      {users.length === 0 &amp;&amp; (
+        &lt;p&gt;Tidak ada user&lt;/p&gt;
+      )}
+
+      {/* Toggle button */}
+      &lt;button onClick={() =&gt; setShowInactive(!showInactive)}&gt;
+        {showInactive ? 'Hide' : 'Show'} Inactive Users
+      &lt;/button&gt;
+
+      {/* List rendering */}
+      &lt;ul&gt;
+        {filteredUsers.map((user) =&gt; (
+          &lt;li key={user.id}&gt;
+            &lt;strong&gt;{user.name}&lt;/strong&gt;
+            &lt;span&gt; - {user.role}&lt;/span&gt;
+            {statusBadge(user.active)}
+          &lt;/li&gt;
+        ))}
+      &lt;/ul&gt;
+
+      {/* Conditional rendering with ternary */}
+      {filteredUsers.length &gt; 0 ? (
+        &lt;p&gt;Total: {filteredUsers.length} users&lt;/p&gt;
+      ) : (
+        &lt;p&gt;Semua user inactive&lt;/p&gt;
+      )}
+    &lt;/div&gt;
+  )
+}</code></pre>
+                    </div>
+                </div>
+            </section>
+
+            <section class="border-t border-gray-200 dark:border-gray-700 pt-10">
+                <h3 class="text-2xl font-bold mb-4">8. Contoh Aplikasi: Task Manager</h3>
+                <div class="prose dark:prose-invert max-w-none">
+                    <p class="leading-relaxed mb-4">
+                        Kita akan mengimplementasikan semua yang sudah dipelajari untuk membuat aplikasi Task Manager sederhana yang memiliki fitur:
+                    </p>
+                    <ul class="space-y-1 mb-4">
+                        <li>Menampilkan daftar task</li>
+                        <li>Menambah task baru</li>
+                        <li>Menandai task selesai/belum selesai</li>
+                        <li>Menghapus task</li>
+                        <li>Filter task (All, Active, Completed)</li>
+                        <li>Menghitung jumlah task</li>
+                    </ul>
+                    <p class="mb-4">Aplikasi ini menggunakan semua konsep dasar React yang sudah kita pelajari: state, props, event handling, conditional rendering, dan list rendering.</p>
+                </div>
+                <div class="mt-6">
+                    <h4 class="font-semibold mb-2">📝 Contoh:</h4>
+                    <div class="code-block">
+                        <pre><code class="language-jsx">import { useState } from 'react'
+
+function TaskManager() {
+  const [tasks, setTasks] = useState([
+    { id: 1, text: 'Belajar React', completed: false },
+    { id: 2, text: 'Membuat project', completed: true },
+    { id: 3, text: 'Deploy aplikasi', completed: false }
+  ])
+  const [newTask, setNewTask] = useState('')
+  const [filter, setFilter] = useState('all') // 'all', 'active', 'completed'
+
+  // Tambah task baru
+  function addTask(e) {
+    e.preventDefault()
+    if (newTask.trim()) {
+      setTasks([
+        ...tasks,
+        {
+          id: Date.now(),
+          text: newTask,
+          completed: false
+        }
+      ])
+      setNewTask('')
+    }
+  }
+
+  // Toggle task completed
+  function toggleTask(id) {
+    setTasks(tasks.map(task =&gt;
+      task.id === id ? { ...task, completed: !task.completed } : task
+    ))
+  }
+
+  // Hapus task
+  function deleteTask(id) {
+    setTasks(tasks.filter(task =&gt; task.id !== id))
+  }
+
+  // Filter tasks
+  const filteredTasks = tasks.filter(task =&gt; {
+    if (filter === 'active') return !task.completed
+    if (filter === 'completed') return task.completed
+    return true
+  })
+
+  // Hitung stats
+  const activeCount = tasks.filter(t =&gt; !t.completed).length
+  const completedCount = tasks.filter(t =&gt; t.completed).length
+
+  return (
+    &lt;div className="task-manager"&gt;
+      &lt;h1&gt;Task Manager&lt;/h1&gt;
+
+      {/* Form tambah task */}
+      &lt;form onSubmit={addTask} className="task-form"&gt;
+        &lt;input
+          type="text"
+          value={newTask}
+          onChange={(e) =&gt; setNewTask(e.target.value)}
+          placeholder="Tambah task baru..."
+        /&gt;
+        &lt;button type="submit"&gt;Tambah&lt;/button&gt;
+      &lt;/form&gt;
+
+      {/* Filter buttons */}
+      &lt;div className="filters"&gt;
+        &lt;button
+          className={filter === 'all' ? 'active' : ''}
+          onClick={() =&gt; setFilter('all')}
+        &gt;
+          All ({tasks.length})
+        &lt;/button&gt;
+        &lt;button
+          className={filter === 'active' ? 'active' : ''}
+          onClick={() =&gt; setFilter('active')}
+        &gt;
+          Active ({activeCount})
+        &lt;/button&gt;
+        &lt;button
+          className={filter === 'completed' ? 'active' : ''}
+          onClick={() =&gt; setFilter('completed')}
+        &gt;
+          Completed ({completedCount})
+        &lt;/button&gt;
+      &lt;/div&gt;
+
+      {/* Task list */}
+      &lt;ul className="task-list"&gt;
+        {filteredTasks.map(task =&gt; (
+          &lt;li key={task.id} className={task.completed ? 'completed' : ''}&gt;
+            &lt;input
+              type="checkbox"
+              checked={task.completed}
+              onChange={() =&gt; toggleTask(task.id)}
+            /&gt;
+            &lt;span&gt;{task.text}&lt;/span&gt;
+            &lt;button
+              className="delete-btn"
+              onClick={() =&gt; deleteTask(task.id)}
+            &gt;
+              ×
+            &lt;/button&gt;
+          &lt;/li&gt;
+        ))}
+      &lt;/ul&gt;
+
+      {filteredTasks.length === 0 &amp;&amp; (
+        &lt;p className="empty-message"&gt;Tidak ada task&lt;/p&gt;
+      )}
+    &lt;/div&gt;
+  )
+}
+
+export default TaskManager</code></pre>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <div class="mt-16 pt-8 border-t border-gray-200 dark:border-gray-700">
+            <div class="flex justify-center">
+                <a href="../index.html"
+                    class="inline-flex items-center gap-2 px-6 py-3 bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors">
+                    ← Kembali ke Menu Utama
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <footer class="mt-20 border-t border-gray-200 dark:border-gray-800 py-8">
+        <div class="max-w-6xl mx-auto px-4 text-center text-gray-500 dark:text-gray-400 text-sm">
+            <p>© 2026 PintarFlow. Seluruh hak cipta dilindungi.</p>
+        </div>
+    </footer>
+
+    <!-- Back To Top Button -->
+    <button class="back-to-top" id="backToTop" title="Kembali ke atas">
+        <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+            stroke-linejoin="round">
+            <polyline points="18 15 12 9 6 15"></polyline>
+        </svg>
+    </button>
+
+    <script src="../js/main.js"></script>
+</body>
+</html>

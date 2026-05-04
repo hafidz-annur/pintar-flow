@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PintarFlow - SEO Best Practices</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+    
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#165DFF',
+                    },
+                }
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .content-auto {
+                content-visibility: auto;
+            }
+            .code-block {
+                @apply rounded-lg overflow-hidden my-4;
+            }
+            .code-block pre {
+                @apply m-0 p-4 !bg-gray-900;
+            }
+            .code-block code {
+                @apply font-mono text-sm leading-relaxed;
+            }
+            .warning-box {
+                @apply bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 p-4 rounded-lg my-4;
+            }
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50 dark:bg-gray-900 text-gray-800 dark:text-gray-200 transition-colors duration-300">
+    <!-- Horizontal Scroll Progress -->
+    <div class="progress-scroll" id="progressScroll"></div>
+    <header
+        class="sticky top-0 z-50 bg-white/80 dark:bg-gray-900/80 backdrop-blur-md border-b border-gray-200 dark:border-gray-800">
+        <div class="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
+            <a href="../index.html" class="font-bold text-xl text-primary">PintarFlow</a>
+            <button id="toggleDark" class="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800">
+                <span class="dark:hidden">🌙</span>
+                <span class="hidden dark:inline">☀️</span>
+            </button>
+        </div>
+    </header>
+
+    <main class="max-w-4xl mx-auto px-4 py-8">
+        <div class="mb-12">
+            <img src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=800&h=400&fit=crop" alt="SEO Best Practices" class="w-full h-48 object-cover rounded-xl mb-6 shadow-md">
+            <div
+                class="inline-block px-3 py-1 bg-yellow-100 dark:bg-yellow-900/30 text-yellow-700 dark:text-yellow-400 rounded-full text-sm font-medium mb-4">
+                Intermediate Level
+            </div>
+            <h1 class="text-4xl font-bold mb-4">SEO Best Practices</h1>
+            <p class="text-lg text-gray-600 dark:text-gray-400 leading-relaxed">
+                Module ini akan mengajarkan kamu tentang best practices Search Engine Optimization (SEO) untuk meningkatkan visibilitas website di mesin pencari seperti Google. Kamu akan mempelajari teknik on-page SEO, technical SEO, content optimization, dan strategi link building yang efektif untuk meningkatkan ranking website.
+            </p>
+        </div>
+
+        <div class="bg-white dark:bg-gray-800 rounded-xl p-6 mb-10 border border-gray-200 dark:border-gray-700">
+            <h2 class="text-xl font-bold mb-4">🎯 Learning Objectives</h2>
+            <ul class="space-y-2 text-gray-700 dark:text-gray-300">
+                <li class="flex items-start gap-3">
+                    <span class="text-primary mt-1">✅</span>
+                    <span>Memahami konsep dasar SEO dan pentingnya untuk website</span>
+                </li>
+                <li class="flex items-start gap-3">
+                    <span class="text-primary mt-1">✅</span>
+                    <span>Dapat melakukan keyword research yang efektif</span>
+                </li>
+                <li class="flex items-start gap-3">
+                    <span class="text-primary mt-1">✅</span>
+                    <span>Memahami on-page SEO optimization techniques</span>
+                </li>
+                <li class="flex items-start gap-3">
+                    <span class="text-primary mt-1">✅</span>
+                    <span>Memahami technical SEO fundamentals</span>
+                </li>
+                <li class="flex items-start gap-3">
+                    <span class="text-primary mt-1">✅</span>
+                    <span>Dapat mengoptimalkan content untuk SEO</span>
+                </li>
+                <li class="flex items-start gap-3">
+                    <span class="text-primary mt-1">✅</span>
+                    <span>Memahami importance of backlinks dan link building</span>
+                </li>
+                <li class="flex items-start gap-3">
+                    <span class="text-primary mt-1">✅</span>
+                    <span>Dapat menggunakan tools SEO untuk analisis</span>
+                </li>
+                <li class="flex items-start gap-3">
+                    <span class="text-primary mt-1">✅</span>
+                    <span>Dapat mengukur dan tracking SEO performance</span>
+                </li>
+            </ul>
+        </div>
+
+        <div class="space-y-12">
+            <section class="border-t border-gray-200 dark:border-gray-700 pt-10">
+                <h3 class="text-2xl font-bold mb-4">1. Pengenalan SEO</h3>
+                <div class="prose dark:prose-invert max-w-none">
+                    <p class="leading-relaxed mb-4">
+                        SEO (Search Engine Optimization) adalah praktik mengoptimalkan website agar mendapatkan peringkat lebih tinggi di halaman hasil mesin pencari (SERP - Search Engine Results Page). Tujuan utama SEO adalah meningkatkan traffic organik (gratis) ke website.
+                    </p>
+                    <p class="mb-4">Jenis-jenis SEO:</p>
+                    <ul class="space-y-1 mb-4">
+                        <li>✅ On-Page SEO - Optimasi elemen di dalam website (content, HTML, struktur)</li>
+                        <li>✅ Off-Page SEO - Optimasi di luar website (backlinks, social signals)</li>
+                        <li>✅ Technical SEO - Optimasi aspek teknis (speed, crawlability, indexing)</li>
+                        <li>✅ Local SEO - Optimasi untuk pencarian lokal</li>
+                    </ul>
+                    <p class="mb-4">Mengapa SEO Penting?</p>
+                    <ul class="space-y-1 mb-4">
+                        <li>• 93% online experience dimulai dengan search engine</li>
+                        <li>• 75% users tidak scroll melewati halaman pertama Google</li>
+                        <li>• Traffic organik lebih berkualitas dan memiliki conversion rate lebih tinggi</li>
+                        <li>• SEO memberikan ROI yang baik dalam jangka panjang</li>
+                    </ul>
+                </div>
+                <div class="mt-6">
+                    <h4 class="font-semibold mb-2">📝 Contoh:</h4>
+                    <div class="code-block">
+                        <pre><code class="language-text">Hasil Pencarian Google untuk "belajar SEO":
+
+Posisi 1: moz.com/beginners-guide-to-seo (Organic)
+Posisi 2: searchenginejournal.com/seo-guide (Organic)
+Posisi 3: neilpatel.com/what-is-seo (Organic)
+...
+Posisi 68: website-anda.com (Butuh optimasi!)
+
+Target: Masuk halaman 1 (Top 10)</code></pre>
+                    </div>
+                </div>
+            </section>
+
+            <section class="border-t border-gray-200 dark:border-gray-700 pt-10">
+                <h3 class="text-2xl font-bold mb-4">2. Keyword Research</h3>
+                <div class="prose dark:prose-invert max-w-none">
+                    <p class="leading-relaxed mb-4">
+                        Keyword research adalah proses menemukan dan menganalisis kata kunci yang digunakan orang saat mencari informasi di mesin pencari. Ini adalah fondasi dari strategi SEO yang sukses.
+                    </p>
+                    <p class="mb-4">Jenis-jenis Keyword:</p>
+                    <ul class="space-y-1 mb-4">
+                        <li>• <strong>Short-tail keywords</strong>: 1-2 kata, volume tinggi, kompetisi tinggi (contoh: "SEO")</li>
+                        <li>• <strong>Long-tail keywords</strong>: 3+ kata, volume lebih rendah, kompetisi lebih rendah, intent lebih spesifik (contoh: "cara belajar SEO untuk pemula")</li>
+                        <li>• <strong>Informational keywords</strong>: Mencari informasi (contoh: "apa itu SEO")</li>
+                        <li>• <strong>Transactional keywords</strong>: Siap membeli (contoh: "jasa SEO murah")</li>
+                        <li>• <strong>Navigational keywords</strong>: Mencari website tertentu (contoh: "moz login")</li>
+                    </ul>
+                    <p class="mb-4">Tools untuk Keyword Research:</p>
+                    <ul class="space-y-1 mb-4">
+                        <li>• Google Keyword Planner (gratis)</li>
+                        <li>• Ahrefs Keywords Explorer</li>
+                        <li>• SEMrush Keyword Magic Tool</li>
+                        <li>• Ubersuggest</li>
+                        <li>• AnswerThePublic</li>
+                    </ul>
+                    <p class="mb-4">Metrik Penting:</p>
+                    <ul class="space-y-1 mb-4">
+                        <li>• <strong>Search Volume</strong>: Berapa banyak orang mencari keyword tersebut</li>
+                        <li>• <strong>Keyword Difficulty</strong>: Seberapa sulit untuk ranking di keyword tersebut</li>
+                        <li>• <strong>CPC (Cost Per Click)</strong>: Berapa biaya per klik di Google Ads</li>
+                        <li>• <strong>Search Intent</strong>: Apa tujuan user mencari keyword tersebut</li>
+                    </ul>
+                </div>
+                <div class="mt-6">
+                    <h4 class="font-semibold mb-2">📝 Contoh:</h4>
+                    <div class="code-block">
+                        <pre><code class="language-text">Keyword Research untuk "belajar digital marketing":
+
+Keyword                         | Volume | Difficulty | CPC    | Intent
+--------------------------------|--------|------------|--------|------------
+digital marketing               | 49,500 | 85 (Hard)  | $5.20  | Informational
+belajar digital marketing       | 8,100  | 45 (Medium)| $2.30  | Informational
+kursus digital marketing        | 5,400  | 38 (Medium)| $8.50  | Commercial
+digital marketing untuk pemula  | 2,900  | 25 (Easy)  | $1.80  | Informational
+cara belajar digital marketing  | 1,600  | 20 (Easy)  | $1.20  | Informational
+
+Strategy: Target long-tail keywords dengan difficulty rendah terlebih dahulu!</code></pre>
+                    </div>
+                </div>
+            </section>
+
+            <section class="border-t border-gray-200 dark:border-gray-700 pt-10">
+                <h3 class="text-2xl font-bold mb-4">3. On-Page SEO</h3>
+                <div class="prose dark:prose-invert max-w-none">
+                    <p class="leading-relaxed mb-4">
+                        On-page SEO adalah praktik mengoptimalkan elemen-elemen di dalam halaman website untuk meningkatkan ranking di mesin pencari. Ini termasuk content, HTML source code, dan struktur halaman.
+                    </p>
+                    <p class="mb-4">Elemen Penting On-Page SEO:</p>
+                    <ul class="space-y-1 mb-4">
+                        <li>1. <strong>Title Tag</strong> (<title>) - Panjang ideal: 50-60 karakter, letakkan keyword utama di depan</li>
+                        <li>2. <strong>Meta Description</strong> - Panjang ideal: 150-160 karakter, buat deskripsi yang menarik</li>
+                        <li>3. <strong>Header Tags (H1-H6)</strong> - H1 untuk judul utama, H2-H6 untuk subheadings</li>
+                        <li>4. <strong>URL Structure</strong> - Pendek, deskriptif, sertakan keyword</li>
+                        <li>5. <strong>Content Optimization</strong> - Keyword density 1-2%, LSI keywords, minimal 1000 words</li>
+                        <li>6. <strong>Image Optimization</strong> - File name deskriptif, alt text relevan, compress images</li>
+                        <li>7. <strong>Internal Linking</strong> - Link ke related content, descriptive anchor text</li>
+                    </ul>
+                </div>
+                <div class="mt-6">
+                    <h4 class="font-semibold mb-2">📝 Contoh:</h4>
+                    <div class="code-block">
+                        <pre><code class="language-html"><!-- Optimized Page Example -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Belajar SEO untuk Pemula: Panduan Lengkap 2024</title>
+    <meta name="description" content="Panduan lengkap belajar SEO untuk pemula. Pelajari teknik on-page, off-page, dan technical SEO.">
+    <meta name="keywords" content="belajar SEO, SEO untuk pemula, panduan SEO">
+</head>
+<body>
+    <h1>Belajar SEO untuk Pemula: Panduan Lengkap 2024</h1>
+    
+    <h2>Apa Itu SEO?</h2>
+    <p>SEO (Search Engine Optimization) adalah...</p>
+    
+    <h2>Mengapa SEO Penting?</h2>
+    <p>SEO penting karena...</p>
+    
+    <img src="seo-diagram.webp" alt="Diagram proses SEO on-page dan off-page" width="800" height="600">
+    
+    <p>Baca juga: <a href="/keyword-research">Panduan Keyword Research Lengkap</a></p>
+</body>
+</html></code></pre>
+                    </div>
+                </div>
+            </section>
+
+            <section class="border-t border-gray-200 dark:border-gray-700 pt-10">
+                <h3 class="text-2xl font-bold mb-4">4. Technical SEO</h3>
+                <div class="prose dark:prose-invert max-w-none">
+                    <p class="leading-relaxed mb-4">
+                        Technical SEO adalah praktik mengoptimalkan aspek teknis website agar mudah di-crawl dan di-index oleh mesin pencari. Ini adalah fondasi yang harus kuat sebelum melakukan on-page dan off-page SEO.
+                    </p>
+                    <p class="mb-4">Aspek Penting Technical SEO:</p>
+                    <ul class="space-y-1 mb-4">
+                        <li>1. <strong>Site Speed</strong> - Core Web Vitals: LCP < 2.5s, FID < 100ms, CLS < 0.1</li>
+                        <li>2. <strong>Mobile-Friendliness</strong> - Responsive design, mobile-first indexing</li>
+                        <li>3. <strong>Crawlability</strong> - XML sitemap, robots.txt, internal linking</li>
+                        <li>4. <strong>Indexing</strong> - noindex tags, canonical tags, structured data</li>
+                        <li>5. <strong>Site Architecture</strong> - Logical hierarchy, flat structure, breadcrumbs</li>
+                        <li>6. <strong>HTTPS/SSL</strong> - Secure connection, SSL certificate</li>
+                        <li>7. <strong>Structured Data</strong> - Schema.org markup, JSON-LD format</li>
+                    </ul>
+                </div>
+                <div class="mt-6">
+                    <h4 class="font-semibold mb-2">📝 Contoh:</h4>
+                    <p class="mb-2">Schema.org Structured Data (JSON-LD):</p>
+                    <div class="code-block">
+                        <pre><code class="language-json">{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Belajar SEO untuk Pemula: Panduan Lengkap 2024",
+  "description": "Panduan lengkap belajar SEO untuk pemula dari dasar hingga advanced.",
+  "author": {
+    "@type": "Person",
+    "name": "John Doe",
+    "url": "https://website.com/author/john"
+  },
+  "datePublished": "2024-01-15",
+  "dateModified": "2024-01-20",
+  "image": "https://website.com/images/seo-guide.jpg"
+}</code></pre>
+                    </div>
+                    <p class="font-semibold mb-2 mt-4">Robots.txt Example:</p>
+                    <div class="code-block">
+                        <pre><code class="language-text"># Robots.txt Example
+User-agent: *
+Allow: /
+
+# Block admin area
+Disallow: /admin/
+Disallow: /wp-admin/
+
+# Block search results
+Disallow: /search/
+
+# Sitemap location
+Sitemap: https://website.com/sitemap.xml</code></pre>
+                    </div>
+                </div>
+            </section>
+
+            <section class="border-t border-gray-200 dark:border-gray-700 pt-10">
+                <h3 class="text-2xl font-bold mb-4">5. Content Optimization</h3>
+                <div class="prose dark:prose-invert max-w-none">
+                    <p class="leading-relaxed mb-4">
+                        Content optimization adalah proses membuat dan mengoptimalkan content agar relevan with search intent dan target keywords. Content yang berkualitas adalah faktor ranking terpenting di SEO modern.
+                    </p>
+                    <p class="mb-4">Prinsip Content Optimization:</p>
+                    <ul class="space-y-1 mb-4">
+                        <li>1. <strong>Search Intent Matching</strong> - Informational, Navigational, Commercial, Transactional</li>
+                        <li>2. <strong>Content Quality Factors</strong> - E-E-A-T, original research, comprehensive coverage</li>
+                        <li>3. <strong>Keyword Usage</strong> - Primary keyword in title, H1; secondary in subheadings</li>
+                        <li>4. <strong>Content Structure</strong> - Short paragraphs, bullet points, table of contents</li>
+                        <li>5. <strong>Content Freshness</strong> - Update regularly, add new information</li>
+                    </ul>
+                </div>
+                <div class="mt-6">
+                    <h4 class="font-semibold mb-2">📝 Contoh:</h4>
+                    <div class="code-block">
+                        <pre><code class="language-markdown"># Cara Membuat Content SEO-Friendly
+
+## Pendahuluan
+Content yang SEO-friendly tidak hanya tentang memasukkan keywords.
+
+## Langkah-langkah Membuat Content SEO-Friendly
+
+### 1. Riset Keyword
+- Gunakan tools seperti Google Keyword Planner
+- Target long-tail keywords
+- Analisis search intent
+
+### 2. Buat Outline
+- Tentukan struktur H2, H3
+- Plan keyword placement
+- Include related topics
+
+### 3. Tulis Content
+- Mulai dengan hook yang kuat
+- Jawab search query di awal
+- Gunakan bahasa yang mudah dipahami
+
+## Tips Tambahan
+- Gunakan active voice
+- Break up text with whitespace
+- Include call-to-action</code></pre>
+                    </div>
+                </div>
+            </section>
+
+            <section class="border-t border-gray-200 dark:border-gray-700 pt-10">
+                <h3 class="text-2xl font-bold mb-4">6. Link Building</h3>
+                <div class="prose dark:prose-invert max-w-none">
+                    <p class="leading-relaxed mb-4">
+                        Link building adalah proses mendapatkan backlinks (inbound links) dari website lain ke website Anda. Backlinks adalah salah satu faktor ranking terpenting di Google karena berfungsi sebagai "vote of confidence" dari website lain.
+                    </p>
+                    <p class="mb-4">Jenis-jenis Backlinks:</p>
+                    <ul class="space-y-1 mb-4">
+                        <li>1. <strong>Natural Links</strong> - Didapat secara organik karena content berkualitas</li>
+                        <li>2. <strong>Manual Outreach</strong> - Guest posting, broken link building, resource page</li>
+                        <li>3. <strong>Self-Created Links</strong> - Directory submissions, forum signatures (hati-hati spam)</li>
+                    </ul>
+                    <p class="mb-4">Quality vs Quantity:</p>
+                    <ul class="space-y-1 mb-4">
+                        <li>• 1 link dari high-authority site > 100 links from low-quality sites</li>
+                        <li>• Relevance matters: links from related niches are more valuable</li>
+                        <li>• Anchor text diversity: avoid over-optimization</li>
+                        <li>• Link placement: contextual links > sidebar/footer links</li>
+                    </ul>
+                </div>
+                <div class="mt-6">
+                    <h4 class="font-semibold mb-2">📝 Contoh:</h4>
+                    <p class="mb-2">Link Building Outreach Email Template:</p>
+                    <div class="code-block">
+                        <pre><code class="language-text">Subject: Quick question about your article on [Topic]
+
+Hi [Name],
+
+I recently read your article on [Topic] and found it really helpful, especially the part about [specific point].
+
+I noticed you mentioned [related topic] - I actually just published a comprehensive guide on that exact topic that includes [unique value: original data, case study, etc.].
+
+Thought it might be a valuable addition to your article if you ever update it.
+
+Either way, keep up the great work!
+
+Best,
+[Your Name]
+[Your Website]</code></pre>
+                    </div>
+                </div>
+            </section>
+
+            <section class="border-t border-gray-200 dark:border-gray-700 pt-10">
+                <h3 class="text-2xl font-bold mb-4">7. SEO Tools</h3>
+                <div class="prose dark:prose-invert max-w-none">
+                    <p class="leading-relaxed mb-4">
+                        SEO tools membantu Anda melakukan research, analysis, tracking, dan optimization dengan lebih efisien. Ada banyak tools tersedia, dari gratis hingga premium.
+                    </p>
+                    <p class="mb-4">Essential SEO Tools:</p>
+                    <ul class="space-y-1 mb-4">
+                        <li>1. <strong>Google Tools (Free)</strong> - Search Console, Analytics, Keyword Planner, PageSpeed Insights</li>
+                        <li>2. <strong>All-in-One SEO Suites (Premium)</strong> - Ahrefs, SEMrush, Moz Pro, SE Ranking</li>
+                        <li>3. <strong>Specialized Tools</strong> - Screaming Frog, Surfer SEO, AnswerThePublic</li>
+                        <li>4. <strong>Free Alternatives</strong> - Ubersuggest, SEO Minion, Schema Markup Generator</li>
+                    </ul>
+                </div>
+                <div class="mt-6">
+                    <h4 class="font-semibold mb-2">📝 Contoh:</h4>
+                    <p class="mb-2">Google Search Console Setup:</p>
+                    <div class="code-block">
+                        <pre><code class="language-text">1. Verify website ownership
+   - HTML file upload
+   - DNS record
+   - Google Analytics
+   - Google Tag Manager
+
+2. Submit XML sitemap
+   - Go to Sitemaps section
+   - Enter sitemap URL
+   - Submit
+
+3. Monitor performance
+   - Check Search Results report
+   - Analyze impressions, clicks, CTR, position
+   - Identify top pages and queries
+
+4. Fix issues
+   - Check Coverage report for errors
+   - Fix crawl errors
+   - Request indexing for new pages
+
+5. Track improvements
+   - Monitor Core Web Vitals
+   - Check Mobile Usability
+   - Review Enhancements (structured data)</code></pre>
+                    </div>
+                </div>
+            </section>
+
+            <section class="border-t border-gray-200 dark:border-gray-700 pt-10">
+                <h3 class="text-2xl font-bold mb-4">8. Measuring SEO Success</h3>
+                <div class="prose dark:prose-invert max-w-none">
+                    <p class="leading-relaxed mb-4">
+                        SEO measurement adalah proses tracking and analyzing metrics untuk mengevaluasi performance SEO strategy Anda. Without measurement, you can't improve.
+                    </p>
+                    <p class="mb-4">Key SEO Metrics:</p>
+                    <ul class="space-y-1 mb-4">
+                        <li>1. <strong>Traffic Metrics</strong> - Organic traffic, traffic growth, traffic by country/device</li>
+                        <li>2. <strong>Ranking Metrics</strong> - Keyword rankings, average position, visibility score</li>
+                        <li>3. <strong>Engagement Metrics</strong> - CTR, bounce rate, time on page, pages per session</li>
+                        <li>4. <strong>Conversion Metrics</strong> - Organic conversions, conversion rate, revenue</li>
+                        <li>5. <strong>Technical Metrics</strong> - Crawl errors, index coverage, page speed</li>
+                        <li>6. <strong>Authority Metrics</strong> - Domain Rating, URL Rating, backlink profile</li>
+                    </ul>
+                </div>
+                <div class="mt-6">
+                    <h4 class="font-semibold mb-2">📝 Contoh:</h4>
+                    <p class="mb-2">SEO Performance Dashboard Metrics:</p>
+                    <div class="code-block">
+                        <pre><code class="language-text">Metric              | Current | Previous | Change | Status
+--------------------|---------|----------|--------|--------
+Organic Traffic     | 45,230  | 38,450   | +17.6% | ✅
+Average Position    | 12.4    | 15.2     | +18.4% | ✅
+CTR                 | 3.2%    | 2.8%     | +14.3% | ✅
+Bounce Rate         | 52.3%   | 58.1%    | -9.9%  | ✅
+Pages/Session       | 2.8     | 2.3      | +21.7% | ✅
+Conversions         | 234     | 189      | +23.8% | ✅
+Domain Rating       | 45      | 42       | +7.1%  | ✅
+Indexed Pages       | 1,234   | 1,156    | +6.7%  | ✅
+Core Web Vitals Pass| 89%     | 82%      | +8.5%  | ✅</code></pre>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <div class="mt-16 pt-8 border-t border-gray-200 dark:border-gray-700">
+            <div class="flex justify-center">
+                <a href="../index.html"
+                    class="inline-flex items-center gap-2 px-6 py-3 bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors">
+                    ← Kembali ke Menu Utama
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <footer class="mt-20 border-t border-gray-200 dark:border-gray-800 py-8">
+        <div class="max-w-6xl mx-auto px-4 text-center text-gray-500 dark:text-gray-400 text-sm">
+            <p>© 2026 PintarFlow. Seluruh hak cipta dilindungi.</p>
+        </div>
+    </footer>
+
+    <!-- Back To Top Button -->
+    <button class="back-to-top" id="backToTop" title="Kembali ke atas">
+        <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+            stroke-linejoin="round">
+            <polyline points="18 15 12 9 6 15"></polyline>
+        </svg>
+    </button>
+
+    <script src="../js/main.js"></script>
+</body>
+
+</html>
