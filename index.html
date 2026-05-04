@@ -4,58 +4,62 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
+
     <!-- Primary Meta Tags -->
     <title>PintarFlow - Platform Belajar Coding & Teknologi dengan AI</title>
     <meta name="title" content="PintarFlow - Platform Belajar Coding & Teknologi dengan AI">
-    <meta name="description" content="Belajar coding dan teknologi secara praktis dan terarah dengan PintarFlow. Tersedia module SQL, HTML, CSS, JavaScript, Laravel, Docker, AWS, React, Vue, dan lainnya dari basic sampai advanced.">
-    <meta name="keywords" content="belajar coding, kursus programming, belajar SQL, belajar JavaScript, belajar Laravel, belajar React, belajar Docker, kursus online, tutorial programming, belajar web development, PintarFlow">
+    <meta name="description"
+        content="Belajar coding dan teknologi secara praktis dan terarah dengan PintarFlow. Tersedia module SQL, HTML, CSS, JavaScript, Laravel, Docker, AWS, React, Vue, dan lainnya dari basic sampai advanced.">
+    <meta name="keywords"
+        content="belajar coding, kursus programming, belajar SQL, belajar JavaScript, belajar Laravel, belajar React, belajar Docker, kursus online, tutorial programming, belajar web development, PintarFlow">
     <meta name="author" content="PintarFlow">
     <meta name="robots" content="index, follow">
     <meta name="language" content="Indonesian">
     <meta name="theme-color" content="#165DFF">
-    
+
     <!-- Canonical URL -->
     <link rel="canonical" href="https://pintarflow.com/">
-    
+
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://pintarflow.com/">
     <meta property="og:title" content="PintarFlow - Platform Belajar Coding & Teknologi dengan AI">
-    <meta property="og:description" content="Belajar coding dan teknologi secara praktis dan terarah. Tersedia module SQL, HTML, CSS, JavaScript, Laravel, Docker, AWS, React, Vue, dan lainnya.">
+    <meta property="og:description"
+        content="Belajar coding dan teknologi secara praktis dan terarah. Tersedia module SQL, HTML, CSS, JavaScript, Laravel, Docker, AWS, React, Vue, dan lainnya.">
     <meta property="og:image" content="https://pintarflow.com/img/og-image.png">
     <meta property="og:locale" content="id_ID">
     <meta property="og:site_name" content="PintarFlow">
-    
+
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:url" content="https://pintarflow.com/">
     <meta name="twitter:title" content="PintarFlow - Platform Belajar Coding & Teknologi dengan AI">
-    <meta name="twitter:description" content="Belajar coding dan teknologi secara praktis dan terarah. Tersedia module SQL, HTML, CSS, JavaScript, Laravel, Docker, AWS, React, Vue, dan lainnya.">
+    <meta name="twitter:description"
+        content="Belajar coding dan teknologi secara praktis dan terarah. Tersedia module SQL, HTML, CSS, JavaScript, Laravel, Docker, AWS, React, Vue, dan lainnya.">
     <meta name="twitter:image" content="https://pintarflow.com/img/og-image.png">
-    
+
     <!-- Favicon -->
     <link rel="shortcut icon" href="img/favicon.png" type="image/x-icon">
     <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="img/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="img/favicon-16x16.png">
-    
+
     <!-- Preconnect for Performance -->
     <link rel="preconnect" href="https://cdn.tailwindcss.com" crossorigin>
     <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
     <link rel="preconnect" href="https://images.unsplash.com" crossorigin>
     <link rel="dns-prefetch" href="https://cdn.tailwindcss.com">
-    
+
     <!-- Preload Critical CSS -->
     <link rel="preload" as="style" href="css/style.css">
-    
+
     <!-- Preload Critical Fonts (if used) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    
+
     <!-- Stylesheets -->
     <link rel="stylesheet" href="css/style.css">
-    
+
     <!-- Structured Data / Schema.org -->
     <script type="application/ld+json">
     {
@@ -77,7 +81,7 @@
         "inLanguage": "id-ID"
     }
     </script>
-    
+
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
@@ -95,7 +99,17 @@
         }
     }
     </script>
-    
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-DHJ14PW5MQ"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'G-DHJ14PW5MQ');
+    </script>
+
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -133,19 +147,22 @@
 
 <body class="bg-gray-50 dark:bg-gray-900 text-gray-800 dark:text-gray-200 transition-colors duration-300">
     <!-- Skip to Content Link (Accessibility) -->
-    <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-primary focus:text-white focus:rounded-lg">
+    <a href="#main-content"
+        class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-primary focus:text-white focus:rounded-lg">
         Skip to main content
     </a>
 
     <!-- Horizontal Scroll Progress -->
-    <div class="progress-scroll" id="progressScroll" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+    <div class="progress-scroll" id="progressScroll" role="progressbar" aria-valuenow="0" aria-valuemin="0"
+        aria-valuemax="100"></div>
 
     <!-- Main Header -->
     <header
         class="sticky top-0 z-50 bg-white/80 dark:bg-gray-900/80 backdrop-blur-md border-b border-gray-200 dark:border-gray-800"
         role="banner">
         <div class="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
-            <a href="/" class="font-bold text-xl text-primary hover:opacity-80 transition-opacity" aria-label="PintarFlow - Beranda">
+            <a href="/" class="font-bold text-xl text-primary hover:opacity-80 transition-opacity"
+                aria-label="PintarFlow - Beranda">
                 PintarFlow
             </a>
             <div class="flex items-center gap-3">
@@ -159,7 +176,7 @@
                         aria-label="Cari module pembelajaran"
                         class="pl-10 pr-4 py-2 rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-primary/50 w-48 md:w-64">
                 </div>
-                <button id="toggleDark" class="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800" 
+                <button id="toggleDark" class="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800"
                     aria-label="Toggle dark mode">
                     <span class="dark:hidden" aria-hidden="true">🌙</span>
                     <span class="hidden dark:inline" aria-hidden="true">☀️</span>
@@ -173,9 +190,12 @@
         <!-- Hero Section with 3D Background -->
         <section class="mb-16 text-center relative overflow-hidden py-0" aria-label="Hero section">
             <!-- Preload LCP image for better performance -->
-            <link rel="preload" as="image" href="https://images.unsplash.com/photo-1633356122544-f134324a6cee?w=800&h=250&fit=crop" fetchpriority="high" />
+            <link rel="preload" as="image"
+                href="https://images.unsplash.com/photo-1633356122544-f134324a6cee?w=800&h=250&fit=crop"
+                fetchpriority="high" />
             <div class="hero-bg-3d absolute top-0 left-0 w-full h-full opacity-20 -z-10" aria-hidden="true"></div>
-            <h2 class="text-4xl md:text-6xl font-bold mb-4 bg-gradient-to-r from-blue-600 via-purple-500 to-cyan-500 bg-clip-text text-transparent bg-300% animate-gradient">
+            <h2
+                class="text-4xl md:text-6xl font-bold mb-4 bg-gradient-to-r from-blue-600 via-purple-500 to-cyan-500 bg-clip-text text-transparent bg-300% animate-gradient">
                 PintarFlow
             </h2>
             <p class="text-lg text-gray-600 dark:text-gray-300 max-w-xl mx-auto">
@@ -219,38 +239,38 @@
         // 3D Background Effect
         function initHeroBackground() {
             const container = document.querySelector('.hero-bg-3d');
-            if(!container) return;
-            
+            if (!container) return;
+
             const scene = new THREE.Scene();
             const camera = new THREE.PerspectiveCamera(75, container.offsetWidth / container.offsetHeight, 0.1, 1000);
             const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
-            
+
             renderer.setSize(container.offsetWidth, container.offsetHeight);
             renderer.setClearColor(0x000000, 0);
             container.appendChild(renderer.domElement);
-            
+
             const particlesCount = 2000;
             const positions = new Float32Array(particlesCount * 3);
-            
-            for(let i = 0; i < particlesCount * 3; i++) {
+
+            for (let i = 0; i < particlesCount * 3; i++) {
                 positions[i] = (Math.random() - 0.5) * 15;
             }
-            
+
             const geometry = new THREE.BufferGeometry();
             geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
-            
+
             const material = new THREE.PointsMaterial({
                 color: 0x165DFF,
                 size: 0.08,
                 transparent: true,
                 opacity: 0.7
             });
-            
+
             const particles = new THREE.Points(geometry, material);
             scene.add(particles);
-            
+
             camera.position.z = 5;
-            
+
             function animate() {
                 requestAnimationFrame(animate);
                 particles.rotation.x += 0.0005;
@@ -258,14 +278,14 @@
                 renderer.render(scene, camera);
             }
             animate();
-            
+
             window.addEventListener('resize', () => {
                 camera.aspect = container.offsetWidth / container.offsetHeight;
                 camera.updateProjectionMatrix();
                 renderer.setSize(container.offsetWidth, container.offsetHeight);
             });
         }
-        
+
         // Initialize after page load
         window.addEventListener('load', initHeroBackground);
 
@@ -316,7 +336,7 @@
             { id: 'automation', name: 'Automation' },
             { id: 'seo', name: 'SEO & Optimization' }
         ];
-        
+
         // Mapping kategori module ke grup filter
         const categoryMap = {
             'sql': 'database',
@@ -364,7 +384,7 @@
         function getFilteredModules() {
             return modules.filter(module => {
                 const matchesSearch = module.title.toLowerCase().includes(searchTerm) || module.description.toLowerCase().includes(searchTerm);
-                
+
                 // Cek apakah module cocok dengan filter group
                 let matchesFilter = activeFilter === 'all';
                 if (!matchesFilter) {
@@ -377,7 +397,7 @@
                         matchesFilter = module.category === activeFilter;
                     }
                 }
-                
+
                 return matchesSearch && matchesFilter;
             });
         }
@@ -410,10 +430,10 @@
             moduleList.innerHTML = pageItems.map((module, index) => {
                 // First 3 images (above the fold) should not use lazy loading and should have fetchpriority="high"
                 const isFirstRow = index < 3;
-                const imgAttrs = isFirstRow 
-                    ? `fetchpriority="high"` 
+                const imgAttrs = isFirstRow
+                    ? `fetchpriority="high"`
                     : `loading="lazy"`;
-                
+
                 return `
                 <article class="module-card bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all hover:-translate-y-1">
                     <a href="${module.path}" class="block" aria-label="Buka module ${module.title}">
