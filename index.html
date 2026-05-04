@@ -4,11 +4,93 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PintarFlow</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    
+    <!-- Primary Meta Tags -->
+    <title>PintarFlow - Platform Belajar Coding & Teknologi dengan AI</title>
+    <meta name="title" content="PintarFlow - Platform Belajar Coding & Teknologi dengan AI">
+    <meta name="description" content="Belajar coding dan teknologi secara praktis dan terarah dengan PintarFlow. Tersedia module SQL, HTML, CSS, JavaScript, Laravel, Docker, AWS, React, Vue, dan lainnya dari basic sampai advanced.">
+    <meta name="keywords" content="belajar coding, kursus programming, belajar SQL, belajar JavaScript, belajar Laravel, belajar React, belajar Docker, kursus online, tutorial programming, belajar web development, PintarFlow">
+    <meta name="author" content="PintarFlow">
+    <meta name="robots" content="index, follow">
+    <meta name="language" content="Indonesian">
+    <meta name="theme-color" content="#165DFF">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://pintarflow.com/">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://pintarflow.com/">
+    <meta property="og:title" content="PintarFlow - Platform Belajar Coding & Teknologi dengan AI">
+    <meta property="og:description" content="Belajar coding dan teknologi secara praktis dan terarah. Tersedia module SQL, HTML, CSS, JavaScript, Laravel, Docker, AWS, React, Vue, dan lainnya.">
+    <meta property="og:image" content="https://pintarflow.com/img/og-image.png">
+    <meta property="og:locale" content="id_ID">
+    <meta property="og:site_name" content="PintarFlow">
+    
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://pintarflow.com/">
+    <meta name="twitter:title" content="PintarFlow - Platform Belajar Coding & Teknologi dengan AI">
+    <meta name="twitter:description" content="Belajar coding dan teknologi secara praktis dan terarah. Tersedia module SQL, HTML, CSS, JavaScript, Laravel, Docker, AWS, React, Vue, dan lainnya.">
+    <meta name="twitter:image" content="https://pintarflow.com/img/og-image.png">
+    
+    <!-- Favicon -->
     <link rel="shortcut icon" href="img/favicon.png" type="image/x-icon">
+    <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="img/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="img/favicon-16x16.png">
+    
+    <!-- Preconnect for Performance -->
+    <link rel="preconnect" href="https://cdn.tailwindcss.com">
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link rel="preconnect" href="https://images.unsplash.com">
+    <link rel="dns-prefetch" href="https://cdn.tailwindcss.com">
+    
+    <!-- Stylesheets -->
     <link rel="stylesheet" href="css/style.css">
+    
+    <!-- Structured Data / Schema.org -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "PintarFlow",
+        "description": "Platform belajar coding dan teknologi dengan AI",
+        "url": "https://pintarflow.com/",
+        "potentialAction": {
+            "@type": "SearchAction",
+            "target": "https://pintarflow.com/?q={search_term_string}",
+            "query-input": "required name=search_term_string"
+        },
+        "publisher": {
+            "@type": "Organization",
+            "name": "PintarFlow",
+            "url": "https://pintarflow.com/"
+        },
+        "inLanguage": "id-ID"
+    }
+    </script>
+    
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "EducationalOrganization",
+        "name": "PintarFlow",
+        "description": "Platform pembelajaran coding dan teknologi berbasis AI dengan module terlengkap dari basic sampai advanced",
+        "url": "https://pintarflow.com/",
+        "sameAs": [
+            "https://github.com/pintarflow",
+            "https://twitter.com/pintarflow"
+        ],
+        "address": {
+            "@type": "PostalAddress",
+            "addressCountry": "ID"
+        }
+    }
+    </script>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
             darkMode: 'class',
@@ -43,45 +125,58 @@
 </head>
 
 <body class="bg-gray-50 dark:bg-gray-900 text-gray-800 dark:text-gray-200 transition-colors duration-300">
-    <!-- Horizontal Scroll Progress -->
-    <div class="progress-scroll" id="progressScroll"></div>
+    <!-- Skip to Content Link (Accessibility) -->
+    <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-primary focus:text-white focus:rounded-lg">
+        Skip to main content
+    </a>
 
+    <!-- Horizontal Scroll Progress -->
+    <div class="progress-scroll" id="progressScroll" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+
+    <!-- Main Header -->
     <header
-        class="sticky top-0 z-50 bg-white/80 dark:bg-gray-900/80 backdrop-blur-md border-b border-gray-200 dark:border-gray-800">
+        class="sticky top-0 z-50 bg-white/80 dark:bg-gray-900/80 backdrop-blur-md border-b border-gray-200 dark:border-gray-800"
+        role="banner">
         <div class="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
-            <h1 class="font-bold text-xl text-primary">PintarFlow</h1>
+            <a href="/" class="font-bold text-xl text-primary hover:opacity-80 transition-opacity" aria-label="PintarFlow - Beranda">
+                PintarFlow
+            </a>
             <div class="flex items-center gap-3">
                 <div class="relative">
                     <svg class="w-4 h-4 absolute top-1/2 left-3 transform -translate-y-1/2 text-gray-500" fill="none"
-                        stroke="currentColor" viewBox="0 0 24 24">
+                        stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
                     </svg>
                     <input type="text" id="searchInput" placeholder="Cari module..."
+                        aria-label="Cari module pembelajaran"
                         class="pl-10 pr-4 py-2 rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-primary/50 w-48 md:w-64">
                 </div>
-                <button id="toggleDark" class="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800">
-                    <span class="dark:hidden">🌙</span>
-                    <span class="hidden dark:inline">☀️</span>
+                <button id="toggleDark" class="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800" 
+                    aria-label="Toggle dark mode">
+                    <span class="dark:hidden" aria-hidden="true">🌙</span>
+                    <span class="hidden dark:inline" aria-hidden="true">☀️</span>
                 </button>
             </div>
         </div>
     </header>
 
-    <main class="max-w-6xl mx-auto px-4 py-8">
+    <!-- Main Content -->
+    <main id="main-content" class="max-w-6xl mx-auto px-4 py-8" role="main">
         <!-- Hero Section with 3D Background -->
-        <div class="mb-16 text-center relative overflow-hidden py-0">
-            <div class="hero-bg-3d absolute top-0 left-0 w-full h-full opacity-20 -z-10"></div>
-            <h1 class="text-4xl md:text-6xl font-bold mb-4 bg-gradient-to-r from-blue-600 via-purple-500 to-cyan-500 bg-clip-text text-transparent bg-300% animate-gradient">
+        <section class="mb-16 text-center relative overflow-hidden py-0" aria-label="Hero section">
+            <div class="hero-bg-3d absolute top-0 left-0 w-full h-full opacity-20 -z-10" aria-hidden="true"></div>
+            <h2 class="text-4xl md:text-6xl font-bold mb-4 bg-gradient-to-r from-blue-600 via-purple-500 to-cyan-500 bg-clip-text text-transparent bg-300% animate-gradient">
                 PintarFlow
-            </h1>
+            </h2>
             <p class="text-lg text-gray-600 dark:text-gray-300 max-w-xl mx-auto">
                 AI-built learning platform untuk belajar coding dan teknologi secara praktis dan terarah
             </p>
-        </div>
+        </section>
 
-        <section class="mb-10">
-            <h3 class="text-2xl font-bold mb-6">📖 Daftar Module Tersedia</h3>
+        <!-- Module List Section -->
+        <section class="mb-10" aria-label="Daftar module pembelajaran">
+            <h2 class="text-2xl font-bold mb-6">📖 Daftar Module Tersedia</h2>
 
             <div id="filterContainer" class="flex flex-wrap gap-2 mb-6"></div>
 
@@ -202,24 +297,34 @@
         let activeFilter = 'all';
         let searchTerm = '';
 
-        // Filter Badges
+        // Filter Badges - Category yang sejenis digabung
         const categories = [
             { id: 'all', name: 'Semua' },
-            { id: 'sql', name: 'SQL' },
-            { id: 'html', name: 'HTML' },
-            { id: 'css', name: 'CSS' },
-            { id: 'javascript', name: 'Javascript' },
-            { id: 'docker', name: 'Docker' },
+            { id: 'database', name: 'Database', items: ['sql'] },
+            { id: 'frontend', name: 'Frontend', items: ['html', 'css', 'javascript', 'react', 'vue'] },
+            { id: 'backend', name: 'Backend', items: ['php', 'laravel', 'nodejs'] },
+            { id: 'devops', name: 'DevOps', items: ['docker', 'aws', 'git'] },
             { id: 'automation', name: 'Automation' },
-            { id: 'laravel', name: 'Laravel' },
-            { id: 'php', name: 'PHP' },
-            { id: 'nodejs', name: 'Node.js' },
-            { id: 'git', name: 'Git' },
-            { id: 'aws', name: 'AWS' },
-            { id: 'vue', name: 'Vue 3' },
-            { id: 'react', name: 'React' },
-            { id: 'seo', name: 'SEO' }
+            { id: 'seo', name: 'SEO & Optimization' }
         ];
+        
+        // Mapping kategori module ke grup filter
+        const categoryMap = {
+            'sql': 'database',
+            'html': 'frontend',
+            'css': 'frontend',
+            'javascript': 'frontend',
+            'react': 'frontend',
+            'vue': 'frontend',
+            'php': 'backend',
+            'laravel': 'backend',
+            'nodejs': 'backend',
+            'docker': 'devops',
+            'aws': 'devops',
+            'git': 'devops',
+            'automation': 'automation',
+            'seo': 'seo'
+        };
 
         // DOM Elements
         const searchInput = document.getElementById('searchInput');
@@ -250,7 +355,20 @@
         function getFilteredModules() {
             return modules.filter(module => {
                 const matchesSearch = module.title.toLowerCase().includes(searchTerm) || module.description.toLowerCase().includes(searchTerm);
-                const matchesFilter = activeFilter === 'all' || module.category === activeFilter;
+                
+                // Cek apakah module cocok dengan filter group
+                let matchesFilter = activeFilter === 'all';
+                if (!matchesFilter) {
+                    const filterGroup = categories.find(cat => cat.id === activeFilter);
+                    if (filterGroup && filterGroup.items) {
+                        // Filter berdasarkan group (frontend, backend, devops, dll)
+                        matchesFilter = filterGroup.items.includes(module.category);
+                    } else {
+                        // Filter langsung berdasarkan category (automation, seo)
+                        matchesFilter = module.category === activeFilter;
+                    }
+                }
+                
                 return matchesSearch && matchesFilter;
             });
         }
@@ -281,18 +399,20 @@
             };
 
             moduleList.innerHTML = pageItems.map(module => `
-                <a href="${module.path}" class="module-card block bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all hover:-translate-y-1">
-                    <img src="${module.image}" alt="${module.title}" class="w-full h-40 object-cover">
-                    <div class="p-6">
-                        <div class="flex items-center justify-between mb-3">
-                            <h4 class="text-xl font-bold">${module.title}</h4>
-                            <span class="px-3 py-1 ${levelColors[module.level]} rounded-full text-sm font-medium">
-                                ${levelText[module.level]}
-                            </span>
+                <article class="module-card bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all hover:-translate-y-1">
+                    <a href="${module.path}" class="block" aria-label="Buka module ${module.title}">
+                        <img src="${module.image}" alt="${module.title} - ${module.description}" class="w-full h-40 object-cover" loading="lazy">
+                        <div class="p-6">
+                            <div class="flex items-center justify-between mb-3">
+                                <h3 class="text-xl font-bold">${module.title}</h3>
+                                <span class="px-3 py-1 ${levelColors[module.level]} rounded-full text-sm font-medium" aria-label="Tingkat ${levelText[module.level]}">
+                                    ${levelText[module.level]}
+                                </span>
+                            </div>
+                            <p class="text-gray-600 dark:text-gray-400">${module.description}</p>
                         </div>
-                        <p class="text-gray-600 dark:text-gray-400">${module.description}</p>
-                    </div>
-                </a>
+                    </a>
+                </article>
             `).join('');
 
             renderPagination(filtered.length);
