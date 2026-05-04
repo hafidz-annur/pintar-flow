@@ -41,10 +41,17 @@
     <link rel="icon" type="image/png" sizes="16x16" href="img/favicon-16x16.png">
     
     <!-- Preconnect for Performance -->
-    <link rel="preconnect" href="https://cdn.tailwindcss.com">
-    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
-    <link rel="preconnect" href="https://images.unsplash.com">
+    <link rel="preconnect" href="https://cdn.tailwindcss.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+    <link rel="preconnect" href="https://images.unsplash.com" crossorigin>
     <link rel="dns-prefetch" href="https://cdn.tailwindcss.com">
+    
+    <!-- Preload Critical CSS -->
+    <link rel="preload" as="style" href="css/style.css">
+    
+    <!-- Preload Critical Fonts (if used) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     
     <!-- Stylesheets -->
     <link rel="stylesheet" href="css/style.css">
@@ -165,6 +172,8 @@
     <main id="main-content" class="max-w-6xl mx-auto px-4 py-8" role="main">
         <!-- Hero Section with 3D Background -->
         <section class="mb-16 text-center relative overflow-hidden py-0" aria-label="Hero section">
+            <!-- Preload LCP image for better performance -->
+            <link rel="preload" as="image" href="https://images.unsplash.com/photo-1633356122544-f134324a6cee?w=800&h=250&fit=crop" fetchpriority="high" />
             <div class="hero-bg-3d absolute top-0 left-0 w-full h-full opacity-20 -z-10" aria-hidden="true"></div>
             <h2 class="text-4xl md:text-6xl font-bold mb-4 bg-gradient-to-r from-blue-600 via-purple-500 to-cyan-500 bg-clip-text text-transparent bg-300% animate-gradient">
                 PintarFlow
@@ -398,10 +407,19 @@
                 advanced: 'Advanced'
             };
 
-            moduleList.innerHTML = pageItems.map(module => `
+            moduleList.innerHTML = pageItems.map((module, index) => {
+                // First 3 images (above the fold) should not use lazy loading and should have fetchpriority="high"
+                const isFirstRow = index < 3;
+                const imgAttrs = isFirstRow 
+                    ? `fetchpriority="high"` 
+                    : `loading="lazy"`;
+                
+                return `
                 <article class="module-card bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all hover:-translate-y-1">
                     <a href="${module.path}" class="block" aria-label="Buka module ${module.title}">
-                        <img src="${module.image}" alt="${module.title} - ${module.description}" class="w-full h-40 object-cover" loading="lazy">
+                        <div class="aspect-video overflow-hidden">
+                            <img src="${module.image}" alt="${module.title} - ${module.description}" class="w-full h-full object-cover" width="800" height="450" ${imgAttrs}>
+                        </div>
                         <div class="p-6">
                             <div class="flex items-center justify-between mb-3">
                                 <h3 class="text-xl font-bold">${module.title}</h3>
@@ -413,7 +431,7 @@
                         </div>
                     </a>
                 </article>
-            `).join('');
+            `}).join('');
 
             renderPagination(filtered.length);
         }
